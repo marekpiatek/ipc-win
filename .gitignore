@@ -1,1 +1,11 @@
 .svn
+Debug
+bin
+obj
+Release
+*.sdf
+*.opensdf
+*.suo
+*.user
+*Reshaprer*
+ipch
