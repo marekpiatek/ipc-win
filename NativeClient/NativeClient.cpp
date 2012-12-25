@@ -27,7 +27,46 @@ int _tmain(int argc, _TCHAR* argv[])
 	for (int i=0;i<times;i++){
 		char* msr = "Memory Mapped Files";
 		sw.start(msr);
-        makeSharedMemoryRequestResponce(rpacketSize,&msg);
+	HANDLE	hPipe;
+   while (1) 
+   { 
+		auto name = TEXT("\\\\.\\pipe\\FastDataServer");
+		 hPipe = CreateFile( 
+         name,   
+         GENERIC_READ | 
+         GENERIC_WRITE, 
+         0,              
+         NULL,           
+         OPEN_EXISTING,  
+         0,              
+         NULL);   
+ 
+   // Break if the pipe handle is valid. 
+ 
+      if (hPipe != INVALID_HANDLE_VALUE) 
+         break; 
+ 
+      // Exit if an error other than ERROR_PIPE_BUSY occurs. 
+ 
+      if (GetLastError() != ERROR_PIPE_BUSY) 
+      {
+         _tprintf( TEXT("Could not open pipe. GLE=%d\n"), GetLastError() ); 
+         return -1;
+      }
+ 
+      // All pipe instances are busy, so wait for 20 seconds. 
+ 
+      if ( ! WaitNamedPipe(name, 100)) 
+      { 
+
+      } 
+   } 
+
+        //makeSharedMemoryRequestResponce(rpacketSize,&msg);
+
+	
+	 unsigned long	cbWritten = 0;
+		WriteFile(hPipe,&rmessageSize,sizeof(long),&cbWritten,NULL);
     	sw.stop(msr);
 	}
 	

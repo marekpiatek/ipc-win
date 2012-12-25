@@ -9,3 +9,6 @@ Release
 *.user
 *Reshaprer*
 ipch
+
+*.mm
+*.vsd
