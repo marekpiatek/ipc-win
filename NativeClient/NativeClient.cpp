@@ -4,82 +4,140 @@
 #include "stdafx.h"
 #include <windows.h>
 #include <stdio.h>
+#include <assert.h>
 #include <string>
 #include "Stopwatch.h"
 
+
 using namespace std;
-void makeSharedMemoryRequestResponce(int rmessageSize,char** result);
+void makeSharedMemoryRequest(int rmessageSize,char** result);
+void makePipeRequest(int rmessageSize,char** response);
+void makeRequest(int messageSize, char* response);
 
 int _tmain(int argc, _TCHAR* argv[])
 {
-		
+		//TODO: use some lib (e.g. like in git)
+	auto call = makeSharedMemoryRequest;
+	for (int i = 0; i < argc; i++){
+		std::wstring  s = argv[i];
+		if (s == TEXT("-m")) 
+		{
+			std::wstring  s = argv[i+1];
+			call = s == TEXT("pipes") ? makePipeRequest : makeSharedMemoryRequest;
+		}
+	}
+
+	int kb = 1024;
+	auto rmessageSize1 = 100*kb;
+	auto rmessageSize2 = kb*10;
+	auto msg_size_1 = 1*kb;
+
 	Stopwatch sw;
 	sw.set_mode(REAL_TIME);
-	
 
 
-	auto times = 10;
-	auto rmessageSize = 1024*128;
-	auto rpacketSize = rmessageSize;
-	char* msg = NULL;
+
+
+	char* response = NULL;
 	cout << "Client started"<< endl;
-
-	for (int i=0;i<times;i++){
-		char* msr = "Memory Mapped Files";
-		sw.start(msr);
-	HANDLE	hPipe;
-   while (1) 
-   { 
-		auto name = TEXT("\\\\.\\pipe\\FastDataServer");
-		 hPipe = CreateFile( 
-         name,   
-         GENERIC_READ | 
-         GENERIC_WRITE, 
-         0,              
-         NULL,           
-         OPEN_EXISTING,  
-         0,              
-         NULL);   
- 
-   // Break if the pipe handle is valid. 
- 
-      if (hPipe != INVALID_HANDLE_VALUE) 
-         break; 
- 
-      // Exit if an error other than ERROR_PIPE_BUSY occurs. 
- 
-      if (GetLastError() != ERROR_PIPE_BUSY) 
-      {
-         _tprintf( TEXT("Could not open pipe. GLE=%d\n"), GetLastError() ); 
-         return -1;
-      }
- 
-      // All pipe instances are busy, so wait for 20 seconds. 
- 
-      if ( ! WaitNamedPipe(name, 100)) 
-      { 
-
-      } 
-   } 
-
-        //makeSharedMemoryRequestResponce(rpacketSize,&msg);
-
+	cout << "Message size :" << rmessageSize1 << endl;
 	
-	 unsigned long	cbWritten = 0;
-		WriteFile(hPipe,&rmessageSize,sizeof(long),&cbWritten,NULL);
-    	sw.stop(msr);
+			for (int i=0;i<10;i++){
+     		char* msr = "Memory Mapped Files 100kb";
+
+
+		sw.start(msr);
+		call(rmessageSize1,&response);
+		sw.stop(msr);
+}
+		
+
+
+	cout << "Message size :" << rmessageSize2 << endl;
+	for (int i=0;i<100;i++){
+
+		char* msr = "Memory Mapped Files 10kb";
+
+		sw.start(msr);
+		call(rmessageSize2,&response);
+		sw.stop(msr);
 	}
 	
-	sw.report_all(cout);
+		cout << "Message size :" << msg_size_1 << endl;
+	for (int i=0;i<1000;i++){
 
-	cout << "Last message :" << msg << endl;
+		char* msr = "Memory Mapped Files 1kb";
+
+		sw.start(msr);
+		//call(msg_size_1,&response);
+
+		sw.stop(msr);
+	}
+
+	
+		sw.report_all(cout);
+	cout << "Last message :" << response << endl;
 		char wait(' ');
 		cin >> &wait;	
 	return 0;
 }
 
+void makePipeRequest(int rmessageSize,char** result){
+		HANDLE	hPipe;
+				auto name = TEXT("\\\\.\\pipe\\FastDataServer");
+   while (1) 
+   { 
 
-void makeSharedMemoryRequestResponce(int rmessageSize,char** result){
+		 hPipe = CreateFile( 
+         name,   
+         GENERIC_READ | 
+         GENERIC_WRITE, 
+         0,              
+         NULL,         
+         OPEN_EXISTING,  
+         FILE_ATTRIBUTE_NORMAL,              
+         NULL);   
+ 
+
+ 
+      if (hPipe != INVALID_HANDLE_VALUE) 
+         break; 
+
+	   while ( !WaitNamedPipe(name, 10)); 
+
+   } 
+
+    
+      
+  // 	    unsigned long	cbWritten = 0;
+		//byte* msg = (byte*)malloc(rmessageSize);
+		//char* rmsg = (char*)msg;
+		//memcpy_s(rmsg,rmessageSize,  "Hello from client!!!",1024);
+		//WriteFile(hPipe,&rmessageSize,sizeof(long),&cbWritten,NULL);
+		//WriteFile(hPipe,rmsg,rmessageSize,&cbWritten,NULL);
+	
+	    unsigned long cbWritten = 0;
+		byte* msg = (byte*)malloc(sizeof(long)+rmessageSize);
+		memcpy(msg,&rmessageSize,sizeof(long));
+		char* rmsg = (char*)(msg+sizeof(long));
+		memcpy_s(rmsg,rmessageSize,  "Hello from client!!!",1024);
+		WriteFile(hPipe,msg,sizeof(long)+rmessageSize,&cbWritten,NULL);
+
+		long responseSize = 0;
+		unsigned long	cbRead = 0;
+		bool rSizeRead = ReadFile(hPipe,&responseSize,sizeof(long),&cbRead,NULL);
+		auto response = (char*) malloc(responseSize);
+		//cout << rSizeRead << endl;
+		//if (GetLastError() == ERROR_MORE_DATA) cout << "MORE DATA" << endl;
+		bool rRead = ReadFile(hPipe,response,responseSize,&cbRead,NULL);
+		*result = response;
+		//cout << response << endl;
+			//if (GetLastError() == ERROR_MORE_DATA) cout << "MORE DATA" << endl;
+		//cout << rRead << endl;
+    	CloseHandle(hPipe);
+		//cout << response << endl;
+}
+void makeSharedMemoryRequest(int rmessageSize,char** result){
 	
 	byte* rdata = (byte*)malloc(rmessageSize);
 

@@ -8,33 +8,70 @@
 #include <assert.h>
 #include "Stopwatch.h"
 
-using namespace std;
 
-int _tmain(int argc, _TCHAR* argv[])
+
+using namespace std;
+void replyPipes(std::map<int,int> sizes,void** request);
+void replySharedMem(std::map<int,int> sizes,void** request);
+
+enum Mechanims {MEMORY , PIPES};
+
+int _tmain(int argc, wchar_t* argv[])
 {
-	auto times = 10;
+	//TODO: use some lib (e.g. like in git)
+	Mechanims mechanism = MEMORY; 
+	for (int i = 0; i < argc; i++){
+		std::wstring  s = argv[i];
+		if (s == TEXT("-m")) 
+		{
+			std::wstring  s = argv[i+1];
+			mechanism = s == TEXT("pipes") ? PIPES : MEMORY;
+		}
+	}
+
+	const int kb = 1024;
+	std::map<int,int> reqResp;
+	reqResp.insert(std::make_pair(500*kb,5000*kb)); //default and max
+	reqResp.insert(std::make_pair(100*kb,1000*kb));
+	reqResp.insert(make_pair(10*kb,100*kb));
+	reqResp.insert(make_pair(1*kb,10*kb));
 
 	void* request = NULL;
+  
 
-	auto messageSize = 1024*1024;
-	auto packetSize = messageSize;
-
-	auto name = TEXT("\\\\.\\pipe\\FastDataServer");
 
 	cout << "Server started"<< endl;
 
-	for (int i=0;i<times;i++){
+	switch(mechanism){
+	case MEMORY:
+		while(true){replySharedMem(reqResp,&request);}
+	case PIPES:
+		while(true){replyPipes(reqResp,&request);}
+	}
+
+
+
+	cout << "Last message: " << (char*)request<<endl;
+	char wait(' ');
+		cin >> &wait;
+	return 0;
+}
+
+void replyPipes(std::map<int,int> sizes,void** result){
+				auto name = TEXT("\\\\.\\pipe\\FastDataServer");
 		auto server = INVALID_HANDLE_VALUE;
-	   while(server == INVALID_HANDLE_VALUE)
+		int inbuf = 500*1024;
+		int outbuf = sizes[outbuf];
+		while(server == INVALID_HANDLE_VALUE)
 	   {
 		    server = CreateNamedPipe(name,             // pipe name 
           PIPE_ACCESS_DUPLEX,       // read/write access 
 		  PIPE_TYPE_BYTE |       // message type pipe 
-		  PIPE_READMODE_BYTE |   // message-read mode 
-          PIPE_WAIT,                // blocking mode 
+		  PIPE_READMODE_BYTE    // message-read mode 
+          | PIPE_WAIT,                // blocking mode 
           PIPE_UNLIMITED_INSTANCES, // max. instances  
-          packetSize,                  // output buffer size 
-          packetSize,                  // input buffer size 
+		  outbuf,                  // output buffer size 
+         inbuf,                  // input buffer size 
           0,                        // client time-out 
           NULL);                    // default security attribute 
 		if (server == INVALID_HANDLE_VALUE){
@@ -47,125 +84,137 @@ int _tmain(int argc, _TCHAR* argv[])
 		};
 		long rSize = 0;
 		 unsigned long	cbRead = 0;
-		assert (ReadFile(server,&rSize,sizeof(long),&cbRead,NULL));
-		cout << rSize<<endl;
-	
-	}
+		bool rSizeRead = ReadFile(server,&rSize,sizeof(long),&cbRead,NULL);
+		//if (GetLastError() == ERROR_MORE_DATA) cout << "MORE DATA" << endl;
+		//cout << rSizeRead << endl;
+		auto request = (byte*) malloc(rSize);
+		bool rRead = ReadFile(server,request,rSize,&cbRead,NULL);
+			//if (GetLastError() == ERROR_MORE_DATA) cout << "MORE DATA" << endl;
+		//cout << rRead << endl;
+		//cout << "Read request: " << cbRead << endl;
+		//if (request !=NULL) cout << "Request:" << (char*)request << endl;
+		*result = request;
 
+		auto packetSize = sizes[rSize];
+	 	byte* data = (byte*)malloc(sizeof(long)+packetSize);
+	memcpy(data,&packetSize,sizeof(long));
+ 	char* response = (char*)(data+sizeof(long));
+	memcpy_s(response,packetSize,  "Hello from server!!!",1024);
+	 unsigned long	cbWritten = 0;	 
+	 WriteFile(server,data,sizeof(long)+packetSize,&cbWritten,NULL);
 
-	cout << (char*)request<<endl;
-	char wait(' ');
-		cin >> &wait;
-	return 0;
+		FlushFileBuffers(server);
+		DisconnectNamedPipe(server);
+		CloseHandle(server);
 }
 
-void replySharedMem(){
-	//	//pull implementation
+void replySharedMem(std::map<int,int> sizes,void** request){
+		//pull implementation
 
-	//	// listening for client request
-	//	auto madeRequest = OpenEvent(SYNCHRONIZE,false,TEXT("ClientMadeRequestEvent"));
-	//	while ( madeRequest == NULL){ 
-	//		madeRequest = OpenEvent(SYNCHRONIZE,false,TEXT("ClientMadeRequestEvent"));
-	//	}
-	//	WaitForSingleObject(madeRequest,INFINITE);
+		// listening for client request
+		auto madeRequest = OpenEvent(SYNCHRONIZE,false,TEXT("ClientMadeRequestEvent"));
+		while ( madeRequest == NULL){ 
+			madeRequest = OpenEvent(SYNCHRONIZE,false,TEXT("ClientMadeRequestEvent"));
+		}
+		WaitForSingleObject(madeRequest,INFINITE);
 
-	//	// reading client request size
-	//	auto requestSizeMap = OpenFileMapping(
- //       FILE_MAP_READ,         
- //       FALSE,                  
- //       TEXT("SizeOfDataRequest")           
- //       );
-	//	
-	//	auto requestSizeMapView = MapViewOfFile(
- //       requestSizeMap,
- //       FILE_MAP_READ,          
- //       0,                     
- //       0,           
- //        sizeof(long)
- //       );
+		// reading client request size
+		auto requestSizeMap = OpenFileMapping(
+        FILE_MAP_READ,         
+        FALSE,                  
+        TEXT("SizeOfDataRequest")           
+        );
+		
+		auto requestSizeMapView = MapViewOfFile(
+        requestSizeMap,
+        FILE_MAP_READ,          
+        0,                     
+        0,           
+         sizeof(long)
+        );
 
-	//    auto requestPacket = *(long*) requestSizeMapView;
-	//	//cout << *packet<< endl;
+	    auto requestPacket = *(long*) requestSizeMapView;
+		//cout << *packet<< endl;
 
-	//	// copying request data
-	//	auto requestDataMap = OpenFileMapping(
- //       FILE_MAP_READ,         
- //       FALSE,                  
- //       TEXT("ClientMessageData")           
- //       );
-	//	
-	//	auto requestDataView = MapViewOfFile(
- //       requestDataMap,
- //       FILE_MAP_READ,          
- //       0,                     
- //       0,           
- //       requestPacket
- //       );
+		// copying request data
+		auto requestDataMap = OpenFileMapping(
+        FILE_MAP_READ,         
+        FALSE,                  
+        TEXT("ClientMessageData")           
+        );
+		
+		auto requestDataView = MapViewOfFile(
+        requestDataMap,
+        FILE_MAP_READ,          
+        0,                     
+        0,           
+        requestPacket
+        );
 
-	//	request = malloc(requestPacket);
-	//	memcpy(request,requestDataView,requestPacket);
-	//	
-	//	// notify client that data was read
-	//	auto readRequest = CreateEvent(NULL,false,false,TEXT("ServerReadRequestEvent"));
-	//	SetEvent(readRequest);
-	//   
-	//	//push implementation
+		*request = malloc(requestPacket);
+		memcpy(*request,requestDataView,requestPacket);
+		
+		// notify client that data was read
+		auto readRequest = CreateEvent(NULL,false,false,TEXT("ServerReadRequestEvent"));
+		SetEvent(readRequest);
+	   
+		//push implementation
 
-	//	// create responsee data
+		// create responsee data
+		auto packetSize = sizes[requestPacket];
+	byte* data = (byte*)malloc(packetSize);
 
-	//byte* data = (byte*)malloc(messageSize);
+	char* msg = (char*)data;
+	memcpy_s(msg,packetSize,  "Hello from server!!!",1024);
+	
+	// posting size of responce data
+        auto sizeMap = CreateFileMapping(
+        INVALID_HANDLE_VALUE,   
+        NULL,                  
+        PAGE_READWRITE,        
+        0,                      
+        sizeof(long),               
+        TEXT("SizeOfData")
+        );
+	auto sizeMapView = MapViewOfFile(
+        sizeMap,
+        FILE_MAP_WRITE,          
+        0,                     
+        0,           
+          sizeof(long)
+        );
 
-	//char* msg = (char*)data;
-	//memcpy_s(msg,messageSize,  "Hello from server!!!",1024);
-	//
-	//// posting size of responce data
- //       auto sizeMap = CreateFileMapping(
- //       INVALID_HANDLE_VALUE,   
- //       NULL,                  
- //       PAGE_READWRITE,        
- //       0,                      
- //       sizeof(long),               
- //       TEXT("SizeOfData")
- //       );
-	//auto sizeMapView = MapViewOfFile(
- //       sizeMap,
- //       FILE_MAP_WRITE,          
- //       0,                     
- //       0,           
- //         sizeof(long)
- //       );
+		//// post responce data
+	auto dataMap = CreateFileMapping(
+        INVALID_HANDLE_VALUE,   
+        NULL,                  
+        PAGE_READWRITE,        
+        0,                      
+        packetSize,               
+        TEXT("ServerMessageData")
+        );
+		auto dataView = MapViewOfFile(
+        dataMap,
+        FILE_MAP_WRITE,          
+        0,                     
+        0,           
+        packetSize
+        );
 
-	//	//// post responce data
-	//auto dataMap = CreateFileMapping(
- //       INVALID_HANDLE_VALUE,   
- //       NULL,                  
- //       PAGE_READWRITE,        
- //       0,                      
- //       packetSize,               
- //       TEXT("ServerMessageData")
- //       );
-	//	auto dataView = MapViewOfFile(
- //       dataMap,
- //       FILE_MAP_WRITE,          
- //       0,                     
- //       0,           
- //       packetSize
- //       );
+		memcpy(sizeMapView,&packetSize,sizeof(long));
+		memcpy(dataView,data,packetSize);
+		// notify clinet about data
 
-	//	memcpy(sizeMapView,&packetSize,sizeof(long));
-	//	memcpy(dataView,data,packetSize);
-	//	// notify clinet about data
+		auto madeResponce = CreateEvent(NULL,true,false,TEXT("ServerMadeResponse"));
+	    SetEvent(madeResponce);
+		//// wait for client to read it
+		auto readResponse = OpenEvent(SYNCHRONIZE,false,TEXT("ClientReadResponseEvent"));
+		while ( readResponse == NULL){ 
+			readResponse = OpenEvent(SYNCHRONIZE,false,TEXT("ClientReadResponseEvent"));
+		}
+		WaitForSingleObject(readResponse,INFINITE);
 
-	//	auto madeResponce = CreateEvent(NULL,true,false,TEXT("ServerMadeResponse"));
-	//    SetEvent(madeResponce);
-	//	//// wait for client to read it
-	//	auto readResponse = OpenEvent(SYNCHRONIZE,false,TEXT("ClientReadResponseEvent"));
-	//	while ( readResponse == NULL){ 
-	//		readResponse = OpenEvent(SYNCHRONIZE,false,TEXT("ClientReadResponseEvent"));
-	//	}
-	//	WaitForSingleObject(readResponse,INFINITE);
-
-		////cout << "Reader read";
+		//cout << "Reader read";
 }
 
 	
