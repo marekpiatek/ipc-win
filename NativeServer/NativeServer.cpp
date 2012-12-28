@@ -213,6 +213,8 @@ void replySharedMem(std::map<int,int> sizes,void** request){
 			readResponse = OpenEvent(SYNCHRONIZE,false,TEXT("ClientReadResponseEvent"));
 		}
 		WaitForSingleObject(readResponse,INFINITE);
+CLEANUP:
+		free(data);
 
 		//cout << "Reader read";
 }

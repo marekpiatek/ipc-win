@@ -5,6 +5,7 @@
 #include <windows.h>
 #include <stdio.h>
 #include <assert.h>
+#include <assert.h>
 #include <string>
 #include "Stopwatch.h"
 
@@ -37,13 +38,13 @@ int _tmain(int argc, _TCHAR* argv[])
 
 
 
-
+	//TODO: clear respince after each request
 	char* response = NULL;
 	cout << "Client started"<< endl;
 	cout << "Message size :" << rmessageSize1 << endl;
 	
 			for (int i=0;i<10;i++){
-     		char* msr = "Memory Mapped Files 100kb";
+     		char* msr = "Memory Mapped Files 100kb -> 1000kb";
 
 
 		sw.start(msr);
@@ -55,9 +56,7 @@ int _tmain(int argc, _TCHAR* argv[])
 
 	cout << "Message size :" << rmessageSize2 << endl;
 	for (int i=0;i<100;i++){
-
-		char* msr = "Memory Mapped Files 10kb";
-
+		char* msr = "Memory Mapped Files 10kb - 100kb";
 		sw.start(msr);
 		call(rmessageSize2,&response);
 		sw.stop(msr);
@@ -65,14 +64,16 @@ int _tmain(int argc, _TCHAR* argv[])
 	
 		cout << "Message size :" << msg_size_1 << endl;
 	for (int i=0;i<1000;i++){
-
-		char* msr = "Memory Mapped Files 1kb";
-
+		//Sleep(1);//BUG: somthing hangs here when pipes used....
+		char* msr = "Memory Mapped Files 1kb - 10kb";
+		response[0]=0;
 		sw.start(msr);
-		//call(msg_size_1,&response);
+		call(msg_size_1,&response);
 
 		sw.stop(msr);
+		assert(response[0]=='H');//TODO: assert whole message and added last character to check
 	}
+
 
 	
 		sw.report_all(cout);

@@ -1,0 +1,16 @@
+message request {
+  required string name = 1;
+  repeated string ids = 2   ;
+  repeated string types = 3 ;
+}
+
+message response {
+  repeated  string data = 1;
+}
+message batch_request{
+  repeated request requests = 1;
+}
+
+message batch_response{
+  repeated response responses = 1;
+}
