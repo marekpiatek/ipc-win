@@ -17,8 +17,8 @@ class custom_request{
 	
 		public:
 
-		std::list<std::string> m_ids;
-		std::list<std::string> m_types;
+		std::vector<std::string> m_ids;
+		std::vector<std::string> m_types;
 		std::string  m_name;
 		int idss;
 		int typess;
@@ -139,59 +139,76 @@ class custom_request{
 
 TEST(SERIALIZATION, SPEED)
 {
+	Stopwatch t;
+	t.set_mode(REAL_TIME);
+
+	//data
 	auto name = "cool data";
 	auto id = "very very cool id";
 	auto type = "very very cool type";
-	Stopwatch t;
-	t.set_mode(REAL_TIME);
-	auto r = "Protobuf serialization deserialization";
-	t.start(r);
-	request* s = new request();
 	
-	s->set_name((char*)name);
-	for (int i = 0;i<5000;i++){
 
-		s->add_ids(id);
-	}
-	for (int i = 0;i<10;i++){
-	
-		s->add_types(type);
-	}
-	auto size = s->ByteSize();
-	void* data = malloc(size);
-	s->SerializeToArray(data,size);
-
-   request* d = new request();
-   d->ParseFromArray(data,size);
-   t.stop(r);
-   
-   custom_request sc;
-  sc.m_name = std::string((char*)name);
-
+	//steps
+	auto obj_creation = "Cusom object creation";
+    t.start(obj_creation);
+	custom_request sc;
+    sc.m_name = std::string((char*)name);
 	for (int i = 0;i<5000;i++){
 		sc.m_ids.insert(sc.m_ids.end(),id);
 	}
 	for (int i = 0;i<10;i++){	
 		sc.m_types.insert(sc.m_types.end(),type);
 	}
+	t.stop(obj_creation);
 
-	auto cr = "Custom object";
-
+	auto obj_serialization = "Custom object to byte array serialization";
+	t.start(obj_serialization);
 	auto cs = sc.getSize();
 	byte* buffer = (byte*)malloc(cs);
-	
-	t.start(cr);
-	sc.toArray(buffer,size);
-	t.stop(cr);
+	sc.toArray(buffer,cs);
+	t.stop(obj_serialization);
+
+	auto obj_deserializaion = "Cusom object instatiation from byte array";
+	t.start(obj_deserializaion);
 	custom_request dc;
 	dc.fromArray(buffer);
+	t.stop(obj_deserializaion);
 
+	auto message_creation = "Protobuf message creation";
+	t.start(message_creation);
+	request* s = new request();	
+	s->set_name((char*)name);
+	for (int i = 0;i<5000;i++){
 
-   t.report_all();
+		std::string str(id);
+		s->add_ids(str);
+	}
+	for (int i = 0;i<10;i++){
+		std::string str(type);
+		s->add_types(str);
+	}
+	t.stop(message_creation);
 
+	auto message_serialization = "Protobug message serialization";
+	t.start(message_serialization);
+	auto size = s->ByteSize();
+	void* data = malloc(size);
+	s->SerializeToArray(data,size);
+	t.stop(message_serialization);
 
+	auto message_deserialization = "Protobug message deserialization";
+	t.start(message_deserialization);
+	request* d = new request();
+    d->ParseFromArray(data,size);
+	t.stop(message_deserialization);
 
-   EXPECT_EQ(1, 1);
+	t.report(obj_creation);
+	t.report(obj_serialization);
+	t.report(obj_deserializaion);
+	t.report(message_creation);
+	t.report(message_serialization);
+	t.report(message_deserialization);
+
 }
 
 
