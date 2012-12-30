@@ -39,7 +39,7 @@
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <LinkIncremental>true</LinkIncremental>
-    <IncludePath>$(SolutionDir)3rdParties;$(SolutionDir)3rdParties\Stopwatch;$(IncludePath)</IncludePath>
+    <IncludePath>$(SolutionDir)Entities;$(SolutionDir)3rdParties;$(SolutionDir)3rdParties\Stopwatch;$(IncludePath)</IncludePath>
     <SourcePath>$(SolutionDir)3rdParties\Stopwatch;$(SourcePath)</SourcePath>
     <ReferencePath>$(Configuration);$(SolutionDir)$(Configuration);$(ReferencePath)</ReferencePath>
     <LibraryPath>$(Configuration);$(SolutionDir)$(Configuration);$(LibraryPath)</LibraryPath>

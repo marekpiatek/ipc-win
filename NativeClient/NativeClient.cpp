@@ -128,14 +128,16 @@ void makePipeRequest(int rmessageSize,char** result){
 		unsigned long	cbRead = 0;
 		bool rSizeRead = ReadFile(hPipe,&responseSize,sizeof(long),&cbRead,NULL);
 		auto response = (char*) malloc(responseSize);
-		//cout << rSizeRead << endl;
+		//if (!rSizeRead) cout << cbRead << endl;
+		//cout << cbRead << endl;
 		//if (GetLastError() == ERROR_MORE_DATA) cout << "MORE DATA" << endl;
 		bool rRead = ReadFile(hPipe,response,responseSize,&cbRead,NULL);
 		*result = response;
-		//cout << response << endl;
-			//if (GetLastError() == ERROR_MORE_DATA) cout << "MORE DATA" << endl;
+		//cout << cbRead << endl;
+		//if (!rRead) cout << cbRead << endl;
+		//if (GetLastError() == ERROR_MORE_DATA) cout << "MORE DATA" << endl;
 		//cout << rRead << endl;
-    	CloseHandle(hPipe);
+    	//CloseHandle(hPipe);
 		//cout << response << endl;
 }
 void makeSharedMemoryRequest(int rmessageSize,char** result){

@@ -39,7 +39,7 @@
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <LinkIncremental>true</LinkIncremental>
-    <IncludePath>$(SolutionDir)3rdParties\gtest\include\;$(SolutionDir)3rdParties\protobuf-2.4.1\src\google\;$(SolutionDir)3rdParties\protobuf-2.4.1\src\google\protobuf\;$(SolutionDir)3rdParties\protobuf-2.4.1\src\google\protobuf\stubs;$(SolutionDir)3rdParties\protobuf-2.4.1\src\;$(SolutionDir)3rdParties\Stopwatch;$(IncludePath)</IncludePath>
+    <IncludePath>$(SolutionDir)3rdParties\gtest\include\;$(SolutionDir)3rdParties\protobuf-2.4.1\src\google\;$(SolutionDir)3rdParties\protobuf-2.4.1\src\google\protobuf\;$(SolutionDir)3rdParties\protobuf-2.4.1\src\google\protobuf\stubs;$(SolutionDir)3rdParties\protobuf-2.4.1\src\;$(SolutionDir)3rdParties\Stopwatch;$(SolutionDir)Entities;$(IncludePath)</IncludePath>
     <ExecutablePath>$(SolutionDir)Tools;$(ExecutablePath)</ExecutablePath>
     <ReferencePath>$(SolutionDir)$(Configuration);$(Configuration);$(ReferencePath)</ReferencePath>
     <LibraryPath>$(SolutionDir)$(Configuration);$(Configuration);$(LibraryPath)</LibraryPath>
@@ -53,7 +53,7 @@
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
-      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+      <PrecompiledHeader>Create</PrecompiledHeader>
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
       <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
@@ -63,7 +63,7 @@
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <AdditionalLibraryDirectories>$(SolutionDir)3rdParties\gtest\msvc\gtest\Debug\;$(SolutionDir)3rdParties\protobuf-2.4.1\vsprojects\Debug\;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-      <AdditionalDependencies>gtestd.lib;libprotobuf.lib;Stopwatch.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>gtestd.lib;libprotobuf.lib;Stopwatch.lib;entities.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">

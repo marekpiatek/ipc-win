@@ -8,29 +8,53 @@
 #include <assert.h>
 #include "Stopwatch.h"
 
+#define RESP_BUILDER void (int size,void** req,int* resp_s,unsigned char** resp);
 
 
 using namespace std;
-void replyPipes(std::map<int,int> sizes,void** request);
-void replySharedMem(std::map<int,int> sizes,void** request);
 
-enum Mechanims {MEMORY , PIPES};
+
+typedef void (*resp_builder)(long requestPacket,void** request,long* packetSizeP,unsigned char** dataP);
+void reply(resp_builder b,void** request);
+void replyPipes(resp_builder b,void** request);
+void replySharedMem(resp_builder b,void** request);
+
+
+const int kb = 1024;
+std::map<int,int> reqResp;
+
+void resp_bytes(long requestPacket,void** request,long* packetSizeP,unsigned char** dataP){
+		long packetSize = 0;
+	    unsigned char* data = NULL;
+    	packetSize = reqResp[requestPacket];
+		data = (unsigned char*)malloc(packetSize);
+		char* msg = (char*)data;
+		memcpy_s(msg,packetSize,  "Hello from server!!!",1024);
+		*packetSizeP = packetSize;
+		*dataP = data;
+}
+
+
 
 int _tmain(int argc, wchar_t* argv[])
 {
 	//TODO: use some lib (e.g. like in git)
-	Mechanims mechanism = MEMORY; 
+	auto replier = replySharedMem;
+	resp_builder builder = resp_bytes;
 	for (int i = 0; i < argc; i++){
 		std::wstring  s = argv[i];
 		if (s == TEXT("-m")) 
 		{
 			std::wstring  s = argv[i+1];
-			mechanism = s == TEXT("pipes") ? PIPES : MEMORY;
+			replier = s == TEXT("pipes") ? replyPipes : replySharedMem;
+		}
+		if (s == TEXT("-d")) 
+		{
+			std::wstring  s = argv[i+1];
+			builder = s == TEXT("message") ? resp_bytes : resp_bytes;
 		}
 	}
 
-	const int kb = 1024;
-	std::map<int,int> reqResp;
 	reqResp.insert(std::make_pair(500*kb,5000*kb)); //default and max
 	reqResp.insert(std::make_pair(100*kb,1000*kb));
 	reqResp.insert(make_pair(10*kb,100*kb));
@@ -42,12 +66,9 @@ int _tmain(int argc, wchar_t* argv[])
 
 	cout << "Server started"<< endl;
 
-	switch(mechanism){
-	case MEMORY:
-		while(true){replySharedMem(reqResp,&request);}
-	case PIPES:
-		while(true){replyPipes(reqResp,&request);}
-	}
+
+	while(true){replier(builder,&request);}
+	
 
 
 
@@ -57,11 +78,11 @@ int _tmain(int argc, wchar_t* argv[])
 	return 0;
 }
 
-void replyPipes(std::map<int,int> sizes,void** result){
+void replyPipes(resp_builder b,void** result){
 				auto name = TEXT("\\\\.\\pipe\\FastDataServer");
 		auto server = INVALID_HANDLE_VALUE;
 		int inbuf = 500*1024;
-		int outbuf = sizes[outbuf];
+		int outbuf = reqResp[outbuf];
 		while(server == INVALID_HANDLE_VALUE)
 	   {
 		    server = CreateNamedPipe(name,             // pipe name 
@@ -87,7 +108,7 @@ void replyPipes(std::map<int,int> sizes,void** result){
 		bool rSizeRead = ReadFile(server,&rSize,sizeof(long),&cbRead,NULL);
 		//if (GetLastError() == ERROR_MORE_DATA) cout << "MORE DATA" << endl;
 		//cout << rSizeRead << endl;
-		auto request = (byte*) malloc(rSize);
+		auto request = (unsigned char*) malloc(rSize);
 		bool rRead = ReadFile(server,request,rSize,&cbRead,NULL);
 			//if (GetLastError() == ERROR_MORE_DATA) cout << "MORE DATA" << endl;
 		//cout << rRead << endl;
@@ -95,20 +116,27 @@ void replyPipes(std::map<int,int> sizes,void** result){
 		//if (request !=NULL) cout << "Request:" << (char*)request << endl;
 		*result = request;
 
-		auto packetSize = sizes[rSize];
-	 	byte* data = (byte*)malloc(sizeof(long)+packetSize);
-	memcpy(data,&packetSize,sizeof(long));
- 	char* response = (char*)(data+sizeof(long));
-	memcpy_s(response,packetSize,  "Hello from server!!!",1024);
-	 unsigned long	cbWritten = 0;	 
-	 WriteFile(server,data,sizeof(long)+packetSize,&cbWritten,NULL);
+		// create responsee data
+		long packetSize = 0;
+	    unsigned char* rData = NULL;
+		b(rSize,result,&packetSize,&rData);
+
+		unsigned char* packetData = (unsigned char*)malloc(sizeof(long)+packetSize);
+	    memcpy(packetData,&packetSize,sizeof(long));
+		auto messageData = packetData+ sizeof(long);
+	    memcpy(messageData,rData,packetSize);
+	     unsigned long	cbWritten = 0;	 
+	 WriteFile(server,packetData,sizeof(long)+packetSize,&cbWritten,NULL);
 
 		FlushFileBuffers(server);
 		DisconnectNamedPipe(server);
 		CloseHandle(server);
+CLEANUP:
+		free(packetData);
+		free(rData);
 }
 
-void replySharedMem(std::map<int,int> sizes,void** request){
+void replySharedMem(resp_builder b,void** request){
 		//pull implementation
 
 		// listening for client request
@@ -161,11 +189,13 @@ void replySharedMem(std::map<int,int> sizes,void** request){
 		//push implementation
 
 		// create responsee data
-		auto packetSize = sizes[requestPacket];
-	byte* data = (byte*)malloc(packetSize);
-
-	char* msg = (char*)data;
-	memcpy_s(msg,packetSize,  "Hello from server!!!",1024);
+		long packetSize = 0;
+	    unsigned char* data = NULL;
+		b(requestPacket,request,&packetSize,&data);
+    	packetSize = reqResp[requestPacket];
+		data = (unsigned char*)malloc(packetSize);
+		char* msg = (char*)data;
+		memcpy_s(msg,packetSize,  "Hello from server!!!",1024);
 	
 	// posting size of responce data
         auto sizeMap = CreateFileMapping(
