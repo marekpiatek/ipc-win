@@ -46,8 +46,8 @@
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <LinkIncremental>false</LinkIncremental>
-    <IncludePath>$(SolutionDir)3rdParties\Stopwatch;$(SolutionDir)3rdParties\protobuf-2.4.1\src;$(IncludePath)</IncludePath>
-    <LibraryPath>$(SolutionDir)\3rdparties\lib;$(LibraryPath)</LibraryPath>
+    <IncludePath>$(SolutionDir)3rdParties\Stopwatch;$(SolutionDir)3rdParties\protobuf-2.4.1\src;$(SolutionDir)Entities;$(IncludePath)</IncludePath>
+    <LibraryPath>$(SolutionDir)\3rdparties\lib;$(SolutionDir)$(Configuration);$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
@@ -78,7 +78,7 @@
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
-      <AdditionalDependencies>libprotobuf.lib;Stopwatch.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>libprotobuf.lib;Stopwatch.lib;entities.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
