@@ -8,6 +8,7 @@
 #include <assert.h>
 #include "Stopwatch.h"
 #include <custom_request.h>
+#include <Messages.pb.h>
 
 #define RESP_BUILDER void (int size,void** req,int* resp_s,unsigned char** resp);
 
@@ -35,6 +36,19 @@ void resp_bytes(long requestPacket,unsigned char* request,long* packetSizeP,unsi
 		*dataP = data;
 }
 
+void resp_msg(long requestPacket,unsigned char* req,long* packetSizeP,unsigned char** dataP){
+		long packetSize = 0;
+	    unsigned char* data = NULL;
+		request r;
+		r.ParseFromArray(req,requestPacket);
+        auto cell = 15;
+		packetSize = r.types().size()*r.ids().size()*cell;
+		data = (unsigned char*)malloc(packetSize);
+		char* msg = (char*)data;
+		memcpy_s(msg,packetSize,  "Hello from server!!!",1024);
+		*packetSizeP = packetSize;
+		*dataP = data;
+}
 
 void resp_obj(long requestPacket,unsigned char* request,long* packetSizeP,unsigned char** dataP){
 		long packetSize = 0;
@@ -55,7 +69,7 @@ int _tmain(int argc, wchar_t* argv[])
 {
 	//TODO: use some lib (e.g. like in git)
 	auto replier = replySharedMem;
-	resp_builder builder = resp_obj;
+	resp_builder builder = resp_msg;
 	for (int i = 0; i < argc; i++){
 		std::wstring  s = argv[i];
 		if (s == TEXT("-m")) 
@@ -66,7 +80,8 @@ int _tmain(int argc, wchar_t* argv[])
 		if (s == TEXT("-d")) 
 		{
 			std::wstring  s = argv[i+1];
-			builder = s == TEXT("bytes") ? resp_bytes : resp_obj;
+			builder = s == TEXT("bytes") ? resp_bytes : resp_msg;
+			builder = s == TEXT("object") ? resp_obj : resp_msg;
 		}
 	}
 

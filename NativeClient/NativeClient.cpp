@@ -9,6 +9,7 @@
 #include <string>
 #include "Stopwatch.h"
 #include <custom_request.h>
+#include <Messages.pb.h>
 
 using namespace std;
 typedef void (*req_builder)(unsigned int size,unsigned char** dataP,unsigned int* sizeP);
@@ -50,6 +51,27 @@ void req_obj(unsigned int size,unsigned char** rdataP,unsigned int* rmessageSize
 	*rmessageSizeP = rmessageSize;
 }
 
+void req_msg(unsigned int size,unsigned char** rdataP,unsigned int* rmessageSizeP)
+{	
+	auto cr = req[size];
+	request r;
+	r.set_name(cr.m_name);
+
+	for (auto it=cr.m_types.begin(); it!=cr.m_types.end(); it++)
+	{
+		std::string s = *it;
+		r.add_types(s);
+	}
+	for (auto it= cr.m_ids.begin(); it!=cr.m_ids.end();it++){
+		std::string s = *it;
+		r.add_ids(s);
+	}
+	unsigned int rmessageSize = r.ByteSize();
+	unsigned char* rdata = (unsigned char*)malloc(rmessageSize);
+	r.SerializeToArray(rdata,rmessageSize);
+	*rdataP = rdata;
+	*rmessageSizeP = rmessageSize;
+}
 
 
 void req_bytes(unsigned int size,unsigned char** rdataP,unsigned int* rmessageSizeP)
@@ -65,7 +87,7 @@ void req_bytes(unsigned int size,unsigned char** rdataP,unsigned int* rmessageSi
 int _tmain(int argc, _TCHAR* argv[])
 {
 	//TODO: use some lib (e.g. like in git)
-	req_builder builder = req_obj;
+	req_builder builder = req_msg;
 	makeRequest call = makeSharedMemoryRequest;
 	for (int i = 0; i < argc; i++){
 		std::wstring  s = argv[i];
@@ -77,7 +99,8 @@ int _tmain(int argc, _TCHAR* argv[])
 		if (s == TEXT("-d")) 
 		{
 			std::wstring  s = argv[i+1];
-			builder = s == TEXT("bytes") ? req_bytes : req_obj;
+			builder = s == TEXT("bytes") ? req_bytes : req_msg;
+			builder = s == TEXT("object") ? req_obj : req_msg;
 		}
 	}
 
