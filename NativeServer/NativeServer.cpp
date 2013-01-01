@@ -7,6 +7,7 @@
 #include <string>
 #include <assert.h>
 #include "Stopwatch.h"
+#include <custom_request.h>
 
 #define RESP_BUILDER void (int size,void** req,int* resp_s,unsigned char** resp);
 
@@ -14,16 +15,16 @@
 using namespace std;
 
 
-typedef void (*resp_builder)(long requestPacket,void** request,long* packetSizeP,unsigned char** dataP);
-void reply(resp_builder b,void** request);
-void replyPipes(resp_builder b,void** request);
-void replySharedMem(resp_builder b,void** request);
+typedef void (*resp_builder)(long requestPacket,unsigned char* request,long* packetSizeP,unsigned char** dataP);
+void reply(resp_builder b,void** result);
+void replyPipes(resp_builder b,void** result);
+void replySharedMem(resp_builder b,void** result);
 
 
 const int kb = 1024;
 std::map<int,int> reqResp;
 
-void resp_bytes(long requestPacket,void** request,long* packetSizeP,unsigned char** dataP){
+void resp_bytes(long requestPacket,unsigned char* request,long* packetSizeP,unsigned char** dataP){
 		long packetSize = 0;
 	    unsigned char* data = NULL;
     	packetSize = reqResp[requestPacket];
@@ -35,12 +36,26 @@ void resp_bytes(long requestPacket,void** request,long* packetSizeP,unsigned cha
 }
 
 
+void resp_obj(long requestPacket,unsigned char* request,long* packetSizeP,unsigned char** dataP){
+		long packetSize = 0;
+	    unsigned char* data = NULL;
+		custom_request cr;
+		cr.fromArray(request);
+        auto cell = 15;
+		packetSize = cr.m_types.size()*cr.m_ids.size()*cell;
+		data = (unsigned char*)malloc(packetSize);
+		char* msg = (char*)data;
+		memcpy_s(msg,packetSize,  "Hello from server!!!",1024);
+		*packetSizeP = packetSize;
+		*dataP = data;
+}
+
 
 int _tmain(int argc, wchar_t* argv[])
 {
 	//TODO: use some lib (e.g. like in git)
 	auto replier = replySharedMem;
-	resp_builder builder = resp_bytes;
+	resp_builder builder = resp_obj;
 	for (int i = 0; i < argc; i++){
 		std::wstring  s = argv[i];
 		if (s == TEXT("-m")) 
@@ -51,7 +66,7 @@ int _tmain(int argc, wchar_t* argv[])
 		if (s == TEXT("-d")) 
 		{
 			std::wstring  s = argv[i+1];
-			builder = s == TEXT("message") ? resp_bytes : resp_bytes;
+			builder = s == TEXT("bytes") ? resp_bytes : resp_obj;
 		}
 	}
 
@@ -119,7 +134,7 @@ void replyPipes(resp_builder b,void** result){
 		// create responsee data
 		long packetSize = 0;
 	    unsigned char* rData = NULL;
-		b(rSize,result,&packetSize,&rData);
+		b(rSize,request,&packetSize,&rData);
 
 		unsigned char* packetData = (unsigned char*)malloc(sizeof(long)+packetSize);
 	    memcpy(packetData,&packetSize,sizeof(long));
@@ -136,7 +151,7 @@ CLEANUP:
 		free(rData);
 }
 
-void replySharedMem(resp_builder b,void** request){
+void replySharedMem(resp_builder b,void** result){
 		//pull implementation
 
 		// listening for client request
@@ -179,8 +194,9 @@ void replySharedMem(resp_builder b,void** request){
         requestPacket
         );
 
-		*request = malloc(requestPacket);
-		memcpy(*request,requestDataView,requestPacket);
+		unsigned char* request = (unsigned char* )malloc(requestPacket);
+		*result = request;
+		memcpy(request,requestDataView,requestPacket);
 		
 		// notify client that data was read
 		auto readRequest = CreateEvent(NULL,false,false,TEXT("ServerReadRequestEvent"));
@@ -192,10 +208,10 @@ void replySharedMem(resp_builder b,void** request){
 		long packetSize = 0;
 	    unsigned char* data = NULL;
 		b(requestPacket,request,&packetSize,&data);
-    	packetSize = reqResp[requestPacket];
+   /* 	packetSize = reqResp[requestPacket];
 		data = (unsigned char*)malloc(packetSize);
 		char* msg = (char*)data;
-		memcpy_s(msg,packetSize,  "Hello from server!!!",1024);
+		memcpy_s(msg,packetSize,  "Hello from server!!!",1024);*/
 	
 	// posting size of responce data
         auto sizeMap = CreateFileMapping(

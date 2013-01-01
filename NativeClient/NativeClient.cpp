@@ -16,16 +16,41 @@ typedef void (*makeRequest)(unsigned int req_size,req_builder b, char** result);
 void makeSharedMemoryRequest(unsigned int req_size,req_builder b,char** result);
 void makePipeRequest(unsigned int req_size,req_builder b,char** result);
 
+char* name = "cool data";
+char* id = "very very cool id";
+char* type = "very very cool type";
 
-void req_bytes(unsigned int size,unsigned char** rdataP,unsigned int* rmessageSizeP)
+int kb = 1024;
+int req_size1 = 100*kb;
+int req_size2 = 10*kb;
+int req_size3 = 1*kb;
+
+std::map<int,custom_request> req;
+
+void init_reqs(int req_size,int ids,int types){
+	custom_request sc;
+	sc.m_name = std::string(name);
+	for (int i = 0;i<ids;i++){
+		sc.m_ids.insert(sc.m_ids.end(),id);
+	}
+	for (int i = 0;i<types;i++){	
+		sc.m_types.insert(sc.m_types.end(),type);
+	}
+
+	req.insert(make_pair(req_size,sc));
+}
+
+void req_obj(unsigned int size,unsigned char** rdataP,unsigned int* rmessageSizeP)
 {	
-	unsigned int rmessageSize = size;
+	auto r = req[size];
+	unsigned int rmessageSize = r.getSize();
 	unsigned char* rdata = (unsigned char*)malloc(rmessageSize);
-	char* rmsg = (char*)rdata;
-	memcpy_s(rmsg,rmessageSize,  "Hello from client!!!",1024);
+	r.toArray(rdata,rmessageSize);
 	*rdataP = rdata;
 	*rmessageSizeP = rmessageSize;
 }
+
+
 
 void req_bytes(unsigned int size,unsigned char** rdataP,unsigned int* rmessageSizeP)
 {	
@@ -40,7 +65,7 @@ void req_bytes(unsigned int size,unsigned char** rdataP,unsigned int* rmessageSi
 int _tmain(int argc, _TCHAR* argv[])
 {
 	//TODO: use some lib (e.g. like in git)
-	req_builder builder = req_bytes;
+	req_builder builder = req_obj;
 	makeRequest call = makeSharedMemoryRequest;
 	for (int i = 0; i < argc; i++){
 		std::wstring  s = argv[i];
@@ -52,14 +77,15 @@ int _tmain(int argc, _TCHAR* argv[])
 		if (s == TEXT("-d")) 
 		{
 			std::wstring  s = argv[i+1];
-			builder = s == TEXT("message") ? req_bytes : req_bytes;
+			builder = s == TEXT("bytes") ? req_bytes : req_obj;
 		}
 	}
 
-	int kb = 1024;
-	auto rmessageSize1 = 100*kb;
-	auto rmessageSize2 = kb*10;
-	auto msg_size_1 = 1*kb;
+
+
+	init_reqs(req_size1,6666,10);
+	init_reqs(req_size2,666,10);
+	init_reqs(req_size3,66,10);
 
 	Stopwatch sw;
 	sw.set_mode(REAL_TIME);
@@ -68,37 +94,44 @@ int _tmain(int argc, _TCHAR* argv[])
 
 	//TODO: clear respince after each request
 	char* response = NULL;
+	unsigned char* req = NULL;
 	cout << "Client started"<< endl;
-	cout << "Message size :" << rmessageSize1 << endl;
+	unsigned int real_size = 0;
+	builder(req_size1,&req,&real_size);
+	cout << "Message size :" << real_size/kb << " kb" << endl;
 
 	for (int i=0;i<10;i++){
-		char* msr = "Memory Mapped Files 100kb -> 1000kb";
+		char* msr = "Request 100kb -> 1000kb";
 
 
 		sw.start(msr);
-		call(rmessageSize1,builder,&response);
+		call(req_size1,builder,&response);
 		sw.stop(msr);
 	}	
 
 
-	cout << "Message size :" << rmessageSize2 << endl;
+	builder(req_size2,&req,&real_size);
+	cout << "Message size :" << real_size/kb << " kb" << endl;
+
 	for (int i=0;i<100;i++){
-		char* msr = "Memory Mapped Files 10kb - 100kb";
+		char* msr = "Request 10kb - 100kb";
 		sw.start(msr);
-		call(rmessageSize2,builder,&response);
+		call(req_size2,builder,&response);
 		sw.stop(msr);
 	}
 
-	cout << "Message size :" << msg_size_1 << endl;
+	builder(req_size3,&req,&real_size);
+	cout << "Message size :" << real_size/kb << " kb" << endl;
+
 	for (int i=0;i<1000;i++){
 		//Sleep(1);//BUG: somthing hangs here when pipes used....
-		char* msr = "Memory Mapped Files 1kb - 10kb";
+		char* msr = "Request 1kb - 10kb";
 		response[0]=0;
 		sw.start(msr);
-		call(msg_size_1,builder,&response);
+		call(req_size3,builder,&response);
 
 		sw.stop(msr);
-		assert(response[0]=='H');//TODO: assert whole message and added last character to check
+		//assert(response[0]=='H');//TODO: assert whole message and added last character to check
 	}
 
 
@@ -161,7 +194,7 @@ void makePipeRequest(unsigned int req_size,req_builder b,char** result){
 	CloseHandle(hPipe);
 	//cout << response << endl;
 CLEANUP:
-	free(
+	free(rdata);
 }
 void makeSharedMemoryRequest(unsigned int req_size,req_builder b,char** result){
 

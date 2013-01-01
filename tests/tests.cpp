@@ -38,7 +38,7 @@ TEST(SERIALIZATION, SPEED)
 
     t.start(obj_creation);
 	custom_request sc;
-    sc.m_name = std::string((char*)name);
+    sc.m_name = std::string(name);
 	for (int i = 0;i<5000;i++){
 		sc.m_ids.insert(sc.m_ids.end(),id);
 	}
