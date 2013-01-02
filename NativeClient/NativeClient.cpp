@@ -8,7 +8,7 @@
 #include <assert.h>
 #include <string>
 #include "Stopwatch.h"
-#include <custom_request.h>
+#include <objects.h>
 #include <Messages.pb.h>
 
 using namespace std;
@@ -87,7 +87,7 @@ void req_bytes(unsigned int size,unsigned char** rdataP,unsigned int* rmessageSi
 int _tmain(int argc, _TCHAR* argv[])
 {
 	//TODO: use some lib (e.g. like in git)
-	req_builder builder = req_msg;
+	req_builder builder = req_obj;
 	makeRequest call = makeSharedMemoryRequest;
 	for (int i = 0; i < argc; i++){
 		std::wstring  s = argv[i];
@@ -160,7 +160,7 @@ int _tmain(int argc, _TCHAR* argv[])
 
 
 	sw.report_all(cout);
-	cout << "Last message :" << response << endl;
+	//cout << "Last message :" << response << endl;
 	char wait(' ');
 	cin >> &wait;	
 	return 0;

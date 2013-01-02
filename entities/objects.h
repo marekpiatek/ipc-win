@@ -6,7 +6,10 @@
 #include <vector>
 #include <list>
 
+using namespace std;
+
 class custom_request;
+class custom_response;
 
 class custom_request {
 	
@@ -18,6 +21,19 @@ class custom_request {
 		int idss;
 		int typess;
 
+		int getSize();
+		void fromArray(unsigned char * buffer);
+		
+		void toArray(unsigned char* buffer,int size);
+};
+
+
+
+class custom_response {
+	
+		public:
+		//NOTE: just for simplicy - in real we should store somehow column and row info
+		list<string> m_data;
 		int getSize();
 		void fromArray(unsigned char * buffer);
 		

@@ -39,10 +39,10 @@
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <LinkIncremental>true</LinkIncremental>
-    <IncludePath>$(SolutionDir)Entities;$(SolutionDir)3rdParties;$(SolutionDir)3rdParties\Stopwatch;$(IncludePath)</IncludePath>
+    <IncludePath>$(SolutionDir)Entities;$(SolutionDir)3rdParties;$(SolutionDir)3rdParties\Stopwatch;$(SolutionDir)3rdParties\protobuf-2.4.1\src\google;$(SolutionDir)3rdParties\protobuf-2.4.1\src\;$(IncludePath)</IncludePath>
     <SourcePath>$(SolutionDir)3rdParties\Stopwatch;$(SourcePath)</SourcePath>
     <ReferencePath>$(Configuration);$(SolutionDir)$(Configuration);$(ReferencePath)</ReferencePath>
-    <LibraryPath>$(Configuration);$(SolutionDir)$(Configuration);$(LibraryPath)</LibraryPath>
+    <LibraryPath>$(Configuration);$(SolutionDir)$(Configuration);$(SolutionDir)3rdParties\protobuf-2.4.1\vsprojects\Debug;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <LinkIncremental>false</LinkIncremental>
@@ -60,7 +60,7 @@
     <Link>
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalDependencies>Stopwatch.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>Stopwatch.lib;entities.lib;libprotobuf.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">

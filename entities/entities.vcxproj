@@ -42,7 +42,7 @@
     <LibraryPath>$(SolutionDir)\3rdparties\lib;$(VCInstallDir)lib;$(VCInstallDir)atlmfc\lib;$(WindowsSdkDir)lib;$(FrameworkSDKDir)\lib</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
-    <IncludePath>$(SolutionDir)3rdParties\protobuf-2.4.1\src\;$(IncludePath)</IncludePath>
+    <IncludePath>$(SolutionDir)3rdParties\protobuf-2.4.1\src\;C:\ipc\3rdParties\protobuf-2.4.1\src\google\protobuf\stubs;$(IncludePath)</IncludePath>
     <ExecutablePath>$(SolutionDir)Tools;$(VCInstallDir)bin;$(WindowsSdkDir)bin\NETFX 4.0 Tools;$(WindowsSdkDir)bin;$(VSInstallDir)Common7\Tools\bin;$(VSInstallDir)Common7\tools;$(VSInstallDir)Common7\ide;$(ProgramFiles)\HTML Help Workshop;$(FrameworkSDKDir)\bin;$(MSBuildToolsPath32);$(VSInstallDir);$(SystemRoot)\SysWow64;$(FxCopDir);$(PATH);</ExecutablePath>
     <LibraryPath>$(SolutionDir)$(Configuration);$(Configuration);$(LibraryPath)</LibraryPath>
   </PropertyGroup>
@@ -73,12 +73,12 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="custom_request.cpp" />
+    <ClCompile Include="objects.cpp" />
     <ClCompile Include="Messages.pb.cc" />
     <ClCompile Include="stdafx.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="custom_request.h" />
+    <ClInclude Include="objects.h" />
     <ClInclude Include="Messages.pb.h" />
     <ClInclude Include="stdafx.h" />
     <ClInclude Include="targetver.h" />

@@ -39,7 +39,7 @@
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <LinkIncremental>true</LinkIncremental>
-    <IncludePath>$(SolutionDir)3rdParties\gtest\include\;$(SolutionDir)3rdParties\protobuf-2.4.1\src\google\;$(SolutionDir)3rdParties\protobuf-2.4.1\src\google\protobuf\;$(SolutionDir)3rdParties\protobuf-2.4.1\src\google\protobuf\stubs;$(SolutionDir)3rdParties\protobuf-2.4.1\src\;$(SolutionDir)3rdParties\Stopwatch;$(SolutionDir)Entities;$(IncludePath)</IncludePath>
+    <IncludePath>$(SolutionDir)3rdParties\gtest\include\;$(SolutionDir)3rdParties\protobuf-2.4.1\src\;$(SolutionDir)3rdParties\Stopwatch;$(SolutionDir)Entities;$(IncludePath)</IncludePath>
     <ExecutablePath>$(SolutionDir)Tools;$(ExecutablePath)</ExecutablePath>
     <ReferencePath>$(SolutionDir)$(Configuration);$(Configuration);$(ReferencePath)</ReferencePath>
     <LibraryPath>$(SolutionDir)$(Configuration);$(Configuration);$(LibraryPath)</LibraryPath>

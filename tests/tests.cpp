@@ -11,14 +11,40 @@
 #include <vector>
 #include <list>
 #include <stopwatch.h>
-#include <custom_request.h>
+#include <objects.h>
 
 
 
 TEST(SERIALIZATION, SPEED)
 {
+	custom_response r;
+	r.m_data.insert(r.m_data.end()," ");
+	auto tsize = r.getSize();
+	unsigned char* tb = (unsigned char*)malloc(tsize);
+	r.toArray(tb,tsize);
+	r.fromArray(tb);
+
 	Stopwatch t;
 	t.set_mode(REAL_TIME);
+	
+	auto obj_data_creation = "Custom data object creation";
+	t.start(obj_data_creation);
+	custom_response br;
+	for (auto i= 0;i<6666*10;i++){
+		br.m_data.insert(br.m_data.end(),"0123456789");
+	}
+	t.stop(obj_data_creation);
+	
+	auto obj_data_serialization = "Custom data object serialization";
+	t.start(obj_data_serialization);
+	auto brsize = br.getSize();
+	unsigned char* brd = (unsigned char*)malloc(brsize);
+	r.toArray(brd,brsize);
+	t.stop(obj_data_serialization);
+
+	t.report(obj_data_creation);
+	t.report(obj_data_serialization);
+
 	auto obj_creation = "Cusom object creation";
 	auto obj_serialization = "Custom object to byte array serialization";
 	auto obj_deserializaion = "Cusom object instatiation from byte array";

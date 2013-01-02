@@ -7,7 +7,7 @@
 #include <string>
 #include <assert.h>
 #include "Stopwatch.h"
-#include <custom_request.h>
+#include <objects.h>
 #include <Messages.pb.h>
 
 #define RESP_BUILDER void (int size,void** req,int* resp_s,unsigned char** resp);
@@ -24,6 +24,15 @@ void replySharedMem(resp_builder b,void** result);
 
 const int kb = 1024;
 std::map<int,int> reqResp;
+std::map<int,custom_response> reqRespObj;
+
+void insert(int reqc){
+	custom_response cresp;
+			for (int i=0;i<reqc;i++){
+			cresp.m_data.insert(cresp.m_data.end(), "Hello from server!!!");
+		}
+			reqRespObj.insert(make_pair(reqc,cresp));
+}
 
 void resp_bytes(long requestPacket,unsigned char* request,long* packetSizeP,unsigned char** dataP){
 		long packetSize = 0;
@@ -55,12 +64,14 @@ void resp_obj(long requestPacket,unsigned char* request,long* packetSizeP,unsign
 	    unsigned char* data = NULL;
 		custom_request cr;
 		cr.fromArray(request);
-        auto cell = 15;
-		packetSize = cr.m_types.size()*cr.m_ids.size()*cell;
-		data = (unsigned char*)malloc(packetSize);
-		char* msg = (char*)data;
-		memcpy_s(msg,packetSize,  "Hello from server!!!",1024);
+
+		// create response
+        int itemsc = cr.m_types.size()*cr.m_ids.size();
+		custom_response cresp = reqRespObj[itemsc];		
+		packetSize = cresp.getSize();
 		*packetSizeP = packetSize;
+		data = (unsigned char*)malloc(packetSize);
+		cresp.toArray(data,packetSize);
 		*dataP = data;
 }
 
@@ -69,7 +80,7 @@ int _tmain(int argc, wchar_t* argv[])
 {
 	//TODO: use some lib (e.g. like in git)
 	auto replier = replySharedMem;
-	resp_builder builder = resp_msg;
+	resp_builder builder = resp_obj;
 	for (int i = 0; i < argc; i++){
 		std::wstring  s = argv[i];
 		if (s == TEXT("-m")) 
@@ -90,6 +101,9 @@ int _tmain(int argc, wchar_t* argv[])
 	reqResp.insert(make_pair(10*kb,100*kb));
 	reqResp.insert(make_pair(1*kb,10*kb));
 
+	insert(6666*10);
+	insert(666*10);
+	insert(66*10);
 	void* request = NULL;
   
 
