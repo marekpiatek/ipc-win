@@ -29,7 +29,7 @@ std::map<int,custom_response> reqRespObj;
 void insert(int reqc){
 	custom_response cresp;
 			for (int i=0;i<reqc;i++){
-			cresp.m_data.insert(cresp.m_data.end(), "Hello from server!!!");
+			cresp.m_data.insert(cresp.m_data.end(), "0123456789");
 		}
 			reqRespObj.insert(make_pair(reqc,cresp));
 }
@@ -48,14 +48,21 @@ void resp_bytes(long requestPacket,unsigned char* request,long* packetSizeP,unsi
 void resp_msg(long requestPacket,unsigned char* req,long* packetSizeP,unsigned char** dataP){
 		long packetSize = 0;
 	    unsigned char* data = NULL;
-		request r;
-		r.ParseFromArray(req,requestPacket);
-        auto cell = 15;
-		packetSize = r.types().size()*r.ids().size()*cell;
-		data = (unsigned char*)malloc(packetSize);
-		char* msg = (char*)data;
-		memcpy_s(msg,packetSize,  "Hello from server!!!",1024);
+		request cr;
+		int sizeOfReq = 0;
+		cr.ParseFromArray(req,requestPacket);
+
+		// create response
+		int itemsc = cr.types().size()*cr.ids().size();//TODO: convert to custom object before usage for more real timing
+		custom_response ccresp = reqRespObj[itemsc];	
+		response resp;
+		for (auto it = ccresp.m_data.begin();it!=ccresp.m_data.end();it++){
+			resp.add_data(*it);
+		}
+		packetSize = resp.ByteSize();
 		*packetSizeP = packetSize;
+		data = (unsigned char*)malloc(packetSize);
+		resp.SerializeToArray(data,packetSize);
 		*dataP = data;
 }
 
@@ -63,7 +70,8 @@ void resp_obj(long requestPacket,unsigned char* request,long* packetSizeP,unsign
 		long packetSize = 0;
 	    unsigned char* data = NULL;
 		custom_request cr;
-		cr.fromArray(request);
+		int sizeOfReq = 0;
+		cr.fromArray(request,&sizeOfReq);
 
 		// create response
         int itemsc = cr.m_types.size()*cr.m_ids.size();
@@ -80,7 +88,7 @@ int _tmain(int argc, wchar_t* argv[])
 {
 	//TODO: use some lib (e.g. like in git)
 	auto replier = replySharedMem;
-	resp_builder builder = resp_obj;
+	resp_builder builder = resp_msg;
 	for (int i = 0; i < argc; i++){
 		std::wstring  s = argv[i];
 		if (s == TEXT("-m")) 
@@ -104,6 +112,7 @@ int _tmain(int argc, wchar_t* argv[])
 	insert(6666*10);
 	insert(666*10);
 	insert(66*10);
+
 	void* request = NULL;
   
 

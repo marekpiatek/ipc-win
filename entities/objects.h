@@ -22,7 +22,7 @@ class custom_request {
 		int typess;
 
 		int getSize();
-		void fromArray(unsigned char * buffer);
+		void fromArray(unsigned char * buffer,int* size);
 		
 		void toArray(unsigned char* buffer,int size);
 };
@@ -33,9 +33,9 @@ class custom_response {
 	
 		public:
 		//NOTE: just for simplicy - in real we should store somehow column and row info
-		list<string> m_data;
+		vector<string> m_data;
 		int getSize();
-		void fromArray(unsigned char * buffer);
+		void fromArray(unsigned char * bufferm,int* size);
 		
 		void toArray(unsigned char* buffer,int size);
 };

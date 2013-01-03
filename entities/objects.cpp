@@ -31,7 +31,8 @@ int custom_request::getSize()
 	size+=sizeof(int)*3+2*sizeof(int); // to store 3 size of bytes and 2 for storing elements count
 	return size;
 }
-void custom_request::fromArray(unsigned char* buffer){
+void custom_request::fromArray(unsigned char* buffer,int* sizeP){
+	auto init = buffer;
 	memcpy(&idss,buffer,sizeof(int));
 	buffer += sizeof(int);
 
@@ -69,7 +70,7 @@ void custom_request::fromArray(unsigned char* buffer){
 	memcpy(n,buffer,ns);
 	buffer+=ns;
 	//TODO: free
-
+	*sizeP = buffer - init;
 }
 
 void custom_request::toArray(unsigned char* buffer,int size){
@@ -134,7 +135,8 @@ int custom_response::getSize(){
 	return size;
 };
 void custom_response::toArray(unsigned char* buffer,int size){
-	memcpy(buffer,&size,sizeof(int));
+	auto ic = m_data.size();
+	memcpy(buffer,&ic,sizeof(int));
 	//NOTE: pointer arifmetics works here by may fail on x64 and can take larger space then possible(with garbage)
 	buffer += sizeof(int);
 	for (auto it =m_data.begin();it!=m_data.end();it++){
@@ -144,14 +146,17 @@ void custom_response::toArray(unsigned char* buffer,int size){
 		buffer +=l;
 	}	
 };
-void custom_response::fromArray(unsigned char * buffer)
+void custom_response::fromArray(unsigned char * buffer,int* sizeP)
 {
+	auto init = buffer;
 	int size = 0;
 	memcpy(&size,buffer,sizeof(int));
 	buffer += sizeof(int);
 	for (auto i=0;i<size;i++){
 		std::string s((char*)buffer) ;
+		auto l = s.length()+1;
 		m_data.insert(m_data.end(),s);
-		buffer+=s.length()+1;
+		buffer+= l;
 	}
+	*sizeP = buffer - init;
 };

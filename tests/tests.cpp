@@ -17,33 +17,23 @@
 
 TEST(SERIALIZATION, SPEED)
 {
-	custom_response r;
-	r.m_data.insert(r.m_data.end()," ");
-	auto tsize = r.getSize();
-	unsigned char* tb = (unsigned char*)malloc(tsize);
-	r.toArray(tb,tsize);
-	r.fromArray(tb);
+	//custom_response r;
+	//r.m_data.insert(r.m_data.end()," ");
+	//auto tsize = r.getSize();
+	//unsigned char* tb = (unsigned char*)malloc(tsize);
+	//r.toArray(tb,tsize);
+	//int size1 = 0;
+	//r.fromArray(tb,&size1);
 
 	Stopwatch t;
 	t.set_mode(REAL_TIME);
 	
 	auto obj_data_creation = "Custom data object creation";
-	t.start(obj_data_creation);
-	custom_response br;
-	for (auto i= 0;i<6666*10;i++){
-		br.m_data.insert(br.m_data.end(),"0123456789");
-	}
-	t.stop(obj_data_creation);
-	
 	auto obj_data_serialization = "Custom data object serialization";
-	t.start(obj_data_serialization);
-	auto brsize = br.getSize();
-	unsigned char* brd = (unsigned char*)malloc(brsize);
-	r.toArray(brd,brsize);
-	t.stop(obj_data_serialization);
-
-	t.report(obj_data_creation);
-	t.report(obj_data_serialization);
+	auto obj_data_deserialization = "Custom data object deserialization";
+	auto msg_data_creation = "Protobuf data object creation";
+	auto msg_data_serialization = "Protobuf data object serialization";
+	auto msg_data_deserialization = "Protobuf data object deserialization";
 
 	auto obj_creation = "Cusom object creation";
 	auto obj_serialization = "Custom object to byte array serialization";
@@ -53,6 +43,45 @@ TEST(SERIALIZATION, SPEED)
 	auto message_deserialization = "Protobug message deserialization";
 
 	for (auto epoch =0;epoch<10;epoch++){
+
+	t.start(obj_data_creation);
+	custom_response br;
+	for (auto i= 0;i<6666*10;i++){
+		br.m_data.insert(br.m_data.end(),"0123456789");
+	}
+	t.stop(obj_data_creation);	
+
+	t.start(obj_data_serialization);
+	auto brsize = br.getSize();
+	unsigned char* brd = (unsigned char*)malloc(brsize);
+	br.toArray(brd,brsize);
+	t.stop(obj_data_serialization);
+
+	t.start(obj_data_deserialization);
+	custom_response crde;
+	int sizeOfDeData = 0;
+	crde.fromArray(brd,&sizeOfDeData);
+	t.stop(obj_data_deserialization);
+
+
+	t.start(msg_data_creation);
+	response respm;
+	for (auto i= 0;i<6666*10;i++){
+		respm.add_data("0123456789");
+	}
+	t.stop(msg_data_creation);	
+
+	t.start(msg_data_serialization);
+	auto respms = respm.ByteSize();
+	unsigned char* respmb = (unsigned char*)malloc(respms);
+	respm.SerializeToArray(respmb,respms);
+	t.stop(msg_data_serialization);
+
+	t.start(msg_data_deserialization);
+	response respmde;
+
+	respmde.ParseFromArray(respmb,respms);
+	t.stop(msg_data_deserialization);
 
 	//data
 	auto name = "cool data";
@@ -83,7 +112,8 @@ TEST(SERIALIZATION, SPEED)
 
 	t.start(obj_deserializaion);
 	custom_request dc;
-	dc.fromArray(buffer);
+	int sizeOfDe = 0;
+	dc.fromArray(buffer,&sizeOfDe);
 	t.stop(obj_deserializaion);
 
 
@@ -114,6 +144,14 @@ TEST(SERIALIZATION, SPEED)
     d->ParseFromArray(data,size);
 	t.stop(message_deserialization);
 	}
+
+	t.report(obj_data_creation);
+	t.report(obj_data_serialization);
+	t.report(obj_data_deserialization);
+	t.report(msg_data_creation);
+	t.report(msg_data_serialization);
+	t.report(msg_data_deserialization);
+
 	t.report(obj_creation);
 	t.report(obj_serialization);
 	t.report(obj_deserializaion);
