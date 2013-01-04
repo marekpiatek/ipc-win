@@ -1,1 +1,0 @@
-nativeserver.exe -m pipes

@@ -49,7 +49,7 @@
     <ExecutablePath>$(SolutionDir)Tools;$(ExecutablePath)</ExecutablePath>
     <IncludePath>$(SolutionDir)3rdParties\gtest\include\;$(SolutionDir)3rdParties\;$(SolutionDir)3rdParties\Stopwatch;$(SolutionDir)3rdParties\protobuf-2.4.1\src\;$(SolutionDir)Entities;$(IncludePath)</IncludePath>
     <ReferencePath>$(SolutionDir)$(Configuration);$(Configuration);$(ReferencePath)</ReferencePath>
-    <LibraryPath>$(SolutionDir)$(Configuration);$(Configuration);$(SolutionDir)3rdParties\gtest\msvc\gtest\$(Configuration);$(SolutionDir)3rdParties\protobuf-2.4.1\vsprojects\$(Configuration);$(SolutionDir)3rdParties\Stopwatch\$(Configuration);$(SolutionDir)build\$(Configuration);$(SolutionDir)Entities\$(Configuration);$(SolutionDir)Entities;$(LibraryPath)</LibraryPath>
+    <LibraryPath>$(SolutionDir)$(Configuration);$(Configuration);$(SolutionDir)3rdParties\lib;$(SolutionDir)build\$(Configuration);$(SolutionDir)Entities\$(Configuration);$(SolutionDir)Entities;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>

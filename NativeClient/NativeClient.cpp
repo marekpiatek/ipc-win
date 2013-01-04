@@ -16,18 +16,20 @@ typedef void (*req_builder)(unsigned int size,unsigned char** dataP,unsigned int
 
 typedef void (*resp_builder)(unsigned int size,unsigned char* resp_data);
 
-typedef void (*makeRequest)(unsigned int req_size,req_builder b, resp_builder br,void** result);
-void makeSharedMemoryRequest(unsigned int req_size,req_builder b,resp_builder br,void** result);
-void makePipeRequest(unsigned int req_size,req_builder b,resp_builder br,void** result);
+typedef void (*makeRequest)(unsigned int req_size,req_builder b, resp_builder br,void** result,int* resultSize);
+void makeSharedMemoryRequest(unsigned int req_size,req_builder b,resp_builder br,void** result,int* resultSize);
+void makePipeRequest(unsigned int req_size,req_builder b,resp_builder br,void** result,int* resultSize);
 
 char* name = "cool data";
 char* id = "very very cool id";
 char* type = "very very cool type";
 
 int kb = 1024;
-int req_size1 = 100*kb;
-int req_size2 = 10*kb;
-int req_size3 = 1*kb;
+int req_size100 = 100*kb;
+int req_size50 = 50*kb;
+int req_size10 = 10*kb;
+int req_size1 = 1*kb;
+
 
 std::map<int,custom_request> req;
 
@@ -83,7 +85,13 @@ void resp_bytes(unsigned int size,unsigned char* resp_data){
 void resp_msg(unsigned int size,unsigned char* resp_data){
 	response r;
 	r.ParseFromArray(resp_data,size);
-	//NOTE: we should translate it to custom object in order to have more real mesurment
+	//NOTE: we have to translate it to custom object in order to have more real mesurment
+	//NOTE: and to satisfie public API
+	custom_response cr;
+	for (auto it = r.data().begin();it!=r.data().end();it++){
+		cr.m_data.insert(cr.m_data.end(),*it);
+	}
+
 }
 
 void resp_obj(unsigned int size,unsigned char* resp_data){
@@ -118,73 +126,87 @@ int _tmain(int argc, _TCHAR* argv[])
 		if (s == TEXT("-d")) 
 		{
 			std::wstring  s = argv[i+1];
-			builder = s == TEXT("bytes") ? req_bytes : req_msg;
-			builder = s == TEXT("object") ? req_obj : req_msg;
-			br = s == TEXT("bytes") ? resp_bytes : resp_msg;
-			br = s == TEXT("object") ? resp_obj : resp_msg;
+			builder = s == TEXT("bytes") ? req_bytes : (s == TEXT("object") ? req_obj : req_msg);
+			br = s == TEXT("bytes") ? resp_bytes : (s == TEXT("object") ? resp_obj : resp_msg);
 		}
 	}
 
 
-
-	init_reqs(req_size1,6666,10);
-	init_reqs(req_size2,666,10);
-	init_reqs(req_size3,66,10);
+	init_reqs(req_size100,5000,10);
+	init_reqs(req_size50,2500,10);
+	init_reqs(req_size10,500,10);
+	init_reqs(req_size1,50,10);
 
 	Stopwatch sw;
 	sw.set_mode(REAL_TIME);
 
-
-
-	//TODO: clear respince after each request
+	//TODO: clear response after each request
 	void* response = NULL;
+	int resp_size = -1;
 	unsigned char* req = NULL;
 	cout << "Client started"<< endl;
 	unsigned int real_size = 0;
+
+
+	char* msr100 = "Client process requests ~100kb and gets ~1000kb response of server process";
+	char* msr50 = "Client process requests ~50kb and gets ~500kb response of server process";
+	char* msr10 = "Client process requests ~10kb and gets ~100kb response  of server process";
+	char* msr1 = "Client process requests ~1kb and gets ~10kb response  of server process";
+
+	builder(req_size100,&req,&real_size);
+	cout << "Request size :" << real_size/kb << " kb" << endl;
+	for (int i=0;i<10;i++){
+		
+		sw.start(msr100);
+		call(req_size100,builder,br,&response,&resp_size);
+		sw.stop(msr100);
+	}	
+	cout << "Response size was :" << resp_size/kb << " kb" <<endl;
+
+
+	builder(req_size50,&req,&real_size);
+	cout << "Request size :" << real_size/kb << " kb" << endl;
+	for (int i=0;i<20;i++){
+		
+		sw.start(msr50);
+		call(req_size50,builder,br,&response,&resp_size);
+		sw.stop(msr50);
+	}	
+	cout << "Response size was :" << resp_size/kb << " kb" <<endl;
+
+	builder(req_size10,&req,&real_size);
+	cout << "Message size :" << real_size/kb << " kb" << endl;
+	for (int i=0;i<100;i++){
+		
+		sw.start(msr10);
+		call(req_size10,builder,br,&response,&resp_size);
+		sw.stop(msr10);
+	}
+	cout << "Response size was :" << resp_size/kb << " kb" <<endl;
+
 	builder(req_size1,&req,&real_size);
 	cout << "Message size :" << real_size/kb << " kb" << endl;
-
-	for (int i=0;i<10;i++){
-		char* msr = "Request 100kb -> 1000kb";
-		sw.start(msr);
-		call(req_size1,builder,br,&response);
-		custom_response cr;
-
-		sw.stop(msr);
-	}	
-
-
-	builder(req_size2,&req,&real_size);
-	cout << "Message size :" << real_size/kb << " kb" << endl;
-
-	for (int i=0;i<100;i++){
-		char* msr = "Request 10kb - 100kb";
-		sw.start(msr);
-		call(req_size2,builder,br,&response);
-		sw.stop(msr);
-	}
-
-	builder(req_size3,&req,&real_size);
-	cout << "Message size :" << real_size/kb << " kb" << endl;
-
 	for (int i=0;i<1000;i++){
-		//Sleep(1);//BUG: somthing hangs here when pipes used....
-		char* msr = "Request 1kb - 10kb";
-		sw.start(msr);
-		call(req_size3,builder,br,&response);
-		sw.stop(msr);
+		//Sleep(1);
+		//BUG: sometimes hangs here when pipes used....
+		sw.start(msr1);
+		call(req_size1,builder,br,&response,&resp_size);
+		sw.stop(msr1);
 	}
+	cout << "Response size was :" << resp_size/kb << " kb" <<endl;
 	//TODO: make assertion of response
 
-
-	sw.report_all(cout);
+	sw.report(msr100);
+	sw.report(msr50);
+	sw.report(msr10);
+	sw.report(msr1);
 
 	char wait(' ');
 	cin >> &wait;	
 	return 0;
 }
 
-void makePipeRequest(unsigned int req_size,req_builder b,resp_builder br,void** result){
+void makePipeRequest(unsigned int req_size,req_builder b,resp_builder br,void** result,int* resultSize){
 	HANDLE	hPipe = INVALID_HANDLE_VALUE;
 	auto name = TEXT("\\\\.\\pipe\\FastDataServer");
 	while ( !WaitNamedPipe(name, 1)); 
@@ -203,8 +225,7 @@ void makePipeRequest(unsigned int req_size,req_builder b,resp_builder br,void** 
 
 		if (hPipe != INVALID_HANDLE_VALUE) 
 			break; 
-	}    
-
+	}
 
 	unsigned char* rdata = NULL;
 	unsigned int rmessageSize = 0;
@@ -234,11 +255,12 @@ void makePipeRequest(unsigned int req_size,req_builder b,resp_builder br,void** 
 	//cout << rRead << endl;
 	CloseHandle(hPipe);
 	br(rSizeRead,response);
+	*resultSize = rSizeRead;
 	//cout << response << endl;
 CLEANUP:
 	free(rdata);
 }
-void makeSharedMemoryRequest(unsigned int req_size,req_builder b,resp_builder br,void** result){
+void makeSharedMemoryRequest(unsigned int req_size,req_builder b,resp_builder br,void** result,int* resultSize){
 
 	unsigned char* rdata = NULL;
 	unsigned int rmessageSize = 0;
@@ -333,8 +355,6 @@ void makeSharedMemoryRequest(unsigned int req_size,req_builder b,resp_builder br
 		packet
 		);
 
-
-
 	byte* data = (byte*)malloc(packet);
 	char* msg = (char*)data;
 	memcpy_s(msg,packet, dataView ,packet);
@@ -342,5 +362,6 @@ void makeSharedMemoryRequest(unsigned int req_size,req_builder b,resp_builder br
 	SetEvent(readResponse);
 	br(packet,data);
 	*result = msg;
+	*resultSize = packet;
 }
 

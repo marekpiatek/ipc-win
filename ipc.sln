@@ -4,12 +4,19 @@ Microsoft Visual Studio Solution File, Format Version 11.00
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ManagedServer", "ManagedServer\ManagedServer.csproj", "{D25132C4-C1D7-4537-A3E9-0CD5BDF99D5B}"
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "NativeServer", "NativeServer\NativeServer.vcxproj", "{89C29B79-FD42-415D-8BDB-E932C0433328}"
+	ProjectSection(ProjectDependencies) = postProject
+		{AA0B2B3D-4E76-4F1C-8C48-E52E08D20259} = {AA0B2B3D-4E76-4F1C-8C48-E52E08D20259}
+	EndProjectSection
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "CppFileMappingClient", "3rdParties\allin1\Visual Studio 2008\CppFileMappingServer-621d89a0\C++\CppFileMappingClient\CppFileMappingClient.vcxproj", "{F8C3C980-531E-493F-A139-D30F1A14D319}"
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "CppFileMappingServer", "3rdParties\allin1\Visual Studio 2008\CppFileMappingServer-621d89a0\C++\CppFileMappingServer\CppFileMappingServer.vcxproj", "{31FA316A-9C39-4BBE-A7E0-B37E22F5A042}"
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "NativeClient", "NativeClient\NativeClient.vcxproj", "{6FC44E6E-088B-48EE-85F6-6AFA44405EFF}"
+	ProjectSection(ProjectDependencies) = postProject
+		{AA0B2B3D-4E76-4F1C-8C48-E52E08D20259} = {AA0B2B3D-4E76-4F1C-8C48-E52E08D20259}
+		{5A8CB3F7-71B7-42F2-8BE0-23963F37F310} = {5A8CB3F7-71B7-42F2-8BE0-23963F37F310}
+	EndProjectSection
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Stopwatch", "3rdParties\Stopwatch\Stopwatch.vcxproj", "{5A8CB3F7-71B7-42F2-8BE0-23963F37F310}"
 EndProject
@@ -18,6 +25,10 @@ EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "CppNamedPipeClient", "3rdParties\allin1\Visual Studio 2010\CppNamedPipeCommunication-7447a0bf\C++\CppNamedPipeCommunication\CppNamedPipeClient\CppNamedPipeClient.vcxproj", "{B54163F0-84A2-4CF1-9EE8-9EFA2BE9471C}"
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "tests", "tests\tests.vcxproj", "{7493EA43-39EA-4BD9-B1C0-3845625F6AB9}"
+	ProjectSection(ProjectDependencies) = postProject
+		{AA0B2B3D-4E76-4F1C-8C48-E52E08D20259} = {AA0B2B3D-4E76-4F1C-8C48-E52E08D20259}
+		{5A8CB3F7-71B7-42F2-8BE0-23963F37F310} = {5A8CB3F7-71B7-42F2-8BE0-23963F37F310}
+	EndProjectSection
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "entities", "entities\entities.vcxproj", "{AA0B2B3D-4E76-4F1C-8C48-E52E08D20259}"
 EndProject

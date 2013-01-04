@@ -29,7 +29,7 @@ std::map<int,custom_response> reqRespObj;
 void insert(int reqc){
 	custom_response cresp;
 			for (int i=0;i<reqc;i++){
-			cresp.m_data.insert(cresp.m_data.end(), "0123456789");
+			cresp.m_data.insert(cresp.m_data.end(), "123456789 123456789");
 		}
 			reqRespObj.insert(make_pair(reqc,cresp));
 }
@@ -53,7 +53,8 @@ void resp_msg(long requestPacket,unsigned char* req,long* packetSizeP,unsigned c
 		cr.ParseFromArray(req,requestPacket);
 
 		// create response
-		int itemsc = cr.types().size()*cr.ids().size();//TODO: convert to custom object before usage for more real timing
+		//NOTE: do not convert into custom object before usage because in end implementation can be also avoided
+		int itemsc = cr.types().size()*cr.ids().size();
 		custom_response ccresp = reqRespObj[itemsc];	
 		response resp;
 		for (auto it = ccresp.m_data.begin();it!=ccresp.m_data.end();it++){
@@ -99,19 +100,20 @@ int _tmain(int argc, wchar_t* argv[])
 		if (s == TEXT("-d")) 
 		{
 			std::wstring  s = argv[i+1];
-			builder = s == TEXT("bytes") ? resp_bytes : resp_msg;
-			builder = s == TEXT("object") ? resp_obj : resp_msg;
+			builder = s == TEXT("bytes") ? resp_bytes : (s == TEXT("object") ? resp_obj : resp_msg);
 		}
 	}
 
 	reqResp.insert(std::make_pair(500*kb,5000*kb)); //default and max
 	reqResp.insert(std::make_pair(100*kb,1000*kb));
+	reqResp.insert(std::make_pair(50*kb,500*kb));
 	reqResp.insert(make_pair(10*kb,100*kb));
 	reqResp.insert(make_pair(1*kb,10*kb));
 
-	insert(6666*10);
-	insert(666*10);
-	insert(66*10);
+	insert(5000*10);
+	insert(2500*10);
+	insert(500*10);
+	insert(50*10);
 
 	void* request = NULL;
   

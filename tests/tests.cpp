@@ -14,9 +14,8 @@
 #include <objects.h>
 
 
-
-TEST(SERIALIZATION, SPEED)
-{
+TEST(add_hoc_deandserialization,ad_hoc_deserialize_signle_item){
+}
 	//custom_response r;
 	//r.m_data.insert(r.m_data.end()," ");
 	//auto tsize = r.getSize();
@@ -24,6 +23,11 @@ TEST(SERIALIZATION, SPEED)
 	//r.toArray(tb,tsize);
 	//int size1 = 0;
 	//r.fromArray(tb,&size1);
+
+
+TEST(SERIALIZATION, SPEED)
+{
+
 
 	Stopwatch t;
 	t.set_mode(REAL_TIME);
@@ -46,8 +50,8 @@ TEST(SERIALIZATION, SPEED)
 
 	t.start(obj_data_creation);
 	custom_response br;
-	for (auto i= 0;i<6666*10;i++){
-		br.m_data.insert(br.m_data.end(),"0123456789");
+	for (auto i= 0;i<5000*10;i++){
+		br.m_data.insert(br.m_data.end(),"123456789 123456789");
 	}
 	t.stop(obj_data_creation);	
 
@@ -66,8 +70,8 @@ TEST(SERIALIZATION, SPEED)
 
 	t.start(msg_data_creation);
 	response respm;
-	for (auto i= 0;i<6666*10;i++){
-		respm.add_data("0123456789");
+	for (auto i= 0;i<5000*10;i++){
+		respm.add_data("123456789 123456789");
 	}
 	t.stop(msg_data_creation);	
 
