@@ -29,7 +29,7 @@ int req_size100 = 100*kb;
 int req_size50 = 50*kb;
 int req_size10 = 10*kb;
 int req_size1 = 1*kb;
-
+int req_size0_1 = 0.1*kb;
 
 std::map<int,custom_request> req;
 
@@ -142,6 +142,7 @@ int _tmain(int argc, _TCHAR* argv[])
 	init_reqs(req_size50,2500,10);
 	init_reqs(req_size10,500,10);
 	init_reqs(req_size1,50,10);
+	init_reqs(req_size0_1,5,10);
 
 	Stopwatch sw;
 	sw.set_mode(REAL_TIME);
@@ -158,6 +159,7 @@ int _tmain(int argc, _TCHAR* argv[])
 	char* msr50 = "Client process requests ~50kb and gets ~500kb response of server process";
 	char* msr10 = "Client process requests ~10kb and gets ~100kb response  of server process";
 	char* msr1 = "Client process requests ~1kb and gets ~10kb response  of server process";
+	char* msr0_1 = "Client process requests ~0.1kb and gets ~1kb response  of server process";
 
 	builder(req_size100,&req,&real_size);
 	cout << "Request size :" << real_size/kb << " kb" << endl;
@@ -191,7 +193,7 @@ int _tmain(int argc, _TCHAR* argv[])
 	cout << "Response size was :" << resp_size/kb << " kb" <<endl;
 
 	builder(req_size1,&req,&real_size);
-	cout << "Message size :" << real_size/kb << " kb" << endl;
+	cout << "Message size :" << real_size << " bytes" << endl;
 	for (int i=0;i<1000;i++){
 		//Sleep(1);
 		//BUG: sometimes hangs here when pipes used....
@@ -200,12 +202,25 @@ int _tmain(int argc, _TCHAR* argv[])
 		sw.stop(msr1);
 	}
 	cout << "Response size was :" << resp_size/kb << " kb" <<endl;
+
+
+	builder(req_size0_1,&req,&real_size);
+	cout << "Message size :" << real_size << " bytes" << endl;
+	for (int i=0;i<2000;i++){//BUG: server of shared memory crashes if make number of 10000
+		//Sleep(1);
+		//BUG: sometimes hangs here when pipes used....
+		sw.start(msr0_1);
+		call(req_size0_1,builder,br,&response,&resp_size);
+		sw.stop(msr0_1);
+	}
+	cout << "Response size was :" << resp_size << " bytes" <<endl;
 	//TODO: make assertion of response
 
 	sw.report(msr100);
 	sw.report(msr50);
 	sw.report(msr10);
 	sw.report(msr1);
+	sw.report(msr0_1);
 
 	char wait(' ');
 	cin >> &wait;	

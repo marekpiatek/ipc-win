@@ -235,7 +235,10 @@ void Stopwatch::report(string perf_name, std::ostream& output) {
 	ostringstream stops;
 	stops << perf_info.stops;
 
-	output << "  *  Stops " << stops.str() << std::endl;
+	//output << "  *  Stops " << stops.str() << std::endl;
+	//CHANGE
+	output << "  *  Count " << stops.str() << std::endl;
+	//CHANGE
 	output << std::endl;
 	
 }

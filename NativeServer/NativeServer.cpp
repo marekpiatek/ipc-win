@@ -119,7 +119,8 @@ void resp_obj(long requestPacket,unsigned char* request,long* packetSizeP,unsign
 // resue as much resources as possible when doing responces, if not then release and auire them again and again
 //KEEP-ALIVE kind of
 bool reuse = false;
-
+unsigned char* resp_data ;
+unsigned char* request_data ;
 int _tmain(int argc, wchar_t* argv[])
 {
 	//TODO: use some lib (e.g. like in git)
@@ -147,15 +148,19 @@ int _tmain(int argc, wchar_t* argv[])
 	}
 
 	reqResp.insert(std::make_pair(500*kb,5000*kb)); //default and max
+	resp_data = (unsigned char*)malloc(sizeof(long)+reqResp[500*kb]*kb);
+	request_data =  (unsigned char*)malloc(sizeof(long)+500*kb);
 	reqResp.insert(std::make_pair(100*kb,1000*kb));
 	reqResp.insert(std::make_pair(50*kb,500*kb));
 	reqResp.insert(make_pair(10*kb,100*kb));
 	reqResp.insert(make_pair(1*kb,10*kb));
+	reqResp.insert(make_pair(0.1*kb,1*kb));
 
 	insert(5000*10);
 	insert(2500*10);
 	insert(500*10);
 	insert(50*10);
+	insert(5*10);
 
 	void* request = NULL;
   
@@ -176,43 +181,54 @@ int _tmain(int argc, wchar_t* argv[])
 	return 0;
 }
 
+
+
 void replyPipes(HANDLE transport,resp_builder b,void** result){
 			
 	     //TODO: handle client closed
 	    if (!reuse) transport = pipe_init();
-		 
+	
 		long rSize = 0;
 		 unsigned long	cbRead = 0;
 		bool rSizeRead = ReadFile(transport,&rSize,sizeof(long),&cbRead,NULL);
-		//if (GetLastError() == ERROR_MORE_DATA) cout << "MORE DATA" << endl;
+		
+		if (reuse && !rSizeRead  && GetLastError() == ERROR_BROKEN_PIPE){ cout << "CLIENT CLOSED" << endl; return;};
+		
+		//if (rSizeRead  == false && GetLastError() == ERROR_ABANDONED_WAIT_0+) cout << "MORE DATA" << endl;
 		//cout << rSizeRead << endl;
-		auto request = (unsigned char*) malloc(rSize);
-		bool rRead = ReadFile(transport,request,rSize,&cbRead,NULL);
+		//if (!reuse) 
+			request_data = (unsigned char*) malloc(rSize);
+		bool rRead = ReadFile(transport,request_data,rSize,&cbRead,NULL);
 			//if (GetLastError() == ERROR_MORE_DATA) cout << "MORE DATA" << endl;
 		//cout << rRead << endl;
 		//cout << "Read request: " << cbRead << endl;
 		//if (request !=NULL) cout << "Request:" << (char*)request << endl;
-		*result = request;
+		*result = request_data;
 
 		// create responsee data
 		long packetSize = 0;
 	    unsigned char* rData = NULL;
-		b(rSize,request,&packetSize,&rData);
+		b(rSize,request_data,&packetSize,&rData);
 
-		unsigned char* packetData = (unsigned char*)malloc(sizeof(long)+packetSize);
-	    memcpy(packetData,&packetSize,sizeof(long));
-		auto messageData = packetData+ sizeof(long);
+		//if (!reuse)  //NOTE: reusing big allocated data increases time of many identical conversations
+			resp_data = (unsigned char*)malloc(sizeof(long)+packetSize);
+	    memcpy(resp_data,&packetSize,sizeof(long));
+		auto messageData = resp_data+ sizeof(long);
 	    memcpy(messageData,rData,packetSize);
 	     unsigned long	cbWritten = 0;	 
-	     WriteFile(transport,packetData,sizeof(long)+packetSize,&cbWritten,NULL);
+	     WriteFile(transport,resp_data,sizeof(long)+packetSize,&cbWritten,NULL);
 
 		FlushFileBuffers(transport);
 		if (!reuse)
 			DisconnectNamedPipe(transport);
 		if (!reuse) CloseHandle(transport);
 CLEANUP:
-		free(packetData);
-		free(rData);
+		//if (!reuse) 
+			free(resp_data);
+	//	if (!reuse)
+			 free(rData);
+		//	if (!reuse)
+				free(request_data);
 }
 
 void replySharedMem(HANDLE transport,resp_builder b,void** result){
@@ -270,8 +286,8 @@ void replySharedMem(HANDLE transport,resp_builder b,void** result){
 
 		// create responsee data
 		long packetSize = 0;
-	    unsigned char* data = NULL;
-		b(requestPacket,request,&packetSize,&data);
+	    unsigned char* resp_data = NULL;
+		b(requestPacket,request,&packetSize,&resp_data);
    /* 	packetSize = reqResp[requestPacket];
 		data = (unsigned char*)malloc(packetSize);
 		char* msg = (char*)data;
@@ -312,7 +328,7 @@ void replySharedMem(HANDLE transport,resp_builder b,void** result){
         );
 
 		memcpy(sizeMapView,&packetSize,sizeof(long));
-		memcpy(dataView,data,packetSize);
+		memcpy(dataView,resp_data,packetSize);
 		// notify clinet about data
 
 		auto madeResponce = CreateEvent(NULL,true,false,TEXT("ServerMadeResponse"));
@@ -324,7 +340,8 @@ void replySharedMem(HANDLE transport,resp_builder b,void** result){
 		}
 		WaitForSingleObject(readResponse,INFINITE);
 CLEANUP:
-		free(data);
+		free(request);
+		free(resp_data);
 
 		//cout << "Reader read";
 }
