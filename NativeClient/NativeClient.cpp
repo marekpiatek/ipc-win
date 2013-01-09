@@ -91,7 +91,6 @@ void resp_msg(unsigned int size,unsigned char* resp_data){
 	for (auto it = r.data().begin();it!=r.data().end();it++){
 		cr.m_data.insert(cr.m_data.end(),*it);
 	}
-
 }
 
 void resp_obj(unsigned int size,unsigned char* resp_data){
@@ -110,6 +109,9 @@ void req_bytes(unsigned int size,unsigned char** rdataP,unsigned int* rmessageSi
 	*rmessageSizeP = rmessageSize;
 }
 
+bool reuse = false;
+
+//TODO: dispose resource on client disconnect
 int _tmain(int argc, _TCHAR* argv[])
 {
 	//TODO: use some lib (e.g. like in git)
@@ -128,6 +130,10 @@ int _tmain(int argc, _TCHAR* argv[])
 			std::wstring  s = argv[i+1];
 			builder = s == TEXT("bytes") ? req_bytes : (s == TEXT("object") ? req_obj : req_msg);
 			br = s == TEXT("bytes") ? resp_bytes : (s == TEXT("object") ? resp_obj : resp_msg);
+		}
+		if (s == TEXT("-r")) 
+		{
+			reuse = true;
 		}
 	}
 
@@ -205,12 +211,14 @@ int _tmain(int argc, _TCHAR* argv[])
 	cin >> &wait;	
 	return 0;
 }
-
+HANDLE	hPipe = INVALID_HANDLE_VALUE;
 void makePipeRequest(unsigned int req_size,req_builder b,resp_builder br,void** result,int* resultSize){
-	HANDLE	hPipe = INVALID_HANDLE_VALUE;
+	if (!reuse)
+		hPipe = INVALID_HANDLE_VALUE;
 	auto name = TEXT("\\\\.\\pipe\\FastDataServer");
-	while ( !WaitNamedPipe(name, 1)); 
-	while (1) 
+	if (hPipe == INVALID_HANDLE_VALUE)
+	    while ( !WaitNamedPipe(name, 1)); 
+	while (hPipe == INVALID_HANDLE_VALUE) 
 	{ 
 
 		hPipe = CreateFile( 
@@ -253,9 +261,10 @@ void makePipeRequest(unsigned int req_size,req_builder b,resp_builder br,void** 
 	//if (!rRead) cout << cbRead << endl;
 	//if (GetLastError() == ERROR_MORE_DATA) cout << "MORE DATA" << endl;
 	//cout << rRead << endl;
-	CloseHandle(hPipe);
+	if (!reuse)
+		 CloseHandle(hPipe);
 	br(rSizeRead,response);
-	*resultSize = rSizeRead;
+	*resultSize = responseSize;
 	//cout << response << endl;
 CLEANUP:
 	free(rdata);

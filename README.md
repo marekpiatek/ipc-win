@@ -25,14 +25,17 @@ TODO
 
 Conclusion
 ===
-- When making few big data exchanges then IPC(syncronization and memory copying) is neglectable if to compare with object serialization to byte array. Better having simple objects (e.g. string or array of string) for IPC.
+- When making few big data exchanges then IPC(syncronization and memory copying) is neglectable if to compare with object serialization to byte array. Better having simple objects (e.g. string or array of string or with sequential memory layout) for IPC.
 - Adhoc byte array serialization is viable solution because using objects translation to serializable(Protobuf) messages can happen to be unallowable overhead.
-- Need find ways to optimize chaty conversations. E.g. tuning syncronization, IPC buffers, batching.
+- Need find ways to optimize chaty(many small requests) conversations. E.g. tuning syncronization, IPC buffers, batching.
 
 Measurments
 ===========
 [Machine specification]
 ---
+
+NOTE: next requests/respones are synchronous with one sending process and one single threaded waiting process
+
 
 Client sending raw bytes via Shared Memory
 ---
@@ -94,6 +97,72 @@ Client process requests ~1kb and gets ~10kb response  of server process
   *  Max. time 0.0010004 sec
   *  Tot. time `0.0570059 sec`
   *  Stops 1000
+
+  
+Client sending adhoc serialized requests via Shared Memory and expecting adhoc objects response
+---
+
+Client process requests ~100kb and gets ~1000kb response of server process
+  *  Avg. time 0.0214021 sec
+  *  Min. time 0.00199986 sec
+  *  Max. time 0.0370038 sec
+  *  Tot. time 0.214021 sec
+  *  Stops 10
+
+Client process requests ~50kb and gets ~500kb response of server process
+  *  Avg. time `0.0107511 sec`
+  *  Min. time 0.00900078 sec
+  *  Max. time 0.0180018 sec
+  *  Tot. time 0.215022 sec
+  *  Stops 20
+
+Client process requests ~10kb and gets ~100kb response  of server process
+  *  Avg. time 0.0019702 sec
+  *  Min. time 0.000999928 sec
+  *  Max. time 0.00800085 sec
+  *  Tot. time 0.19702 sec
+  *  Stops 100
+
+Client process requests ~1kb and gets ~10kb response  of server process
+  *  Avg. time 0.000246025 sec
+  *  Min. time 0 sec
+  *  Max. time 0.0010004 sec
+  *  Tot. time 0.246025 sec
+  *  Stops 1000
+
+Client sending request via Shared Memory using objects translated into Protobuf messages, expecting messages and translating them back
+---
+
+Client process requests ~100kb and gets ~1000kb response of server process
+  *  Avg. time 0.0342034 sec
+  *  Min. time 0.00400043 sec
+  *  Max. time 0.0560055 sec
+  *  Tot. time 0.342034 sec
+  *  Stops 10
+
+Client process requests ~50kb and gets ~500kb response of server process
+  *  Avg. time `0.0180518 sec`
+  *  Min. time 0.0160017 sec
+  *  Max. time 0.0330033 sec
+  *  Tot. time 0.361036 sec
+  *  Stops 20
+
+Client process requests ~10kb and gets ~100kb response  of server process
+  *  Avg. time 0.00326032 sec
+  *  Min. time 0.00300002 sec
+  *  Max. time 0.0160017 sec
+  *  Tot. time 0.326032 sec
+  *  Stops 100
+
+Client process requests ~1kb and gets ~10kb response  of server process
+  *  Avg. time 0.000384039 sec
+  *  Min. time 0 sec
+  *  Max. time 0.00200009 sec
+  *  Tot. time 0.384039 sec
+  *  Stops 1000
+
+
+
 
 
  [Machine specification]: http://valid.canardpc.com/2639433

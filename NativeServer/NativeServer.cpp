@@ -17,9 +17,12 @@ using namespace std;
 
 
 typedef void (*resp_builder)(long requestPacket,unsigned char* request,long* packetSizeP,unsigned char** dataP);
-void reply(resp_builder b,void** result);
-void replyPipes(resp_builder b,void** result);
-void replySharedMem(resp_builder b,void** result);
+typedef HANDLE (*client_init)();
+typedef void (*reply)(HANDLE transport,resp_builder b,void** result);
+
+
+void replyPipes(HANDLE transport,resp_builder b,void** result);
+void replySharedMem(HANDLE transport,resp_builder b,void** result);
 
 
 const int kb = 1024;
@@ -32,6 +35,35 @@ void insert(int reqc){
 			cresp.m_data.insert(cresp.m_data.end(), "123456789 123456789");
 		}
 			reqRespObj.insert(make_pair(reqc,cresp));
+}
+
+HANDLE empty_init(){return INVALID_HANDLE_VALUE;}
+
+wchar_t* name = TEXT("\\\\.\\pipe\\FastDataServer");
+HANDLE  pipe_init(){
+			auto transport = INVALID_HANDLE_VALUE;
+	    //NOTE: tried different sizes (e.g. 30 bytes) but found very small difference for running tests
+		int inbuf = 500*kb;
+		int outbuf = reqResp[outbuf];
+
+   	while(transport == INVALID_HANDLE_VALUE)
+	   {
+		    transport = CreateNamedPipe(name,             // pipe name 
+          PIPE_ACCESS_DUPLEX,       // read/write access 
+		  PIPE_TYPE_BYTE |       // message type pipe 
+		  PIPE_READMODE_BYTE    // message-read mode 
+          | PIPE_WAIT,                // blocking mode 
+          PIPE_UNLIMITED_INSTANCES, // max. instances  
+		  outbuf,                  // output buffer size - tests
+         inbuf,                  // input buffer size 
+          0,                        // client time-out 
+          NULL);                    // default security attribute 
+		if (transport == INVALID_HANDLE_VALUE){
+		    CloseHandle(transport);
+		}
+		}
+	    while(ConnectNamedPipe(transport,NULL)== 0){		};
+	return transport;
 }
 
 void resp_bytes(long requestPacket,unsigned char* request,long* packetSizeP,unsigned char** dataP){
@@ -84,23 +116,33 @@ void resp_obj(long requestPacket,unsigned char* request,long* packetSizeP,unsign
 		*dataP = data;
 }
 
+// resue as much resources as possible when doing responces, if not then release and auire them again and again
+//KEEP-ALIVE kind of
+bool reuse = false;
 
 int _tmain(int argc, wchar_t* argv[])
 {
 	//TODO: use some lib (e.g. like in git)
-	auto replier = replySharedMem;
+	reply replier = replySharedMem;
 	resp_builder builder = resp_msg;
+	client_init init  = empty_init;
+
 	for (int i = 0; i < argc; i++){
 		std::wstring  s = argv[i];
 		if (s == TEXT("-m")) 
 		{
 			std::wstring  s = argv[i+1];
 			replier = s == TEXT("pipes") ? replyPipes : replySharedMem;
+			init = s == TEXT("pipes") ? pipe_init : empty_init;
 		}
 		if (s == TEXT("-d")) 
 		{
 			std::wstring  s = argv[i+1];
 			builder = s == TEXT("bytes") ? resp_bytes : (s == TEXT("object") ? resp_obj : resp_msg);
+		}
+	    if (s == TEXT("-r")) 
+		{
+			reuse = true;
 		}
 	}
 
@@ -121,8 +163,9 @@ int _tmain(int argc, wchar_t* argv[])
 
 	cout << "Server started"<< endl;
 
-
-	while(true){replier(builder,&request);}
+	HANDLE transport = INVALID_HANDLE_VALUE;
+	if (reuse) transport = init();
+	while(true){replier(transport,builder,&request);}
 	
 
 
@@ -133,38 +176,18 @@ int _tmain(int argc, wchar_t* argv[])
 	return 0;
 }
 
-void replyPipes(resp_builder b,void** result){
-				auto name = TEXT("\\\\.\\pipe\\FastDataServer");
-		auto server = INVALID_HANDLE_VALUE;
-		int inbuf = 500*1024;
-		int outbuf = reqResp[outbuf];
-		while(server == INVALID_HANDLE_VALUE)
-	   {
-		    server = CreateNamedPipe(name,             // pipe name 
-          PIPE_ACCESS_DUPLEX,       // read/write access 
-		  PIPE_TYPE_BYTE |       // message type pipe 
-		  PIPE_READMODE_BYTE    // message-read mode 
-          | PIPE_WAIT,                // blocking mode 
-          PIPE_UNLIMITED_INSTANCES, // max. instances  
-		  outbuf,                  // output buffer size 
-         inbuf,                  // input buffer size 
-          0,                        // client time-out 
-          NULL);                    // default security attribute 
-		if (server == INVALID_HANDLE_VALUE){
-		    CloseHandle(server);
-		}
-		}
-
-		while(ConnectNamedPipe(server,NULL)== 0){
-
-		};
+void replyPipes(HANDLE transport,resp_builder b,void** result){
+			
+	     //TODO: handle client closed
+	    if (!reuse) transport = pipe_init();
+		 
 		long rSize = 0;
 		 unsigned long	cbRead = 0;
-		bool rSizeRead = ReadFile(server,&rSize,sizeof(long),&cbRead,NULL);
+		bool rSizeRead = ReadFile(transport,&rSize,sizeof(long),&cbRead,NULL);
 		//if (GetLastError() == ERROR_MORE_DATA) cout << "MORE DATA" << endl;
 		//cout << rSizeRead << endl;
 		auto request = (unsigned char*) malloc(rSize);
-		bool rRead = ReadFile(server,request,rSize,&cbRead,NULL);
+		bool rRead = ReadFile(transport,request,rSize,&cbRead,NULL);
 			//if (GetLastError() == ERROR_MORE_DATA) cout << "MORE DATA" << endl;
 		//cout << rRead << endl;
 		//cout << "Read request: " << cbRead << endl;
@@ -181,17 +204,18 @@ void replyPipes(resp_builder b,void** result){
 		auto messageData = packetData+ sizeof(long);
 	    memcpy(messageData,rData,packetSize);
 	     unsigned long	cbWritten = 0;	 
-	 WriteFile(server,packetData,sizeof(long)+packetSize,&cbWritten,NULL);
+	     WriteFile(transport,packetData,sizeof(long)+packetSize,&cbWritten,NULL);
 
-		FlushFileBuffers(server);
-		DisconnectNamedPipe(server);
-		CloseHandle(server);
+		FlushFileBuffers(transport);
+		if (!reuse)
+			DisconnectNamedPipe(transport);
+		if (!reuse) CloseHandle(transport);
 CLEANUP:
 		free(packetData);
 		free(rData);
 }
 
-void replySharedMem(resp_builder b,void** result){
+void replySharedMem(HANDLE transport,resp_builder b,void** result){
 		//pull implementation
 
 		// listening for client request
