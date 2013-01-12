@@ -412,4 +412,427 @@
       <SamplePackage LastUpdated="12/19/2012" DownloadLink="http://code.msdn.microsoft.com/CSCOMService-fb8eaad7/file/21656/9/Out-of-process%20C%23%20COM%20service%20(CSCOMService).zip" ProgrammingLanguage="C#" EntryFile="H:\src\allin1\Visual Studio 2008\CSCOMService-fb8eaad7\C#\CSCOMService.sln" />
     </SamplePackages>
   </CodeSample>
+  <CodeSample Name="CppCOMClient-8eb832b1" Title="C++ app invokes COM server (CppCOMClient)" Supports="Visual Studio 2010" LastUpdated="3/2/2012" GallertURL="http://code.msdn.microsoft.com/CppCOMClient-8eb832b1" Rating="0" Raters="0" Downloads="5517" Affiliation="">
+    <Author DisplayName="All-In-One Code Framework" Link="http://code.msdn.microsoft.com/site/profile?userName=All-In-One%20Code%20Framework" />
+    <License Title="MSLPL" Link="http://code.msdn.microsoft.com/site/CppCOMClient-8eb832b1/eula?licenseType=MSLPL" />
+    <ProgrammingLanguages>
+      <ProgrammingLanguage>C#</ProgrammingLanguage>
+      <ProgrammingLanguage>C++</ProgrammingLanguage>
+    </ProgrammingLanguages>
+    <Platforms>
+      <Platform>Desktop</Platform>
+    </Platforms>
+    <Summary>The code sample demonstrates the different ways to invoke COM objects from native VC++</Summary>
+    <Technologies>
+      <Technology>COM</Technology>
+      <Technology>Windows SDK</Technology>
+    </Technologies>
+    <SamplePackages>
+      <SamplePackage LastUpdated="1/10/2013" DownloadLink="http://code.msdn.microsoft.com/CppCOMClient-8eb832b1/file/52780/9/C%20app%20invokes%20COM%20server%20(CppCOMClient).zip" ProgrammingLanguage="C#,C++" EntryFile="C:\ipc\3rdParties\allin1\Visual Studio 2010\CppCOMClient-8eb832b1\C#,C++\CppCOMClient.sln" />
+    </SamplePackages>
+  </CodeSample>
+  <CodeSample Name="CppOfficeManagedCOMAddInShi-39f7be85" Title="Office managed COM addIn shim (CppOfficeManagedCOMAddInShim)" Supports="Visual Studio 2008" LastUpdated="5/5/2011" GallertURL="http://code.msdn.microsoft.com/CppOfficeManagedCOMAddInShi-39f7be85" Rating="0" Raters="0" Downloads="8644" Affiliation="">
+    <Author DisplayName="All-In-One Code Framework" Link="http://code.msdn.microsoft.com/site/profile?userName=All-In-One%20Code%20Framework" />
+    <License Title="Apache" Link="http://code.msdn.microsoft.com/site/CppOfficeManagedCOMAddInShi-39f7be85/eula?licenseType=Apache" />
+    <ProgrammingLanguages>
+      <ProgrammingLanguage>C#</ProgrammingLanguage>
+      <ProgrammingLanguage>C++</ProgrammingLanguage>
+    </ProgrammingLanguages>
+    <Platforms>
+      <Platform>Desktop</Platform>
+    </Platforms>
+    <Summary>The code sample demonstrates a VC++ shim for Office managed COM add-in</Summary>
+    <Technologies>
+      <Technology>Office</Technology>
+    </Technologies>
+    <SamplePackages>
+      <SamplePackage LastUpdated="1/10/2013" DownloadLink="http://code.msdn.microsoft.com/CppOfficeManagedCOMAddInShi-39f7be85/file/21573/9/Office%20managed%20COM%20addIn%20shim%20(CppOfficeManagedCOMAddInShim).zip" ProgrammingLanguage="C#,C++" EntryFile="C:\ipc\3rdParties\allin1\Visual Studio 2008\CppOfficeManagedCOMAddInShi-39f7be85\C#,C++\CppOfficeManagedCOMAddInShim.sln" />
+    </SamplePackages>
+  </CodeSample>
+  <CodeSample Name="CppCOMClient-fbb4c5f4" Title="C++ app invokes COM server (CppCOMClient)" Supports="Visual Studio 2008" LastUpdated="3/2/2012" GallertURL="http://code.msdn.microsoft.com/CppCOMClient-fbb4c5f4" Rating="5" Raters="2" Downloads="9922" Affiliation="">
+    <Author DisplayName="All-In-One Code Framework" Link="http://code.msdn.microsoft.com/site/profile?userName=All-In-One%20Code%20Framework" />
+    <License Title="MSLPL" Link="http://code.msdn.microsoft.com/site/CppCOMClient-fbb4c5f4/eula?licenseType=MSLPL" />
+    <ProgrammingLanguages>
+      <ProgrammingLanguage>C#</ProgrammingLanguage>
+      <ProgrammingLanguage>C++</ProgrammingLanguage>
+    </ProgrammingLanguages>
+    <Platforms>
+      <Platform>Desktop</Platform>
+    </Platforms>
+    <Summary>The code sample demonstrates the different ways to invoke COM objects from native VC++</Summary>
+    <Technologies>
+      <Technology>COM</Technology>
+      <Technology>Windows SDK</Technology>
+    </Technologies>
+    <SamplePackages>
+      <SamplePackage LastUpdated="1/10/2013" DownloadLink="http://code.msdn.microsoft.com/CppCOMClient-fbb4c5f4/file/21555/11/C%20app%20invokes%20COM%20server%20(CppCOMClient).zip" ProgrammingLanguage="C#,C++" EntryFile="C:\ipc\3rdParties\allin1\Visual Studio 2008\CppCOMClient-fbb4c5f4\C#,C++\CppCOMClient.sln" />
+    </SamplePackages>
+  </CodeSample>
+  <CodeSample Name="ATLCOMClient-aa6bb0d7" Title="ATL app invokes COM server (ATLCOMClient)" Supports="Visual Studio 2010" LastUpdated="3/5/2012" GallertURL="http://code.msdn.microsoft.com/ATLCOMClient-aa6bb0d7" Rating="0" Raters="0" Downloads="3280" Affiliation="">
+    <Author DisplayName="All-In-One Code Framework" Link="http://code.msdn.microsoft.com/site/profile?userName=All-In-One%20Code%20Framework" />
+    <License Title="MSLPL" Link="http://code.msdn.microsoft.com/site/ATLCOMClient-aa6bb0d7/eula?licenseType=MSLPL" />
+    <ProgrammingLanguages>
+      <ProgrammingLanguage>C++</ProgrammingLanguage>
+    </ProgrammingLanguages>
+    <Platforms>
+      <Platform>Desktop</Platform>
+    </Platforms>
+    <Summary>The sample demonstrates invoking COM objects in an application that enables ATL</Summary>
+    <Technologies>
+      <Technology>Windows SDK</Technology>
+    </Technologies>
+    <SamplePackages>
+      <SamplePackage LastUpdated="1/10/2013" DownloadLink="http://code.msdn.microsoft.com/ATLCOMClient-aa6bb0d7/file/53612/9/ATL%20app%20invokes%20COM%20server%20(ATLCOMClient).zip" ProgrammingLanguage="C++" EntryFile="C:\ipc\3rdParties\allin1\Visual Studio 2010\ATLCOMClient-aa6bb0d7\C++\ATLCOMClient.sln" />
+    </SamplePackages>
+  </CodeSample>
+  <CodeSample Name="ATLDllCOMServer-b52a7d5d" Title="In-process ATL COM server (ATLDllCOMServer)" Supports="Visual Studio 2008" LastUpdated="3/12/2012" GallertURL="http://code.msdn.microsoft.com/ATLDllCOMServer-b52a7d5d" Rating="0" Raters="0" Downloads="5710" Affiliation="">
+    <Author DisplayName="All-In-One Code Framework" Link="http://code.msdn.microsoft.com/site/profile?userName=All-In-One%20Code%20Framework" />
+    <License Title="MSLPL" Link="http://code.msdn.microsoft.com/site/ATLDllCOMServer-b52a7d5d/eula?licenseType=MSLPL" />
+    <ProgrammingLanguages>
+      <ProgrammingLanguage>C++</ProgrammingLanguage>
+    </ProgrammingLanguages>
+    <Platforms>
+      <Platform>Desktop</Platform>
+    </Platforms>
+    <Summary>The code sample demonstrates how to use Acitve Template Library (ATL) wizards in Visual Studio 2008 to create an in-process COM server.</Summary>
+    <Technologies>
+      <Technology>COM</Technology>
+      <Technology>Windows SDK</Technology>
+    </Technologies>
+    <SamplePackages>
+      <SamplePackage LastUpdated="1/10/2013" DownloadLink="http://code.msdn.microsoft.com/ATLDllCOMServer-b52a7d5d/file/21533/13/In-process%20ATL%20COM%20server%20(ATLDllCOMServer).zip" ProgrammingLanguage="C++" EntryFile="C:\ipc\3rdParties\allin1\Visual Studio 2008\ATLDllCOMServer-b52a7d5d\C++\ATLDllCOMServer.sln" />
+    </SamplePackages>
+  </CodeSample>
+  <CodeSample Name="ATLCOMClient-2a29c499" Title="ATL app invokes COM server (ATLCOMClient)" Supports="Visual Studio 2008" LastUpdated="3/5/2012" GallertURL="http://code.msdn.microsoft.com/ATLCOMClient-2a29c499" Rating="0" Raters="0" Downloads="5973" Affiliation="">
+    <Author DisplayName="All-In-One Code Framework" Link="http://code.msdn.microsoft.com/site/profile?userName=All-In-One%20Code%20Framework" />
+    <License Title="MSLPL" Link="http://code.msdn.microsoft.com/site/ATLCOMClient-2a29c499/eula?licenseType=MSLPL" />
+    <ProgrammingLanguages>
+      <ProgrammingLanguage>C++</ProgrammingLanguage>
+    </ProgrammingLanguages>
+    <Platforms>
+      <Platform>Desktop</Platform>
+    </Platforms>
+    <Summary>The sample demonstrates invoking COM objects in an application that enables ATL</Summary>
+    <Technologies>
+      <Technology>Windows SDK</Technology>
+    </Technologies>
+    <SamplePackages>
+      <SamplePackage LastUpdated="1/10/2013" DownloadLink="http://code.msdn.microsoft.com/ATLCOMClient-2a29c499/file/21531/11/ATL%20app%20invokes%20COM%20server%20(ATLCOMClient).zip" ProgrammingLanguage="C++" EntryFile="C:\ipc\3rdParties\allin1\Visual Studio 2008\ATLCOMClient-2a29c499\C++\ATLCOMClient.sln" />
+    </SamplePackages>
+  </CodeSample>
+  <CodeSample Name="CSCOMClient-f776f7b8" Title="C# app invokes COM server and ActiveX control (CSCOMClient)" Supports="Visual Studio 2008" LastUpdated="5/5/2011" GallertURL="http://code.msdn.microsoft.com/CSCOMClient-f776f7b8" Rating="0" Raters="0" Downloads="8259" Affiliation="">
+    <Author DisplayName="All-In-One Code Framework" Link="http://code.msdn.microsoft.com/site/profile?userName=All-In-One%20Code%20Framework" />
+    <License Title="Apache" Link="http://code.msdn.microsoft.com/site/CSCOMClient-f776f7b8/eula?licenseType=Apache" />
+    <ProgrammingLanguages>
+      <ProgrammingLanguage>C#</ProgrammingLanguage>
+      <ProgrammingLanguage>C++</ProgrammingLanguage>
+    </ProgrammingLanguages>
+    <Platforms>
+      <Platform>Desktop</Platform>
+    </Platforms>
+    <Summary>The sample demonstrates the different ways to invoke COM objects from VC#</Summary>
+    <Technologies>
+      <Technology>COM</Technology>
+    </Technologies>
+    <SamplePackages>
+      <SamplePackage LastUpdated="1/10/2013" DownloadLink="http://code.msdn.microsoft.com/CSCOMClient-f776f7b8/file/21655/9/C%23%20app%20invokes%20COM%20server%20and%20ActiveX%20control%20(CSCOMClient).zip" ProgrammingLanguage="C#,C++" EntryFile="C:\ipc\3rdParties\allin1\Visual Studio 2008\CSCOMClient-f776f7b8\C#,C++\CSCOMClient.sln" />
+    </SamplePackages>
+  </CodeSample>
+  <CodeSample Name="CSRegFreeCOMServer-d138c3c4" Title="Reg-free C# COM server (CSRegFreeCOMServer)" Supports="Visual Studio 2008" LastUpdated="5/5/2011" GallertURL="http://code.msdn.microsoft.com/CSRegFreeCOMServer-d138c3c4" Rating="0" Raters="0" Downloads="5929" Affiliation="">
+    <Author DisplayName="All-In-One Code Framework" Link="http://code.msdn.microsoft.com/site/profile?userName=All-In-One%20Code%20Framework" />
+    <License Title="Apache" Link="http://code.msdn.microsoft.com/site/CSRegFreeCOMServer-d138c3c4/eula?licenseType=Apache" />
+    <ProgrammingLanguages>
+      <ProgrammingLanguage>C#</ProgrammingLanguage>
+    </ProgrammingLanguages>
+    <Platforms>
+      <Platform>Desktop</Platform>
+    </Platforms>
+    <Summary>The sample demonstrates a .NET Framework-based component which is ready for registration-free activation. </Summary>
+    <Technologies>
+      <Technology>COM</Technology>
+    </Technologies>
+    <SamplePackages>
+      <SamplePackage LastUpdated="1/10/2013" DownloadLink="http://code.msdn.microsoft.com/CSRegFreeCOMServer-d138c3c4/file/21695/9/Reg-free%20C%23%20COM%20server%20(CSRegFreeCOMServer).zip" ProgrammingLanguage="C#" EntryFile="C:\ipc\3rdParties\allin1\Visual Studio 2008\CSRegFreeCOMServer-d138c3c4\C#\CSRegFreeCOMServer.sln" />
+    </SamplePackages>
+  </CodeSample>
+  <CodeSample Name="CSDllCOMServer-1d5f97a4" Title="In-process C# COM server (CSDllCOMServer)" Supports="Visual Studio 2008" LastUpdated="5/5/2011" GallertURL="http://code.msdn.microsoft.com/CSDllCOMServer-1d5f97a4" Rating="0" Raters="0" Downloads="5951" Affiliation="">
+    <Author DisplayName="All-In-One Code Framework" Link="http://code.msdn.microsoft.com/site/profile?userName=All-In-One%20Code%20Framework" />
+    <License Title="Apache" Link="http://code.msdn.microsoft.com/site/CSDllCOMServer-1d5f97a4/eula?licenseType=Apache" />
+    <ProgrammingLanguages>
+      <ProgrammingLanguage>C#</ProgrammingLanguage>
+    </ProgrammingLanguages>
+    <Platforms>
+      <Platform>Desktop</Platform>
+    </Platforms>
+    <Summary>This VC# code sample focuses on exposing .NET Framework components to COM,  which allows us to write a .NET type and consuming that type from unmanaged  code with distinct activities for COM developers</Summary>
+    <Technologies>
+      <Technology>COM</Technology>
+    </Technologies>
+    <SamplePackages>
+      <SamplePackage LastUpdated="1/10/2013" DownloadLink="http://code.msdn.microsoft.com/CSDllCOMServer-1d5f97a4/file/21660/9/In-process%20C%23%20COM%20server%20(CSDllCOMServer).zip" ProgrammingLanguage="C#" EntryFile="C:\ipc\3rdParties\allin1\Visual Studio 2008\CSDllCOMServer-1d5f97a4\C#\CSDllCOMServer.sln" />
+    </SamplePackages>
+  </CodeSample>
+  <CodeSample Name="CSRegFreeCOMClient-1b9bcfe5" Title="Reg-free C# COM client (CSRegFreeCOMClient)" Supports="Visual Studio 2008" LastUpdated="5/5/2011" GallertURL="http://code.msdn.microsoft.com/CSRegFreeCOMClient-1b9bcfe5" Rating="0" Raters="0" Downloads="5858" Affiliation="">
+    <Author DisplayName="All-In-One Code Framework" Link="http://code.msdn.microsoft.com/site/profile?userName=All-In-One%20Code%20Framework" />
+    <License Title="Apache" Link="http://code.msdn.microsoft.com/site/CSRegFreeCOMClient-1b9bcfe5/eula?licenseType=Apache" />
+    <ProgrammingLanguages>
+      <ProgrammingLanguage>C#</ProgrammingLanguage>
+    </ProgrammingLanguages>
+    <Platforms>
+      <Platform>Desktop</Platform>
+    </Platforms>
+    <Summary>This sample demonstrates how to create a registration-free COM from the aspect of .NET Framework based client, so that the client can consume existing COM server as if the COM server is Registration-free</Summary>
+    <Technologies>
+      <Technology>COM</Technology>
+    </Technologies>
+    <SamplePackages>
+      <SamplePackage LastUpdated="1/10/2013" DownloadLink="http://code.msdn.microsoft.com/CSRegFreeCOMClient-1b9bcfe5/file/21694/9/Reg-free%20C%23%20COM%20client%20(CSRegFreeCOMClient).zip" ProgrammingLanguage="C#" EntryFile="C:\ipc\3rdParties\allin1\Visual Studio 2008\CSRegFreeCOMClient-1b9bcfe5\C#\CSRegFreeCOMClient.sln" />
+    </SamplePackages>
+  </CodeSample>
+  <CodeSample Name="CppRegFreeCOMClient-553897dc" Title="Reg-free C++ COM client (CppRegFreeCOMClient)" Supports="Visual Studio 2008" LastUpdated="4/5/2011" GallertURL="http://code.msdn.microsoft.com/CppRegFreeCOMClient-553897dc" Rating="4" Raters="1" Downloads="6511" Affiliation="">
+    <Author DisplayName="All-In-One Code Framework" Link="http://code.msdn.microsoft.com/site/profile?userName=All-In-One%20Code%20Framework" />
+    <License Title="Apache" Link="http://code.msdn.microsoft.com/site/CppRegFreeCOMClient-553897dc/eula?licenseType=Apache" />
+    <ProgrammingLanguages>
+      <ProgrammingLanguage>C#</ProgrammingLanguage>
+      <ProgrammingLanguage>C++</ProgrammingLanguage>
+    </ProgrammingLanguages>
+    <Platforms>
+      <Platform>Desktop</Platform>
+    </Platforms>
+    <Summary>This sample demonstrates how to create a registration-free COM from the native VC++ based client, so that the client can consume existing COM server as if the COM server is Registration-free</Summary>
+    <Technologies>
+      <Technology>COM</Technology>
+      <Technology>Interop</Technology>
+    </Technologies>
+    <SamplePackages>
+      <SamplePackage LastUpdated="1/10/2013" DownloadLink="http://code.msdn.microsoft.com/CppRegFreeCOMClient-553897dc/file/20446/9/Reg-free%20C%20COM%20client%20(CppRegFreeCOMClient).zip" ProgrammingLanguage="C#,C++" EntryFile="C:\ipc\3rdParties\allin1\Visual Studio 2008\CppRegFreeCOMClient-553897dc\C#,C++\CppRegFreeCOMClient.sln" />
+    </SamplePackages>
+  </CodeSample>
+  <CodeSample Name="CSActiveX-b86194f8" Title="C# ActiveX control (CSActiveX)" Supports="Visual Studio 2010" LastUpdated="3/2/2012" GallertURL="http://code.msdn.microsoft.com/CSActiveX-b86194f8" Rating="1" Raters="1" Downloads="5698" Affiliation="">
+    <Author DisplayName="All-In-One Code Framework" Link="http://code.msdn.microsoft.com/site/profile?userName=All-In-One%20Code%20Framework" />
+    <License Title="MSLPL" Link="http://code.msdn.microsoft.com/site/CSActiveX-b86194f8/eula?licenseType=MSLPL" />
+    <ProgrammingLanguages>
+      <ProgrammingLanguage>C#</ProgrammingLanguage>
+      <ProgrammingLanguage>XML</ProgrammingLanguage>
+    </ProgrammingLanguages>
+    <Platforms>
+      <Platform>Desktop</Platform>
+    </Platforms>
+    <Summary>The code sample demonstrates creating an ActiveX control in VC#</Summary>
+    <Technologies>
+      <Technology>COM</Technology>
+      <Technology>Windows SDK</Technology>
+    </Technologies>
+    <SamplePackages>
+      <SamplePackage LastUpdated="1/10/2013" DownloadLink="http://code.msdn.microsoft.com/CSActiveX-b86194f8/file/52605/9/C%23%20ActiveX%20control%20(CSActiveX).zip" ProgrammingLanguage="C#" EntryFile="C:\ipc\3rdParties\allin1\Visual Studio 2010\CSActiveX-b86194f8\C#\CSActiveX.sln" />
+    </SamplePackages>
+  </CodeSample>
+  <CodeSample Name="CSActiveX-c3f43e7d" Title="C# ActiveX control (CSActiveX)" Supports="Visual Studio 2008" LastUpdated="3/2/2012" GallertURL="http://code.msdn.microsoft.com/CSActiveX-c3f43e7d" Rating="5" Raters="1" Downloads="10219" Affiliation="">
+    <Author DisplayName="All-In-One Code Framework" Link="http://code.msdn.microsoft.com/site/profile?userName=All-In-One%20Code%20Framework" />
+    <License Title="MSLPL" Link="http://code.msdn.microsoft.com/site/CSActiveX-c3f43e7d/eula?licenseType=MSLPL" />
+    <ProgrammingLanguages>
+      <ProgrammingLanguage>C#</ProgrammingLanguage>
+      <ProgrammingLanguage>XML</ProgrammingLanguage>
+    </ProgrammingLanguages>
+    <Platforms>
+      <Platform>Desktop</Platform>
+    </Platforms>
+    <Summary>The code sample demonstrates creating an ActiveX control in VC#</Summary>
+    <Technologies>
+      <Technology>COM</Technology>
+      <Technology>Windows SDK</Technology>
+    </Technologies>
+    <SamplePackages>
+      <SamplePackage LastUpdated="1/10/2013" DownloadLink="http://code.msdn.microsoft.com/CSActiveX-c3f43e7d/file/21607/11/C%23%20ActiveX%20control%20(CSActiveX).zip" ProgrammingLanguage="C#" EntryFile="C:\ipc\3rdParties\allin1\Visual Studio 2008\CSActiveX-c3f43e7d\C#\CSActiveX.sln" />
+    </SamplePackages>
+  </CodeSample>
+  <CodeSample Name="CSExcelAutomationAddIn-c46f6956" Title="C# Excel Automation addin (CSExcelAutomationAddIn)" Supports="Visual Studio 2010" LastUpdated="3/2/2012" GallertURL="http://code.msdn.microsoft.com/CSExcelAutomationAddIn-c46f6956" Rating="5" Raters="1" Downloads="4033" Affiliation="">
+    <Author DisplayName="All-In-One Code Framework" Link="http://code.msdn.microsoft.com/site/profile?userName=All-In-One%20Code%20Framework" />
+    <License Title="MSLPL" Link="http://code.msdn.microsoft.com/site/CSExcelAutomationAddIn-c46f6956/eula?licenseType=MSLPL" />
+    <ProgrammingLanguages>
+      <ProgrammingLanguage>C#</ProgrammingLanguage>
+    </ProgrammingLanguages>
+    <Platforms>
+      <Platform>Desktop</Platform>
+    </Platforms>
+    <Summary>This project illustrates how to write a managed COM component which can be used as an Automation AddIn in Excel.</Summary>
+    <Technologies>
+      <Technology>Office</Technology>
+    </Technologies>
+    <SamplePackages>
+      <SamplePackage LastUpdated="1/10/2013" DownloadLink="http://code.msdn.microsoft.com/CSExcelAutomationAddIn-c46f6956/file/52672/9/C%23%20Excel%20Automation%20addin%20(CSExcelAutomationAddIn).zip" ProgrammingLanguage="C#" EntryFile="C:\ipc\3rdParties\allin1\Visual Studio 2010\CSExcelAutomationAddIn-c46f6956\C#\CSExcelAutomationAddIn.sln" />
+    </SamplePackages>
+  </CodeSample>
+  <CodeSample Name="CSOneNoteRibbonAddIn-c3547362" Title="C# OneNote Ribbon addin (CSOneNoteRibbonAddIn)" Supports="Visual Studio 2010" LastUpdated="5/5/2011" GallertURL="http://code.msdn.microsoft.com/CSOneNoteRibbonAddIn-c3547362" Rating="0" Raters="0" Downloads="9253" Affiliation="">
+    <Author DisplayName="All-In-One Code Framework" Link="http://code.msdn.microsoft.com/site/profile?userName=All-In-One%20Code%20Framework" />
+    <License Title="Apache" Link="http://code.msdn.microsoft.com/site/CSOneNoteRibbonAddIn-c3547362/eula?licenseType=Apache" />
+    <ProgrammingLanguages>
+      <ProgrammingLanguage>C#</ProgrammingLanguage>
+    </ProgrammingLanguages>
+    <Platforms>
+      <Platform>Desktop</Platform>
+    </Platforms>
+    <Summary>The example demonstrates how to create a VSTO add-in to customize the ribbon of Microsoft OneCode 2010</Summary>
+    <Technologies>
+      <Technology>Office</Technology>
+    </Technologies>
+    <SamplePackages>
+      <SamplePackage LastUpdated="1/10/2013" DownloadLink="http://code.msdn.microsoft.com/CSOneNoteRibbonAddIn-c3547362/file/22032/9/C%23%20OneNote%20Ribbon%20addin%20(CSOneNoteRibbonAddIn).zip" ProgrammingLanguage="C#" EntryFile="C:\ipc\3rdParties\allin1\Visual Studio 2010\CSOneNoteRibbonAddIn-c3547362\C#\CSOneNoteRibbonAddIn.sln" />
+    </SamplePackages>
+  </CodeSample>
+  <CodeSample Name="CSExcelAutomationAddIn-d0281eca" Title="C# Excel Automation addin (CSExcelAutomationAddIn)" Supports="Visual Studio 2008" LastUpdated="3/2/2012" GallertURL="http://code.msdn.microsoft.com/CSExcelAutomationAddIn-d0281eca" Rating="0" Raters="0" Downloads="6384" Affiliation="">
+    <Author DisplayName="All-In-One Code Framework" Link="http://code.msdn.microsoft.com/site/profile?userName=All-In-One%20Code%20Framework" />
+    <License Title="MSLPL" Link="http://code.msdn.microsoft.com/site/CSExcelAutomationAddIn-d0281eca/eula?licenseType=MSLPL" />
+    <ProgrammingLanguages>
+      <ProgrammingLanguage>C#</ProgrammingLanguage>
+    </ProgrammingLanguages>
+    <Platforms>
+      <Platform>Desktop</Platform>
+    </Platforms>
+    <Summary>This project illustrates how to write a managed COM component which can be used as an Automation AddIn in Excel.</Summary>
+    <Technologies>
+      <Technology>Office</Technology>
+    </Technologies>
+    <SamplePackages>
+      <SamplePackage LastUpdated="1/10/2013" DownloadLink="http://code.msdn.microsoft.com/CSExcelAutomationAddIn-d0281eca/file/21664/11/C%23%20Excel%20Automation%20addin%20(CSExcelAutomationAddIn).zip" ProgrammingLanguage="C#" EntryFile="C:\ipc\3rdParties\allin1\Visual Studio 2008\CSExcelAutomationAddIn-d0281eca\C#\CSExcelAutomationAddIn.sln" />
+    </SamplePackages>
+  </CodeSample>
+  <CodeSample Name="CppAutomateExcel-be36992e" Title="C++ app automates Excel (CppAutomateExcel)" Supports="Visual Studio 2010" LastUpdated="3/2/2012" GallertURL="http://code.msdn.microsoft.com/CppAutomateExcel-be36992e" Rating="5" Raters="1" Downloads="8282" Affiliation="">
+    <Author DisplayName="All-In-One Code Framework" Link="http://code.msdn.microsoft.com/site/profile?userName=All-In-One%20Code%20Framework" />
+    <License Title="MSLPL" Link="http://code.msdn.microsoft.com/site/CppAutomateExcel-be36992e/eula?licenseType=MSLPL" />
+    <ProgrammingLanguages>
+      <ProgrammingLanguage>C#</ProgrammingLanguage>
+      <ProgrammingLanguage>C++</ProgrammingLanguage>
+    </ProgrammingLanguages>
+    <Platforms>
+      <Platform>Desktop</Platform>
+    </Platforms>
+    <Summary>The CppAutomateExcel example demonstrates how to write VC++ codes to create and automate a Microsoft Excel instance</Summary>
+    <Technologies>
+      <Technology>Office</Technology>
+    </Technologies>
+    <SamplePackages>
+      <SamplePackage LastUpdated="1/10/2013" DownloadLink="http://code.msdn.microsoft.com/CppAutomateExcel-be36992e/file/52564/9/C%20app%20automates%20Excel%20(CppAutomateExcel).zip" ProgrammingLanguage="C++" EntryFile="C:\ipc\3rdParties\allin1\Visual Studio 2010\CppAutomateExcel-be36992e\C++\CppAutomateExcel.sln" />
+    </SamplePackages>
+  </CodeSample>
+  <CodeSample Name="CppAutomateExcel-44214081" Title="C++ app automates Excel (CppAutomateExcel)" Supports="Visual Studio 2008" LastUpdated="3/2/2012" GallertURL="http://code.msdn.microsoft.com/CppAutomateExcel-44214081" Rating="5" Raters="1" Downloads="8227" Affiliation="">
+    <Author DisplayName="All-In-One Code Framework" Link="http://code.msdn.microsoft.com/site/profile?userName=All-In-One%20Code%20Framework" />
+    <License Title="MSLPL" Link="http://code.msdn.microsoft.com/site/CppAutomateExcel-44214081/eula?licenseType=MSLPL" />
+    <ProgrammingLanguages>
+      <ProgrammingLanguage>C#</ProgrammingLanguage>
+      <ProgrammingLanguage>C++</ProgrammingLanguage>
+    </ProgrammingLanguages>
+    <Platforms>
+      <Platform>Desktop</Platform>
+    </Platforms>
+    <Summary>The CppAutomateExcel example demonstrates how to write VC++ codes to create and automate a Microsoft Excel instance</Summary>
+    <Technologies>
+      <Technology>Office</Technology>
+    </Technologies>
+    <SamplePackages>
+      <SamplePackage LastUpdated="1/10/2013" DownloadLink="http://code.msdn.microsoft.com/CppAutomateExcel-44214081/file/21544/11/C%20app%20automates%20Excel%20(CppAutomateExcel).zip" ProgrammingLanguage="C++" EntryFile="C:\ipc\3rdParties\allin1\Visual Studio 2008\CppAutomateExcel-44214081\C++\CppAutomateExcel.sln" />
+    </SamplePackages>
+  </CodeSample>
+  <CodeSample Name="CSExcelNewEventForShapes-5d1a5046" Title="Create new events for shape in Excel (CSExcelNewEventForShapes)" Supports="Visual Studio 2012" LastUpdated="12/21/2012" GallertURL="http://code.msdn.microsoft.com/CSExcelNewEventForShapes-5d1a5046" Rating="0" Raters="0" Downloads="284" Affiliation="">
+    <Author DisplayName="All-In-One Code Framework" Link="http://code.msdn.microsoft.com/site/profile?userName=All-In-One%20Code%20Framework" />
+    <License Title="MSLPL" Link="http://code.msdn.microsoft.com/site/CSExcelNewEventForShapes-5d1a5046/eula?licenseType=MSLPL" />
+    <ProgrammingLanguages>
+      <ProgrammingLanguage>C#</ProgrammingLanguage>
+    </ProgrammingLanguages>
+    <Platforms>
+      <Platform>Desktop</Platform>
+    </Platforms>
+    <Summary>This sample demonstrates how to create new events​ for shape in Excel by VSTO</Summary>
+    <Technologies>
+      <Technology>Office</Technology>
+    </Technologies>
+    <SamplePackages>
+      <SamplePackage LastUpdated="1/10/2013" DownloadLink="http://code.msdn.microsoft.com/CSExcelNewEventForShapes-5d1a5046/file/73162/5/Create%20new%20events%20for%20shape%20in%20Excel%20(CSExcelNewEventForShapes).zip" ProgrammingLanguage="C#" EntryFile="C:\ipc\3rdParties\allin1\Visual Studio 2012\CSExcelNewEventForShapes-5d1a5046\C#\CSExcelNewEventForShapes.sln" />
+    </SamplePackages>
+  </CodeSample>
+  <CodeSample Name="CSExcelNewEventForShapes-0e26b1f2" Title="Create new events for shape in Excel (CSExcelNewEventForShapes)" Supports="Visual Studio 2010" LastUpdated="12/21/2012" GallertURL="http://code.msdn.microsoft.com/CSExcelNewEventForShapes-0e26b1f2" Rating="0" Raters="0" Downloads="322" Affiliation="">
+    <Author DisplayName="All-In-One Code Framework" Link="http://code.msdn.microsoft.com/site/profile?userName=All-In-One%20Code%20Framework" />
+    <License Title="MSLPL" Link="http://code.msdn.microsoft.com/site/CSExcelNewEventForShapes-0e26b1f2/eula?licenseType=MSLPL" />
+    <ProgrammingLanguages>
+      <ProgrammingLanguage>C#</ProgrammingLanguage>
+    </ProgrammingLanguages>
+    <Platforms>
+      <Platform>Desktop</Platform>
+    </Platforms>
+    <Summary>This sample demonstrates how to create new events​ for shape in Excel by VSTO</Summary>
+    <Technologies>
+      <Technology>Office</Technology>
+    </Technologies>
+    <SamplePackages>
+      <SamplePackage LastUpdated="1/10/2013" DownloadLink="http://code.msdn.microsoft.com/CSExcelNewEventForShapes-0e26b1f2/file/73122/5/Create%20new%20events%20for%20shape%20in%20Excel%20(CSExcelNewEventForShapes).zip" ProgrammingLanguage="C#" EntryFile="C:\ipc\3rdParties\allin1\Visual Studio 2010\CSExcelNewEventForShapes-0e26b1f2\C#\CSExcelNewEventForShapes.sln" />
+    </SamplePackages>
+  </CodeSample>
+  <CodeSample Name="CSVstoGetWrapperObject-f7ee870d" Title="Get VSTO wrapper object (CSVstoGetWrapperObject)" Supports="Visual Studio 2008" LastUpdated="4/5/2011" GallertURL="http://code.msdn.microsoft.com/CSVstoGetWrapperObject-f7ee870d" Rating="0" Raters="0" Downloads="6783" Affiliation="">
+    <Author DisplayName="All-In-One Code Framework" Link="http://code.msdn.microsoft.com/site/profile?userName=All-In-One%20Code%20Framework" />
+    <License Title="Apache" Link="http://code.msdn.microsoft.com/site/CSVstoGetWrapperObject-f7ee870d/eula?licenseType=Apache" />
+    <ProgrammingLanguages>
+      <ProgrammingLanguage>C#</ProgrammingLanguage>
+    </ProgrammingLanguages>
+    <Platforms>
+      <Platform>Desktop</Platform>
+    </Platforms>
+    <Summary>The CSVstoGetWrapperObject project demonstrates how to get a VSTO wrapper object from an existing Office COM object</Summary>
+    <Technologies>
+      <Technology>Office</Technology>
+    </Technologies>
+    <SamplePackages>
+      <SamplePackage LastUpdated="1/10/2013" DownloadLink="http://code.msdn.microsoft.com/CSVstoGetWrapperObject-f7ee870d/file/20619/9/Get%20VSTO%20wrapper%20object%20(CSVstoGetWrapperObject).zip" ProgrammingLanguage="C#" EntryFile="C:\ipc\3rdParties\allin1\Visual Studio 2008\CSVstoGetWrapperObject-f7ee870d\C#\CSVstoGetWrapperObject.sln" />
+    </SamplePackages>
+  </CodeSample>
+  <CodeSample Name="CSVstoGetWrapperObject-abda93a5" Title="Get VSTO wrapper object (CSVstoGetWrapperObject)" Supports="Visual Studio 2012" LastUpdated="12/7/2012" GallertURL="http://code.msdn.microsoft.com/CSVstoGetWrapperObject-abda93a5" Rating="5" Raters="1" Downloads="425" Affiliation="">
+    <Author DisplayName="All-In-One Code Framework" Link="http://code.msdn.microsoft.com/site/profile?userName=All-In-One%20Code%20Framework" />
+    <License Title="MSLPL" Link="http://code.msdn.microsoft.com/site/CSVstoGetWrapperObject-abda93a5/eula?licenseType=MSLPL" />
+    <ProgrammingLanguages>
+      <ProgrammingLanguage>C#</ProgrammingLanguage>
+    </ProgrammingLanguages>
+    <Platforms>
+      <Platform>Desktop</Platform>
+    </Platforms>
+    <Summary>The CSVstoGetWrapperObject project demonstrates how to get a VSTO wrapper object from an existing Office COM object.</Summary>
+    <Technologies>
+      <Technology>Office</Technology>
+    </Technologies>
+    <SamplePackages>
+      <SamplePackage LastUpdated="1/10/2013" DownloadLink="http://code.msdn.microsoft.com/CSVstoGetWrapperObject-abda93a5/file/72134/4/Get%20VSTO%20wrapper%20object%20(CSVstoGetWrapperObject).zip" ProgrammingLanguage="C#" EntryFile="C:\ipc\3rdParties\allin1\Visual Studio 2012\CSVstoGetWrapperObject-abda93a5\C#\CSVstoGetWrapperObject.sln" />
+    </SamplePackages>
+  </CodeSample>
+  <CodeSample Name="CSVstoGetWrapperObject-0a223bf5" Title="Get VSTO wrapper object (CSVstoGetWrapperObject)" Supports="Visual Studio 2010" LastUpdated="12/7/2012" GallertURL="http://code.msdn.microsoft.com/CSVstoGetWrapperObject-0a223bf5" Rating="0" Raters="0" Downloads="369" Affiliation="">
+    <Author DisplayName="All-In-One Code Framework" Link="http://code.msdn.microsoft.com/site/profile?userName=All-In-One%20Code%20Framework" />
+    <License Title="MSLPL" Link="http://code.msdn.microsoft.com/site/CSVstoGetWrapperObject-0a223bf5/eula?licenseType=MSLPL" />
+    <ProgrammingLanguages>
+      <ProgrammingLanguage>C#</ProgrammingLanguage>
+    </ProgrammingLanguages>
+    <Platforms>
+      <Platform>Desktop</Platform>
+    </Platforms>
+    <Summary>The CSVstoGetWrapperObject project demonstrates how to get a VSTO wrapper object from an existing Office COM object.</Summary>
+    <Technologies>
+      <Technology>Office</Technology>
+    </Technologies>
+    <SamplePackages>
+      <SamplePackage LastUpdated="1/10/2013" DownloadLink="http://code.msdn.microsoft.com/CSVstoGetWrapperObject-0a223bf5/file/72128/4/Get%20VSTO%20wrapper%20object%20(CSVstoGetWrapperObject).zip" ProgrammingLanguage="C#" EntryFile="C:\ipc\3rdParties\allin1\Visual Studio 2010\CSVstoGetWrapperObject-0a223bf5\C#\CSVstoGetWrapperObject.sln" />
+    </SamplePackages>
+  </CodeSample>
+  <CodeSample Name="VBVstoGetWrapperObject-d17e2086" Title="Get VSTO wrapper object (VBVstoGetWrapperObject)" Supports="Visual Studio 2010" LastUpdated="12/7/2012" GallertURL="http://code.msdn.microsoft.com/VBVstoGetWrapperObject-d17e2086" Rating="0" Raters="0" Downloads="339" Affiliation="">
+    <Author DisplayName="All-In-One Code Framework" Link="http://code.msdn.microsoft.com/site/profile?userName=All-In-One%20Code%20Framework" />
+    <License Title="MSLPL" Link="http://code.msdn.microsoft.com/site/VBVstoGetWrapperObject-d17e2086/eula?licenseType=MSLPL" />
+    <ProgrammingLanguages>
+      <ProgrammingLanguage>VB.NET</ProgrammingLanguage>
+    </ProgrammingLanguages>
+    <Platforms>
+      <Platform>Desktop</Platform>
+    </Platforms>
+    <Summary>The VBVstoGetWrapperObject project demonstrates how to get a VSTO wrapper object from an existing Office COM object.</Summary>
+    <Technologies>
+      <Technology>Office</Technology>
+    </Technologies>
+    <SamplePackages>
+      <SamplePackage LastUpdated="1/10/2013" DownloadLink="http://code.msdn.microsoft.com/VBVstoGetWrapperObject-d17e2086/file/72131/4/Get%20VSTO%20wrapper%20object%20(VBVstoGetWrapperObject).zip" ProgrammingLanguage="VB" EntryFile="C:\ipc\3rdParties\allin1\Visual Studio 2010\VBVstoGetWrapperObject-d17e2086\VB\VBVstoGetWrapperObject.sln" />
+    </SamplePackages>
+  </CodeSample>
 </CodeSamples>

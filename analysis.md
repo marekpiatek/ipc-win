@@ -1,45 +1,44 @@
 Inter Process Communication
 ===========================
 
-Debug
------
-- Build Debug *gtest.sln*
-- Build Debug *protobuf.sln*
-- Build Debug *ipc.sln*
-
 Release
 -------
 - Build *ipc.sln*
 
-
-TODO
-====
-- Native <-> Managed
-- Manged <-> Managed
-- Evaluate UI syncronization impact
-- Pushing many small(1kb) data items to clients process
-- Send 0.1kb, 1kb, 3kb one way
-- Check batching for very very small items
-- Broadcasting data to 10 processes
-- 400kb and 2000kb, 1kb and 1kb requests/responses
-- Make multithreaded tests (consider single chanell memory issues)
+Debug (do not use for measurements)
+-----------------------------------
+- Build Debug *gtest.sln*
+- Build Debug *protobuf.sln*
+- Build Debug *ipc.sln*
 
 Considerations
 ==============
-Windows provides various IPC[1] mechanims all baesed on shared memory[2]. It means that any mechanims can beat shared memory, but can use different api
+- Windows provides various IPC[1] mechanisms all based on shared memory[2]. It means that any mechanisms cannot beat shared memory, but can provide different abstractions(e.g. calling function above shared morory reads/writes) and use different synchronization mechanisms(e.g. spin wait instead of lock) leading to different performances. 
+- Target machines can have only one hardware thread. Event having several processes can be similar to having one if second hardware thread is occupied with some task. Multithreading have is own impact - it can make thinks faster because several thinks done simultaneously,  but need to pay for synchronization. Number of channels of RAM can influence multithreaded situation. So all basic tests done synchronous with one sending process and one single threaded waiting process. Real multithread scenario can be estimated and tested after.
+- Having request/response scenarios of different kind when client pull data from server many times by requests and when client makes single request then server pushes data many times. Push performance considered to be approximated from pull time. 
+- Requests and responses can  have various sizes - several big request or many small requests.
+
+Neglected measurements
+======================
+The maing goal is performance and possibility to tune it. Layers of abstractions (e.g. represeting shared memory reads/writes as generic object interface) decrease perfromance. Layring managed code above unmanged ads some penalty (marhaling). Second consideration is API should be usable from managed/unmanged code with small configuration hassle.
+- Mailslots shows to be slow as shown by [3] and of customer teams reports. Provides one way communication which should be doubled to provide communication in other direction. Does to many things which are never be used by in considered scenarios.
+- Sockets shows to be slow as shown by [3] and of customer teams reports. Provides hussle of choosing port[6] and potentialy can be blocket of security reasons (e.g. need administrator intervention to unblock).
+- RPC uses Named Pipes. Cannot be faster then using Named Pipes directly. Documented usage is COM/C++ specific hard to use from C#.  Providing transport independent function call abstraction and other stuff never be used by in considered scenarios.
+- DDE is "not as efficient as newer technologies"[7], used Windows Messaging and Shared Memorory inside[4], considered legacy and not suggested for use for new projects[5].
+- COM provides object layer above Shared Memory, adds some marshaling to using it from managed code and configuration hussle.
+- Windows Messages does not provide blocking calls abstractions and need heavy weight STA threads with hidden windows for multhireading. [3] shows that it is slower then named pipes or shared memory. Current blocking calls tests potentially will show that this mechanism is slow either, need do more real multi threaded scenario in order to measure one way thougtput. 
 
 Conclusion
 ==========
-- When making few big data exchanges then IPC(syncronization and memory copying) is neglectable if to compare with object serialization to byte array. Better having simple objects (e.g. string or array of string or with sequential memory layout) for IPC.
-- Adhoc byte array serialization is viable solution because using objects translation to serializable(Protobuf) messages can happen to be unallowable overhead.
-- Need find ways to optimize chaty(many small requests) conversations. E.g. tuning syncronization, IPC buffers, batching.
+- When making few big data exchanges then IPC(synchronization and memory copying) is neglectable if to compare with object serialization to byte array. Better having simple objects (e.g. string or array of string or with sequential memory layout) for IPC.
+- Adhoc byte array serialization is viable solution because using objects translation to serializable (Protobuf) messages can happen to be unallowable overhead.
+- Tests shows that batching of many requests( request ~100 bytes, response 1kb) into 2000 items bucket can improve IPC by 20-30%.
+- Need som king of different API,  one for high perfromance low level for data pumping and another for workflows.
 
-Measurments with comments highlighted
-=====================================
-[Machine specification]
----
-
-NOTE: next requests/respones are synchronous with one sending process and one single threaded waiting process
+Measurments
+===========
+[Machine specification 1]
+-----------------------
 
 
 Client sending raw bytes via Shared Memory
@@ -166,9 +165,24 @@ Client process requests ~1kb and gets ~10kb response  of server process
   *  Tot. time 0.384039 sec
   *  Stops 1000
 
-
-
-
-
- [Machine specification]: http://valid.canardpc.com/2639433
- [Fastest IPC method on Windows XP/Vista]: https://onegazhang.wordpress.com/2008/05/28/fastest-ipc-method-on-windows-xpvista/
+TODO
+====
+- Shuffle tests and shuffle data, investigate CPU cache influence
+- Native <-> Managed
+- Managed <-> Managed
+- Evaluate UI syncronization impact
+- Pushing many small(1kb) data items to clients process
+- Send 0.1kb, 1kb, 3kb one way
+- Broadcasting data to 10 processes
+- 400kb and 2000kb, 1kb and 1kb requests/responses
+- Make multithreaded tests (consider single chanell memory issues) with addint Windows Messaging
+- Tuning syncronization to optimize chaty(many small requests) conversations
+ 
+ [Machine specification 1]: http://valid.canardpc.com/2639433
+ [1]: http://msdn.microsoft.com/en-us/library/windows/desktop/aa365574.aspx
+ [2]: http://blogs.msdn.com/b/salvapatuel/archive/2009/06/08/working-with-memory-mapped-files-in-net-4.aspx
+ [3]: https://onegazhang.wordpress.com/2008/05/28/fastest-ipc-method-on-windows-xpvista/
+ [4]: http://msdn.microsoft.com/en-us/library/windows/desktop/ms648774.aspx
+ [5]: http://ndde.codeplex.com/
+ [6]: http://stackoverflow.com/questions/8748396/ipc-port-ranges
+ [7]: http://msdn.microsoft.com/en-us/library/windows/desktop/aa365574.aspx#base.using_dde_for_ipc

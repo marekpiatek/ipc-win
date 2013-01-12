@@ -10,8 +10,11 @@
 #include "Stopwatch.h"
 #include <objects.h>
 #include <Messages.pb.h>
+#include <windows.h>
+#include <windowsx.h>
 
 using namespace std;
+VOID RegisterDispatcherWindow();
 typedef void (*req_builder)(unsigned int size,unsigned char** dataP,unsigned int* sizeP);
 
 typedef void (*resp_builder)(unsigned int size,unsigned char* resp_data);
@@ -19,12 +22,13 @@ typedef void (*resp_builder)(unsigned int size,unsigned char* resp_data);
 typedef void (*makeRequest)(unsigned int req_size,req_builder b, resp_builder br,void** result,int* resultSize);
 void makeSharedMemoryRequest(unsigned int req_size,req_builder b,resp_builder br,void** result,int* resultSize);
 void makePipeRequest(unsigned int req_size,req_builder b,resp_builder br,void** result,int* resultSize);
+void makeWindowsMessageRequest(unsigned int req_size,req_builder b,resp_builder br,void** result,int* resultSize);
 
 char* name = "cool data";
 char* id = "very very cool id";
 char* type = "very very cool type";
 
-int kb = 1024;
+const int kb = 1024;
 int req_size100 = 100*kb;
 int req_size50 = 50*kb;
 int req_size10 = 10*kb;
@@ -109,6 +113,11 @@ void req_bytes(unsigned int size,unsigned char** rdataP,unsigned int* rmessageSi
 	*rmessageSizeP = rmessageSize;
 }
 
+// inits shared memory buffer
+void init_mem(int size);
+void init_mem_open();
+
+bool oneway = true;
 bool reuse = false;
 
 //TODO: dispose resource on client disconnect
@@ -123,7 +132,7 @@ int _tmain(int argc, _TCHAR* argv[])
 		if (s == TEXT("-m")) 
 		{
 			std::wstring  s = argv[i+1];
-			call = s == TEXT("pipes") ? makePipeRequest : makeSharedMemoryRequest;
+			call = s == TEXT("pipes") ? makePipeRequest : (s == TEXT("messaging") ? makeWindowsMessageRequest : makeSharedMemoryRequest);
 		}
 		if (s == TEXT("-d")) 
 		{
@@ -136,6 +145,13 @@ int _tmain(int argc, _TCHAR* argv[])
 			reuse = true;
 		}
 	}
+
+	if (reuse) {
+		init_mem(3000*kb);
+		init_mem_open();
+		RegisterDispatcherWindow();
+	}
+
 
 
 	init_reqs(req_size100,5000,10);
@@ -226,6 +242,160 @@ int _tmain(int argc, _TCHAR* argv[])
 	cin >> &wait;	
 	return 0;
 }
+
+
+#define IDD_MAINDIALOG                  129
+#define IDC_SENDMSG_BUTTON              1001
+#define IDC_NUMBER_EDIT                 1002
+#define IDC_MESSAGE_EDIT                1003
+#define IDC_STATIC                      -1
+
+int current_req_size = 0;
+HWND  m_messageDispatcherWindow;
+LRESULT CALLBACK ClientWindowProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam);
+DWORD WINAPI WinThreadProc(_In_  LPVOID lpParameter)
+{
+	WNDCLASS wc = { };
+	HINSTANCE hInstance = GetModuleHandle(NULL);
+	wc.lpfnWndProc   = ClientWindowProc;
+	wc.hInstance     = hInstance;
+	wc.lpszClassName = TEXT("Client Dispatcher Window Class");
+
+	RegisterClass(&wc);
+
+	m_messageDispatcherWindow = CreateWindowEx(
+		0,
+		TEXT("Client Dispatcher Window Class"),
+		L"Client Dispatcher Window",
+		WS_OVERLAPPEDWINDOW,
+		CW_USEDEFAULT, CW_USEDEFAULT, CW_USEDEFAULT, CW_USEDEFAULT,
+		NULL,
+		NULL,
+		hInstance,
+		NULL);
+	 MSG msg = { };
+    while (GetMessage(&msg, NULL, 0, 0))
+    {
+        TranslateMessage(&msg);
+        DispatchMessage(&msg);
+    }
+	DestroyWindow(m_messageDispatcherWindow);
+	return 0;
+}
+
+HANDLE m_thread;
+
+VOID RegisterDispatcherWindow()
+{
+	// Register the window class.
+	DWORD wt = 0;
+	m_thread = CreateThread(NULL,NULL,WinThreadProc,NULL,0,&wt);
+	
+}
+void OnCommand(HWND hWnd, int id, HWND hwndCtl, UINT codeNotify);
+void OnClose(HWND hWnd);
+
+LRESULT CALLBACK ClientWindowProc(HWND hwnd, UINT message, WPARAM wParam, LPARAM lParam)
+{
+	switch (message)
+    {
+        // Handle the WM_COMMAND message in OnCommand
+        HANDLE_MSG (hwnd, WM_COMMAND, OnCommand);
+
+        // Handle the WM_CLOSE message in OnClose
+        HANDLE_MSG (hwnd, WM_CLOSE, OnClose);
+
+    default:
+        return true;
+    }
+	//return DefWindowProc(hwnd, message, wParam, lParam);
+}
+
+
+
+
+
+
+//
+//   FUNCTION: OnCommand(HWND, int, HWND, UINT)
+//
+//   PURPOSE: Process the WM_COMMAND message
+//
+void OnCommand(HWND hWnd, int id, HWND hwndCtl, UINT codeNotify)
+{
+    if (id == IDC_SENDMSG_BUTTON)
+    {
+        // Find the target window handle.
+        HWND hTargetWnd = FindWindow(NULL, L"CppReceiveWM_COPYDATA");
+        if (hTargetWnd == NULL)
+        {
+            MessageBox(hWnd, L"Unable to find the \"CppReceiveWM_COPYDATA\" window", 
+                L"Error", MB_ICONERROR);
+            return;
+        }
+
+
+
+
+        COPYDATASTRUCT cds;
+        cds.cbData = current_req_size;
+        cds.lpData = malloc(current_req_size*10);
+
+        // Send the COPYDATASTRUCT struct through the WM_COPYDATA message to 
+        // the receiving window. (The application must use SendMessage, 
+        // instead of PostMessage to send WM_COPYDATA because the receiving 
+        // application must accept while it is guaranteed to be valid.)
+        SendMessage(hTargetWnd, WM_COPYDATA, reinterpret_cast<WPARAM>(hWnd), reinterpret_cast<LPARAM>(&cds));
+		free(cds.lpData);
+        DWORD dwError = GetLastError();
+        if (dwError != NO_ERROR)
+        {
+            cout << "SendMessage(WM_COPYDATA)" << dwError << endl;
+        }
+    }
+}
+
+
+//
+//   FUNCTION: OnClose(HWND)
+//
+//   PURPOSE: Process the WM_CLOSE message
+//
+void OnClose(HWND hWnd)
+{
+    EndDialog(hWnd, 0);
+}
+
+
+//
+//  FUNCTION: DialogProc(HWND, UINT, WPARAM, LPARAM)
+//
+//  PURPOSE:  Processes messages for the main dialog.
+//
+INT_PTR CALLBACK DialogProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
+{
+    switch (message)
+    {
+        // Handle the WM_COMMAND message in OnCommand
+        HANDLE_MSG (hWnd, WM_COMMAND, OnCommand);
+
+        // Handle the WM_CLOSE message in OnClose
+        HANDLE_MSG (hWnd, WM_CLOSE, OnClose);
+
+    default:
+        return FALSE;
+    }
+    return 0;
+}
+
+
+void makeWindowsMessageRequest(unsigned int req_size,req_builder b,resp_builder br,void** result,int* resultSize){
+	current_req_size =  req_size;
+
+	PostMessage(m_messageDispatcherWindow,WM_COMMAND,IDC_SENDMSG_BUTTON,req_size);
+	//PostThreadMessage(GetThreadId(m_thread),IDC_SENDMSG_BUTTON,0,0);
+}
+
 HANDLE	hPipe = INVALID_HANDLE_VALUE;
 void makePipeRequest(unsigned int req_size,req_builder b,resp_builder br,void** result,int* resultSize){
 	if (!reuse)
@@ -250,49 +420,72 @@ void makePipeRequest(unsigned int req_size,req_builder b,resp_builder br,void** 
 			break; 
 	}
 
-	unsigned char* rdata = NULL;
+	unsigned char* request_data = NULL;
 	unsigned int rmessageSize = 0;
-	b(req_size,&rdata,&rmessageSize);
+	b(req_size,&request_data,&rmessageSize);
 
 	unsigned char* msg = (unsigned char*)malloc(sizeof(long)+rmessageSize);
 
 	memcpy(msg,&rmessageSize,sizeof(long));
 	unsigned char* rmsg = (unsigned char*)(msg+sizeof(long));
-	memcpy(rmsg,rdata, rmessageSize);//NOTE: additional copy slows down pipes - can be avoided
+	memcpy(rmsg,request_data, rmessageSize);//NOTE: additional copy slows down pipes - can be avoided
 
 	unsigned long cbWritten = 0;
 	WriteFile(hPipe,msg,sizeof(long)+rmessageSize,&cbWritten,NULL);
 
+	unsigned char* response = NULL;
 	long responseSize = 0;
+	if (!oneway){
+	
 	unsigned long	cbRead = 0;
-	bool rSizeRead = ReadFile(hPipe,&responseSize,sizeof(long),&cbRead,NULL);
-	auto response = (unsigned char*) malloc(responseSize);
+	bool size_was_read = ReadFile(hPipe,&responseSize,sizeof(long),&cbRead,NULL);
+	unsigned char* response = (unsigned char*) malloc(responseSize);
 	//if (!rSizeRead) cout << cbRead << endl;
 	//cout << cbRead << endl;
 	//if (GetLastError() == ERROR_MORE_DATA) cout << "MORE DATA" << endl;
-	bool rRead = ReadFile(hPipe,response,responseSize,&cbRead,NULL);
+	bool was_read = ReadFile(hPipe,response,responseSize,&cbRead,NULL);
 	*result = response;
+
 	//cout << cbRead << endl;
 	//if (!rRead) cout << cbRead << endl;
 	//if (GetLastError() == ERROR_MORE_DATA) cout << "MORE DATA" << endl;
 	//cout << rRead << endl;
-	if (!reuse)
+	}
+	if (!reuse && !oneway)
 		 CloseHandle(hPipe);
-	br(rSizeRead,response);
+	if (!oneway){
+	br(responseSize,response);
 	*resultSize = responseSize;
+      }
 	//cout << response << endl;
 CLEANUP:
-	free(rdata);
+	free(request_data);
 }
-void makeSharedMemoryRequest(unsigned int req_size,req_builder b,resp_builder br,void** result,int* resultSize){
 
-	unsigned char* rdata = NULL;
-	unsigned int rmessageSize = 0;
-	b(req_size,&rdata,&rmessageSize);
+void* rsizeMap;
+void* rsizeMapView;
+void* rdataMap;
+void* rdataView;
 
+void *dataMap;
+void* sizeMap;
+void init_mem_open(){
+	 	 sizeMap = OpenFileMapping(
+		FILE_MAP_READ,         
+		FALSE,                  
+		TEXT("SizeOfData")           
+		);
+ dataMap = OpenFileMapping(
+		FILE_MAP_READ,         
+		FALSE,                  
+		TEXT("ServerMessageData")           
+		);
 
-	// posting size of request data
-	auto rsizeMap = CreateFileMapping(
+}
+
+void init_mem(int rmessageSize){
+	// mem for size of request data
+	 rsizeMap = CreateFileMapping(
 		INVALID_HANDLE_VALUE,   
 		NULL,                  
 		PAGE_READWRITE,        
@@ -300,16 +493,9 @@ void makeSharedMemoryRequest(unsigned int req_size,req_builder b,resp_builder br
 		sizeof(long),               
 		TEXT("SizeOfDataRequest")
 		);
-	auto rsizeMapView = MapViewOfFile(
-		rsizeMap,
-		FILE_MAP_WRITE,          
-		0,                     
-		0,           
-		sizeof(long)
-		);
 
-	// post responce data
-	auto rdataMap = CreateFileMapping(
+	// mem for req data
+	 rdataMap = CreateFileMapping(
 		INVALID_HANDLE_VALUE,   
 		NULL,                  
 		PAGE_READWRITE,        
@@ -317,14 +503,31 @@ void makeSharedMemoryRequest(unsigned int req_size,req_builder b,resp_builder br
 		rmessageSize,               
 		TEXT("ClientMessageData")
 		);
-	auto rdataView = MapViewOfFile(
+
+
+}
+
+void makeSharedMemoryRequest(unsigned int req_size,req_builder b,resp_builder br,void** result,int* resultSize){
+
+	unsigned char* rdata = NULL;
+	unsigned int rmessageSize = 0;
+	b(req_size,&rdata,&rmessageSize);
+
+	if (!reuse) init_mem(rmessageSize);
+		 rsizeMapView = MapViewOfFile(
+		rsizeMap,
+		FILE_MAP_WRITE,          
+		0,                     
+		0,           
+		sizeof(long)
+		);
+	 	 rdataView = MapViewOfFile(
 		rdataMap,
 		FILE_MAP_WRITE,          
 		0,                     
 		0,           
 		rmessageSize
 		);
-
 	memcpy(rsizeMapView,&rmessageSize,sizeof(long));
 	memcpy(rdataView,rdata,rmessageSize);
 
@@ -348,11 +551,8 @@ void makeSharedMemoryRequest(unsigned int req_size,req_builder b,resp_builder br
 		madeResponse = OpenEvent(SYNCHRONIZE,false,TEXT("ServerMadeResponse"));
 	}
 	WaitForSingleObject(madeResponse,INFINITE);
-	auto sizeMap = OpenFileMapping(
-		FILE_MAP_READ,         
-		FALSE,                  
-		TEXT("SizeOfData")           
-		);
+
+	if (!reuse || dataMap == NULL || sizeMap == NULL) init_mem_open();
 
 	auto sizeMapView = MapViewOfFile(
 		sizeMap,
@@ -365,11 +565,7 @@ void makeSharedMemoryRequest(unsigned int req_size,req_builder b,resp_builder br
 	auto packet = *(long*) sizeMapView;
 	//cout << *packet<< endl;
 
-	auto dataMap = OpenFileMapping(
-		FILE_MAP_READ,         
-		FALSE,                  
-		TEXT("ServerMessageData")           
-		);
+
 
 	auto dataView = MapViewOfFile(
 		dataMap,

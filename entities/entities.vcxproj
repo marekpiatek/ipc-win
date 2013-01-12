@@ -84,7 +84,11 @@
     <ClInclude Include="targetver.h" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Messages.proto" />
+    <None Include="Messages.proto">
+      <Command Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">protoc.exe -I=$(ProjectDir) --cpp_out=$(ProjectDir) $(ProjectDir)Messages.proto</Command>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Messages.pb.h;Messages.pb.cc;</Outputs>
+      <FileType>Document</FileType>
+    </None>
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

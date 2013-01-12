@@ -1,3 +1,5 @@
+// Command Line: protoc.exe -I=$(ProjectDir) --cpp_out=$(ProjectDir) $(ProjectDir)Messages.proto
+// Output: Messages.pb.h;Messages.pb.cc;
 message request {
   required string name = 1;
   repeated string ids = 2   ;
@@ -8,9 +10,9 @@ message response {
   repeated  string data = 1;
 }
 message batch_request{
-  repeated request requests = 1;
+  repeated request batch = 1;
 }
 
 message batch_response{
-  repeated response responses = 1;
+  repeated response batch = 1;
 }

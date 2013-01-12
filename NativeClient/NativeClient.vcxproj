@@ -101,6 +101,9 @@
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Create</PrecompiledHeader>
     </ClCompile>
   </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="..\3rdParties\allin1\Visual Studio 2008\CppSendWMCOPYDATA-f75bc681\C++\CppSendWM_COPYDATA\CppSendWM_COPYDATA.rc" />
+  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>
