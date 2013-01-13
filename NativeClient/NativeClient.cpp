@@ -269,7 +269,7 @@ int _tmain(int argc, _TCHAR* argv[])
 	return 0;
 }
 
-
+		HWND hTargetWnd ;
 #define IDD_MAINDIALOG                  129
 #define IDC_SENDMSG_BUTTON              1001
 #define IDC_NUMBER_EDIT                 1002
@@ -316,6 +316,7 @@ VOID RegisterDispatcherWindow()
 	// Register the window class.
 	DWORD wt = 0;
 	m_thread = CreateThread(NULL,NULL,WinThreadProc,NULL,0,&wt);
+    hTargetWnd = FindWindow(NULL, L"CppReceiveWM_COPYDATA");
 
 }
 void OnCommand(HWND hWnd, int id, HWND hwndCtl, UINT codeNotify);
@@ -347,7 +348,7 @@ void OnCommand(HWND hWnd, int id, HWND hwndCtl, UINT codeNotify)
 	if (id == IDC_SENDMSG_BUTTON)
 	{
 		// Find the target window handle.
-		HWND hTargetWnd = FindWindow(NULL, L"CppReceiveWM_COPYDATA");
+		if (!reuse || hTargetWnd == NULL) hTargetWnd = FindWindow(NULL, L"CppReceiveWM_COPYDATA");
 		if (hTargetWnd == NULL)
 		{
 			MessageBox(hWnd, L"Unable to find the \"CppReceiveWM_COPYDATA\" window", 
@@ -367,6 +368,10 @@ void OnCommand(HWND hWnd, int id, HWND hwndCtl, UINT codeNotify)
 		// instead of PostMessage to send WM_COPYDATA because the receiving 
 		// application must accept while it is guaranteed to be valid.)
 		SendMessage(hTargetWnd, WM_COPYDATA, reinterpret_cast<WPARAM>(hWnd), reinterpret_cast<LPARAM>(&cds));
+		//SendMessage(hTargetWnd, WM_COPYDATA, reinterpret_cast<WPARAM>(hWnd), reinterpret_cast<LPARAM>(&cds));
+		//SendMessage(hTargetWnd, WM_COPYDATA, reinterpret_cast<WPARAM>(hWnd), reinterpret_cast<LPARAM>(&cds));
+		//SendMessage(hTargetWnd, WM_COPYDATA, reinterpret_cast<WPARAM>(hWnd), reinterpret_cast<LPARAM>(&cds));
+		//SendMessage(hTargetWnd, WM_COPYDATA, reinterpret_cast<WPARAM>(hWnd), reinterpret_cast<LPARAM>(&cds));
 		message_send = true;
 		free(cds.lpData);
 		DWORD dwError = GetLastError();
@@ -414,7 +419,8 @@ INT_PTR CALLBACK DialogProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lPara
 void makeWindowsMessageRequest(unsigned int req_size,req_builder b,resp_builder br,void** result,int* resultSize){
 	current_req_size =  req_size;
 	message_send = false;
-	PostMessage(m_messageDispatcherWindow,WM_COMMAND,IDC_SENDMSG_BUTTON,req_size);
+	SendMessage(m_messageDispatcherWindow,WM_COMMAND,IDC_SENDMSG_BUTTON,req_size);
+	//PostMessage(m_messageDispatcherWindow,WM_COMMAND,IDC_SENDMSG_BUTTON,req_size);
 	//PostThreadMessage(GetThreadId(m_thread),IDC_SENDMSG_BUTTON,0,0);
 	//while (!message_send){};//TODO: compare to wait handle
 }
@@ -473,6 +479,11 @@ void makePipeRequest(unsigned int req_size,req_builder b,resp_builder br,void** 
 		//if (!rRead) cout << cbRead << endl;
 		//if (GetLastError() == ERROR_MORE_DATA) cout << "MORE DATA" << endl;
 		//cout << rRead << endl;
+	}
+	else{
+		unsigned long	cbRead = 0;
+		bool got_data = false;
+		bool was_read = ReadFile(hPipe,&got_data,sizeof(bool),&cbRead,NULL);
 	}
 	if (!reuse && !oneway)
 		CloseHandle(hPipe);

@@ -229,8 +229,8 @@ BOOL OnCopyData(HWND hWnd, HWND hwndFrom, PCOPYDATASTRUCT pcds)
 	//cds.lpData = malloc(resp_data_size);
 	//free(cds.lpData);
 	//SendMessage(hTargetWnd, WM_COPYDATA, reinterpret_cast<WPARAM>(hWnd), reinterpret_cast<LPARAM>(&cds));
-	if (req_data_size > 100*kb)
-	cout << req_data_size << endl;
+	//if (req_data_size > 99*kb)
+	    //cout << req_data_size << endl;
 	DWORD dwError = GetLastError();
 	if (dwError != NO_ERROR)
 	{
@@ -321,6 +321,12 @@ void replyPipes(HANDLE transport,resp_builder b,void** result){
 		unsigned long	cbWritten = 0;	 
 		WriteFile(transport,resp_data,sizeof(long)+packetSize,&cbWritten,NULL);
 		FlushFileBuffers(transport);
+	}
+	else
+	{ 
+		bool got_data = true;
+		unsigned long cbWritten = 0;
+		WriteFile(transport,&got_data,sizeof(bool),&cbWritten,NULL);
 	}
 
 	if (!reuse && !oneway)
