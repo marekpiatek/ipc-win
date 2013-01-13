@@ -122,7 +122,7 @@ void resp_obj(long requestPacket,unsigned char* request,long* packetSizeP,unsign
 // resue as much resources as possible when doing responces, if not then release and auire them again and again
 //KEEP-ALIVE kind of
 bool reuse = false;
-bool oneway = true;
+bool oneway = false;
 unsigned char* resp_data ;
 unsigned char* request_data ;
 int _tmain(int argc, wchar_t* argv[])
@@ -148,6 +148,10 @@ int _tmain(int argc, wchar_t* argv[])
 		if (s == TEXT("-r")) 
 		{
 			reuse = true;
+		}
+		if (s == TEXT("-o")) 
+		{
+			oneway = true;
 		}
 	}
 
@@ -215,22 +219,23 @@ BOOL OnCopyData(HWND hWnd, HWND hwndFrom, PCOPYDATASTRUCT pcds)
 	// of the message. The receiving application should not free the 
 	// memory referenced by pcds. If the receiving application must 
 	// access the data after SendMessage returns, it must copy the data 
-	// into a local buffer. 
+	// into a local buffer. 4
 	auto req_data_size = pcds->cbData;
 	auto req_data = malloc(req_data_size);
 	memcpy(req_data,pcds->lpData,req_data_size);
-	auto resp_data_size = reqResp[req_data_size/10];
-	COPYDATASTRUCT cds;
-	cds.cbData = resp_data_size;
-	cds.lpData = malloc(resp_data_size);
-	free(cds.lpData);
-	/*SendMessage(hTargetWnd, WM_COPYDATA, reinterpret_cast<WPARAM>(hWnd), reinterpret_cast<LPARAM>(&cds));
-
+	//auto resp_data_size = reqResp[req_data_size/10];
+	//COPYDATASTRUCT cds;
+	//cds.cbData = resp_data_size;
+	//cds.lpData = malloc(resp_data_size);
+	//free(cds.lpData);
+	//SendMessage(hTargetWnd, WM_COPYDATA, reinterpret_cast<WPARAM>(hWnd), reinterpret_cast<LPARAM>(&cds));
+	if (req_data_size > 100*kb)
+	cout << req_data_size << endl;
 	DWORD dwError = GetLastError();
 	if (dwError != NO_ERROR)
 	{
-	cout << "SendMessage(WM_COPYDATA)" << dwError << endl;
-	}*/
+	cout << "OnCopyData(WM_COPYDATA)" << dwError << endl;
+	}
 	//TODO: post to client
 
 	// Display the MY_STRUCT value in the window.
@@ -304,7 +309,8 @@ void replyPipes(HANDLE transport,resp_builder b,void** result){
 	if (!oneway){
 		// create responsee data
 		long packetSize = 0;
-
+		//TODO: parse reques without doing response
+		//cout << (char*)request_data;
 		b(rSize,request_data,&packetSize,&response_data);
 
 		//if (!reuse)  //NOTE: reusing big allocated data increases time of many identical conversations
@@ -420,10 +426,6 @@ void replySharedMem(HANDLE transport,resp_builder b,void** result){
 	long packetSize = 0;
 	unsigned char* resp_data = NULL;
 	b(requestPacket,request,&packetSize,&resp_data);
-	/* 	packetSize = reqResp[requestPacket];
-	data = (unsigned char*)malloc(packetSize);
-	char* msg = (char*)data;
-	memcpy_s(msg,packetSize,  "Hello from server!!!",1024);*/
 
 	if (!reuse) init_mem(packetSize);
 	auto sizeMapView = MapViewOfFile(

@@ -1,5 +1,8 @@
 // Command Line: protoc.exe -I=$(ProjectDir) --cpp_out=$(ProjectDir) $(ProjectDir)Messages.proto
 // Output: Messages.pb.h;Messages.pb.cc;
+
+option optimize_for = SPEED;
+
 message request {
   required string name = 1;
   repeated string ids = 2   ;
