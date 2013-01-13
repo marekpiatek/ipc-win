@@ -420,6 +420,34 @@ void makeWindowsMessageRequest(unsigned int req_size,req_builder b,resp_builder 
 	current_req_size =  req_size;
 	message_send = false;
 	SendMessage(m_messageDispatcherWindow,WM_COMMAND,IDC_SENDMSG_BUTTON,req_size);
+			// Find the target window handle.
+		//if (!reuse || hTargetWnd == NULL) hTargetWnd = FindWindow(NULL, L"CppReceiveWM_COPYDATA");
+		//if (hTargetWnd == NULL)
+		//{
+		//	cout << "Unable to find the \"CppReceiveWM_COPYDATA\" window Error" <<endl;
+		//}
+
+		//COPYDATASTRUCT cds;
+		//cds.cbData = current_req_size;
+		//cds.lpData = malloc(current_req_size*10);
+
+		//// Send the COPYDATASTRUCT struct through the WM_COPYDATA message to 
+		//// the receiving window. (The application must use SendMessage, 
+		//// instead of PostMessage to send WM_COPYDATA because the receiving 
+		//// application must accept while it is guaranteed to be valid.)
+
+		//SendMessage(hTargetWnd, WM_COPYDATA, reinterpret_cast<WPARAM>(m_messageDispatcherWindow), reinterpret_cast<LPARAM>(&cds));
+		////SendMessage(hTargetWnd, WM_COPYDATA, reinterpret_cast<WPARAM>(hWnd), reinterpret_cast<LPARAM>(&cds));
+		////SendMessage(hTargetWnd, WM_COPYDATA, reinterpret_cast<WPARAM>(hWnd), reinterpret_cast<LPARAM>(&cds));
+		////SendMessage(hTargetWnd, WM_COPYDATA, reinterpret_cast<WPARAM>(hWnd), reinterpret_cast<LPARAM>(&cds));
+		////SendMessage(hTargetWnd, WM_COPYDATA, reinterpret_cast<WPARAM>(hWnd), reinterpret_cast<LPARAM>(&cds));
+		//message_send = true;
+		//free(cds.lpData);
+		//DWORD dwError = GetLastError();
+		//if (dwError != NO_ERROR)
+		//{
+		//	cout << "SendMessage(WM_COPYDATA)" << dwError << endl;
+		//}
 	//PostMessage(m_messageDispatcherWindow,WM_COMMAND,IDC_SENDMSG_BUTTON,req_size);
 	//PostThreadMessage(GetThreadId(m_thread),IDC_SENDMSG_BUTTON,0,0);
 	//while (!message_send){};//TODO: compare to wait handle
