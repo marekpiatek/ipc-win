@@ -14,7 +14,7 @@ class custom_response;
 class custom_request {
 	
 		public:
-
+		//typedef std::list<CAdapt<CComBSTR>> TComBSTRList; - doubly linked list
 		std::list<std::string> m_ids;
 		std::list<std::string> m_types;
 		std::string  m_name;

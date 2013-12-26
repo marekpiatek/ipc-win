@@ -1,5 +1,7 @@
 // Command Line: protoc.exe -I=$(ProjectDir) --cpp_out=$(ProjectDir) $(ProjectDir)Messages.proto
 // Output: Messages.pb.h;Messages.pb.cc;
+//TODO: bat with protoc.exe and clang.exe adding precompiled header
+package reqresp;
 
 option optimize_for = SPEED;
 
@@ -18,4 +20,8 @@ message batch_request{
 
 message batch_response{
   repeated response batch = 1;
+}
+
+service Server {
+  rpc Send (request) returns (response);
 }

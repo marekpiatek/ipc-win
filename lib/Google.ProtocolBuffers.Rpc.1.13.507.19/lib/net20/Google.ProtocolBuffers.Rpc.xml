@@ -1,0 +1,126 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Google.ProtocolBuffers.Rpc</name>
+    </assembly>
+    <members>
+        <member name="M:Google.ProtocolBuffers.Rpc.Messages.RpcExceptionInfo.Create(System.Exception,Google.ProtocolBuffers.Rpc.Messages.RpcErrorDetailBehavior)">
+            <summary>
+              Constructs the exception details for the server to return
+            </summary>
+        </member>
+        <member name="M:Google.ProtocolBuffers.Rpc.Messages.RpcExceptionInfo.ReThrow(Google.ProtocolBuffers.Rpc.Messages.RpcErrorTypeBehavior)">
+            <summary>
+              Reconstruct the exception and raise
+            </summary>
+        </member>
+        <member name="M:Google.ProtocolBuffers.Rpc.Messages.RpcExceptionInfo.CreateException(Google.ProtocolBuffers.Rpc.Messages.RpcErrorTypeBehavior,System.Boolean)">
+            <summary>
+              Constructs the exception for the client to raise
+            </summary>
+        </member>
+        <member name="P:Google.ProtocolBuffers.Rpc.RpcClient.ExceptionTypeResolution">
+            <summary>
+              Controls how (and if) clients resolve exception types returned by the server, by default
+              the client will not perform Assembly.Load() to resolve exceptions.
+            </summary>
+        </member>
+        <member name="T:Google.ProtocolBuffers.Rpc.Messages.RpcErrorDetailBehavior">
+            <summary>
+              Controls the amount of details about excpetions that will be returned to the client.
+            </summary>
+        </member>
+        <member name="F:Google.ProtocolBuffers.Rpc.Messages.RpcErrorDetailBehavior.NoDetails">
+            <summary>
+              do not include any details about the exception
+            </summary>
+        </member>
+        <member name="F:Google.ProtocolBuffers.Rpc.Messages.RpcErrorDetailBehavior.TypeOnly">
+            <summary>
+              include only the type of the exception
+            </summary>
+        </member>
+        <member name="F:Google.ProtocolBuffers.Rpc.Messages.RpcErrorDetailBehavior.MessageOnly">
+            <summary>
+              return the contents of the Message field for excpetions
+            </summary>
+        </member>
+        <member name="F:Google.ProtocolBuffers.Rpc.Messages.RpcErrorDetailBehavior.FullDetails">
+            <summary>
+              include all details of exceptions
+            </summary>
+        </member>
+        <member name="T:Google.ProtocolBuffers.Rpc.Messages.RpcErrorTypeBehavior">
+            <summary>
+              Controls how (and if) clients resolve exception types returned by the server
+            </summary>
+        </member>
+        <member name="F:Google.ProtocolBuffers.Rpc.Messages.RpcErrorTypeBehavior.NoTypeResolution">
+            <summary>
+              The client will treat any excpetion returned by the server as a System.ApplicationException
+            </summary>
+        </member>
+        <member name="F:Google.ProtocolBuffers.Rpc.Messages.RpcErrorTypeBehavior.OnlyUseMsCorLibTypes">
+            <summary>
+              The client will use any exception type that is defined in mscorlib.dll, all others become ApplicationException
+            </summary>
+        </member>
+        <member name="F:Google.ProtocolBuffers.Rpc.Messages.RpcErrorTypeBehavior.OnlyUseLoadedAssemblies">
+            <summary>
+              The client will use excpetion types defined in any assembly already loaded into the current domain
+            </summary>
+        </member>
+        <member name="F:Google.ProtocolBuffers.Rpc.Messages.RpcErrorTypeBehavior.OnlyLoadStrongNamed">
+            <summary>
+              Like OnlyUseLoadedAssemblies but will also resolve any assembly that provides a strong name
+            </summary>
+        </member>
+        <member name="F:Google.ProtocolBuffers.Rpc.Messages.RpcErrorTypeBehavior.LoadAnyAssembly">
+            <summary>
+              The client will attempt to load any assembly specifed by the exception details returned from the server
+            </summary>
+        </member>
+        <member name="T:Google.ProtocolBuffers.Rpc.RpcCommunicationException">
+            <summary>
+              Exception class: RpcCommunicationException : ApplicationException
+              Unspecified communications error.
+            </summary>
+        </member>
+        <member name="M:Google.ProtocolBuffers.Rpc.RpcCommunicationException.#ctor(System.Runtime.Serialization.SerializationInfo,System.Runtime.Serialization.StreamingContext)">
+            <summary>
+              Serialization constructor
+            </summary>
+        </member>
+        <member name="M:Google.ProtocolBuffers.Rpc.RpcCommunicationException.#ctor">
+            <summary>
+              Unspecified communications error.
+            </summary>
+        </member>
+        <member name="M:Google.ProtocolBuffers.Rpc.RpcCommunicationException.#ctor(System.Exception)">
+            <summary>
+              Unspecified communications error.
+            </summary>
+        </member>
+        <member name="M:Google.ProtocolBuffers.Rpc.RpcCommunicationException.#ctor(System.String)">
+            <summary>
+              Unspecified communications error.
+            </summary>
+        </member>
+        <member name="M:Google.ProtocolBuffers.Rpc.RpcCommunicationException.#ctor(System.String,System.Exception)">
+            <summary>
+              Unspecified communications error.
+            </summary>
+        </member>
+        <member name="M:Google.ProtocolBuffers.Rpc.RpcCommunicationException.Assert(System.Boolean)">
+            <summary>
+              if(condition == false) throws Unspecified communications error.
+            </summary>
+        </member>
+        <member name="P:Google.ProtocolBuffers.Rpc.RpcServer.ExceptionDetails">
+            <summary>
+              Controls the amount of details about excpetions that will be returned to the client. 
+              Default is FullDetails (trusted subsystem)
+            </summary>
+        </member>
+    </members>
+</doc>

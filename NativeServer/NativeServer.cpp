@@ -10,12 +10,14 @@
 #include "Stopwatch.h"
 #include <objects.h>
 #include <Messages.pb.h>
+#include <Rpc.h>
+#include "..\Example1Explicit\Example1Explicit.h"
 
 #define RESP_BUILDER void (int size,void** req,int* resp_s,unsigned char** resp);
 
 
 using namespace std;
-
+using namespace reqresp;
 
 typedef void (*resp_builder)(long requestPacket,unsigned char* request,long* packetSizeP,unsigned char** dataP);
 typedef HANDLE (*client_init)();
@@ -24,9 +26,13 @@ typedef void (*reply)(HANDLE transport,resp_builder b,void** result);
 
 void replyPipes(HANDLE transport,resp_builder b,void** result);
 void replySharedMem(HANDLE transport,resp_builder b,void** result);
+void replyRpc(HANDLE transport,resp_builder b,void** result);
 void replyMessages(HANDLE transport,resp_builder b,void** result);
 void init_mem(int packetSize);
 void init_mem_read();
+
+	reply replier;
+	resp_builder builder;
 
 const int kb = 1024;
 std::map<int,int> reqResp;
@@ -67,6 +73,79 @@ HANDLE  pipe_init(){
 	}
 	while(ConnectNamedPipe(transport,NULL)== 0){		};
 	return transport;
+}
+
+
+// Memory allocation function for RPC.
+// The runtime uses these two functions for allocating/deallocating
+// enough memory to pass the string to the server.
+void* __RPC_USER midl_user_allocate(size_t size)
+{
+	return malloc(size);
+}
+
+// Memory deallocation function for RPC.
+void __RPC_USER midl_user_free(void* p)
+{
+	free(p);
+}
+
+
+// Server function.
+void Output( 
+	/* [in] */ handle_t hBinding,
+	/* [in] */ long cItems,
+	/* [size_is][in] */ const byte szOutput[  ],
+	/* [out] */ long *pSize,
+	/* [size_is][size_is][out] */ byte **ppp)
+{
+	 unsigned char* a= (unsigned char*)szOutput;
+	builder(cItems,a,pSize,ppp);
+
+}
+
+// Naive security callback.
+RPC_STATUS CALLBACK SecurityCallback(RPC_IF_HANDLE /*hInterface*/, void* /*pBindingHandle*/)
+{
+	return RPC_S_OK; // Always allow anyone.
+}
+
+HANDLE rpc_init(){
+	RPC_STATUS status;
+
+	// Uses the protocol combined with the endpoint for receiving
+	// remote procedure calls.
+	status = RpcServerUseProtseqEpA(
+
+
+		reinterpret_cast<unsigned char*>("ncalrpc"), 
+		RPC_C_PROTSEQ_MAX_REQS_DEFAULT,// Backlog queue length
+		reinterpret_cast<unsigned char*>("FastDataServer"),
+
+		//reinterpret_cast<unsigned char*>("ncacn_np"), 
+		//RPC_C_PROTSEQ_MAX_REQS_DEFAULT,// Backlog queue length
+		//reinterpret_cast<unsigned char*>("\\pipe\\FastDataServer"),
+
+		//NOTE: TCP is slower then Named Pipes
+		//reinterpret_cast<unsigned char*>("ncacn_ip_tcp"), // Use TCP/IP protocol.
+		//RPC_C_PROTSEQ_MAX_REQS_DEFAULT, // Backlog queue length for TCP/IP.
+		//reinterpret_cast<unsigned char*>("4747"), // TCP/IP port to use.
+
+		NULL); // No security.
+
+	assert (status == S_OK);
+
+	// Registers the Example1Explicit interface.
+	status = RpcServerRegisterIf2(
+		Example1Explicit_v1_0_s_ifspec, // Interface to register.
+		NULL, // Use the MIDL generated entry-point vector.
+		NULL, // Use the MIDL generated entry-point vector.
+		RPC_IF_ALLOW_CALLBACKS_WITH_NO_AUTH, // Forces use of security callback.
+		RPC_C_LISTEN_MAX_CALLS_DEFAULT, // Use default number of concurrent calls.
+		(unsigned)-1, // Infinite max size of incoming data blocks.
+		SecurityCallback); // Naive security callback.
+	assert (status == S_OK);
+	return NULL;
 }
 
 void resp_bytes(long requestPacket,unsigned char* request,long* packetSizeP,unsigned char** dataP){
@@ -125,20 +204,39 @@ bool reuse = false;
 bool oneway = false;
 unsigned char* resp_data ;
 unsigned char* request_data ;
+
+
 int _tmain(int argc, wchar_t* argv[])
 {
-	//TODO: use some lib (e.g. like in git)
-	reply replier = replySharedMem;
-	resp_builder builder = resp_msg;
-	client_init init  = empty_init;
 
+
+	//TODO: use some lib for command line
+	 replier = replySharedMem;
+	 builder = resp_msg;
+	client_init init  = empty_init;
+	std::wstring mechanism;
 	for (int i = 0; i < argc; i++){
 		std::wstring  s = argv[i];
 		if (s == TEXT("-m")) 
 		{
-			std::wstring  s = argv[i+1];
-			replier = s == TEXT("pipes") ? replyPipes : (s == TEXT("messaging") ? replyMessages: replySharedMem);
-			init = s == TEXT("pipes") ? pipe_init : empty_init;
+			std::wstring s = argv[i+1];
+			mechanism = s;
+			if (s == TEXT("pipes")){
+				replier = replyPipes;
+				init = pipe_init;
+			}
+			else if (s == TEXT("messaging")){
+				replier = replyMessages;
+				init = empty_init;
+			}
+			else if (s == TEXT("rpc")){
+				replier = replyRpc;
+				init = rpc_init;
+			}
+			else {
+				replier = replySharedMem;
+				init = empty_init;
+			}			
 		}
 		if (s == TEXT("-d")) 
 		{
@@ -167,13 +265,13 @@ int _tmain(int argc, wchar_t* argv[])
 		init_mem_read();
 		init_mem(5000*kb);
 	};
-
-	insert(5000*10);
-	insert(2500*10);
-	insert(500*10);
-	insert(50*10);
-	insert(5*10);
-
+	if (builder != resp_bytes){
+	  insert(5000*10);
+	  insert(2500*10);
+	  insert(500*10);
+	  insert(50*10);
+	  insert(5*10);
+	}
 	void* request = NULL;
 
 
@@ -182,7 +280,19 @@ int _tmain(int argc, wchar_t* argv[])
 
 	HANDLE transport = INVALID_HANDLE_VALUE;
 	if (reuse) transport = init();
-	while(true){replier(transport,builder,&request);}
+	if (mechanism == TEXT("rpc")){
+
+		auto  status = RpcServerListen(
+			2, // Recommended minimum number of threads.
+			10, // Recommended maximum number of threads.
+			FALSE); // Start listening now.
+		assert (status == S_OK);
+	}
+
+	else 
+	{
+		while(true){replier(transport,builder,&request);}
+	}
 
 
 
@@ -230,11 +340,11 @@ BOOL OnCopyData(HWND hWnd, HWND hwndFrom, PCOPYDATASTRUCT pcds)
 	//free(cds.lpData);
 	//SendMessage(hTargetWnd, WM_COPYDATA, reinterpret_cast<WPARAM>(hWnd), reinterpret_cast<LPARAM>(&cds));
 	//if (req_data_size > 99*kb)
-	    //cout << req_data_size << endl;
+	//cout << req_data_size << endl;
 	DWORD dwError = GetLastError();
 	if (dwError != NO_ERROR)
 	{
-	cout << "OnCopyData(WM_COPYDATA)" << dwError << endl;
+		cout << "OnCopyData(WM_COPYDATA)" << dwError << endl;
 	}
 	//TODO: post to client
 
@@ -283,6 +393,13 @@ void replyMessages(HANDLE transport,resp_builder b,void** result){
 	auto dResult =  DialogBox(hInstance, MAKEINTRESOURCE(IDD_MAINDIALOG), NULL, DialogProc);
 }
 
+void replyRpc(HANDLE transport,resp_builder b,void** result){
+
+
+}
+
+
+
 void replyPipes(HANDLE transport,resp_builder b,void** result){
 
 	//TODO: handle client closed
@@ -318,7 +435,8 @@ void replyPipes(HANDLE transport,resp_builder b,void** result){
 		memcpy(resp_data,&packetSize,sizeof(long));
 		auto messageData = resp_data+ sizeof(long);
 		memcpy(messageData,response_data,packetSize);
-		unsigned long	cbWritten = 0;	 
+		unsigned long	cbWritten = 0;
+
 		WriteFile(transport,resp_data,sizeof(long)+packetSize,&cbWritten,NULL);
 		FlushFileBuffers(transport);
 	}
@@ -329,7 +447,7 @@ void replyPipes(HANDLE transport,resp_builder b,void** result){
 		WriteFile(transport,&got_data,sizeof(bool),&cbWritten,NULL);
 	}
 
-	if (!reuse && !oneway)
+	if (!reuse)
 		DisconnectNamedPipe(transport);
 	if (!reuse) CloseHandle(transport);
 CLEANUP:

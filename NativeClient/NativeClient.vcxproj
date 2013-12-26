@@ -39,15 +39,15 @@
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <LinkIncremental>true</LinkIncremental>
-    <IncludePath>$(SolutionDir)Entities;$(SolutionDir)3rdParties;$(SolutionDir)3rdParties\Stopwatch;$(SolutionDir)3rdParties\protobuf-2.4.1\src\google;$(SolutionDir)3rdParties\protobuf-2.4.1\src\;$(IncludePath)</IncludePath>
-    <SourcePath>$(SolutionDir)3rdParties\Stopwatch;$(SourcePath)</SourcePath>
+    <IncludePath>$(SolutionDir)Entities;$(SolutionDir)lib;$(SolutionDir)lib\Stopwatch;$(SolutionDir)lib\protobuf-2.4.1\src\google;$(SolutionDir)lib\protobuf-2.4.1\src\;$(IncludePath)</IncludePath>
+    <SourcePath>$(SolutionDir)lib\Stopwatch;$(SourcePath)</SourcePath>
     <ReferencePath>$(Configuration);$(SolutionDir)$(Configuration);$(ReferencePath)</ReferencePath>
-    <LibraryPath>$(Configuration);$(SolutionDir)$(Configuration);$(SolutionDir)3rdParties\protobuf-2.4.1\vsprojects\Debug;$(LibraryPath)</LibraryPath>
+    <LibraryPath>$(Configuration);$(SolutionDir)$(Configuration);$(SolutionDir)lib\protobuf-2.4.1\vsprojects\Debug;$(VCInstallDir)lib;$(VCInstallDir)atlmfc\lib;$(WindowsSdkDir)lib;$(FrameworkSDKDir)\lib;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <LinkIncremental>false</LinkIncremental>
-    <IncludePath>$(SolutionDir)3rdParties\Stopwatch;$(SolutionDir)3rdParties\protobuf-2.4.1\src;$(SolutionDir)Entities;$(IncludePath)</IncludePath>
-    <LibraryPath>$(SolutionDir)\3rdparties\lib;$(SolutionDir)$(Configuration);$(LibraryPath)</LibraryPath>
+    <IncludePath>$(SolutionDir)lib\Stopwatch;$(SolutionDir)lib\protobuf-2.4.1\src;$(SolutionDir)Entities;$(IncludePath)</IncludePath>
+    <LibraryPath>$(SolutionDir)\lib\lib;$(SolutionDir)$(Configuration);$(VCInstallDir)lib;$(VCInstallDir)atlmfc\lib;$(WindowsSdkDir)lib;$(FrameworkSDKDir)\lib;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
@@ -60,10 +60,12 @@
     <Link>
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalDependencies>Stopwatch.lib;entities.lib;libprotobuf.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>libprotobuf.lib;Stopwatch.lib;entities.lib;example1Explicit.lib;rpcrt4.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
     <PostBuildEvent>
-      <Command>copy $(SolutionDir)scripts\* $(SolutionDir)$(Configuration)</Command>
+      <Command>
+	  copy $(SolutionDir)scripts\* $(SolutionDir)$(Configuration)
+</Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
@@ -81,7 +83,7 @@
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
-      <AdditionalDependencies>libprotobuf.lib;Stopwatch.lib;entities.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>libprotobuf.lib;Stopwatch.lib;entities.lib;example1Explicit.lib;rpcrt4.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
     <PostBuildEvent>
       <Command>copy $(SolutionDir)scripts\* $(SolutionDir)$(Configuration)</Command>
@@ -102,7 +104,7 @@
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ResourceCompile Include="..\3rdParties\allin1\Visual Studio 2008\CppSendWMCOPYDATA-f75bc681\C++\CppSendWM_COPYDATA\CppSendWM_COPYDATA.rc" />
+    <ResourceCompile Include="..\lib\allin1\Visual Studio 2008\CppSendWMCOPYDATA-f75bc681\C++\CppSendWM_COPYDATA\CppSendWM_COPYDATA.rc" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

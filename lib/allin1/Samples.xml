@@ -1,0 +1,838 @@
+<CodeSamples>
+  <CodeSample Name="CppNamedPipeServer-d1778534" Title="C++ named-pipe server for IPC (CppNamedPipeServer)" Supports="Visual Studio 2008" LastUpdated="5/5/2011" GallertURL="http://code.msdn.microsoft.com/CppNamedPipeServer-d1778534" Rating="0" Raters="0" Downloads="5459" Affiliation="">
+    <Author DisplayName="All-In-One Code Framework" Link="http://code.msdn.microsoft.com/site/profile?userName=All-In-One%20Code%20Framework" />
+    <License Title="Apache" Link="http://code.msdn.microsoft.com/site/CppNamedPipeServer-d1778534/eula?licenseType=Apache" />
+    <ProgrammingLanguages>
+      <ProgrammingLanguage>C++</ProgrammingLanguage>
+    </ProgrammingLanguages>
+    <Platforms>
+      <Platform>Desktop</Platform>
+    </Platforms>
+    <Summary>The VC++ code sample demonstrates creating a basic named pipe server for inter-process communication</Summary>
+    <Technologies>
+      <Technology>Windows General</Technology>
+    </Technologies>
+    <SamplePackages>
+      <SamplePackage LastUpdated="12/19/2012" DownloadLink="http://code.msdn.microsoft.com/CppNamedPipeServer-d1778534/file/21572/9/C%20named-pipe%20server%20for%20IPC%20(CppNamedPipeServer).zip" ProgrammingLanguage="C++" EntryFile="H:\src\allin1\Visual Studio 2008\CppNamedPipeServer-d1778534\C++\CppNamedPipeServer.sln" />
+    </SamplePackages>
+  </CodeSample>
+  <CodeSample Name="CSNamedPipeCommunication-33b2485c" Title="Named-pipe communication for IPC (CSNamedPipeCommunication)" Supports="Visual Studio 2010" LastUpdated="7/23/2012" GallertURL="http://code.msdn.microsoft.com/CSNamedPipeCommunication-33b2485c" Rating="0" Raters="0" Downloads="1623" Affiliation="">
+    <Author DisplayName="All-In-One Code Framework" Link="http://code.msdn.microsoft.com/site/profile?userName=All-In-One%20Code%20Framework" />
+    <License Title="MSLPL" Link="http://code.msdn.microsoft.com/site/CSNamedPipeCommunication-33b2485c/eula?licenseType=MSLPL" />
+    <ProgrammingLanguages>
+      <ProgrammingLanguage>C#</ProgrammingLanguage>
+    </ProgrammingLanguages>
+    <Platforms>
+      <Platform>Desktop</Platform>
+    </Platforms>
+    <Summary>Named pipe is a mechanism for one-way or duplex inter-process communication between the pipe server and one or more pipe clients in the local machine or across the computers in the intranet</Summary>
+    <Technologies>
+      <Technology>Windows SDK</Technology>
+    </Technologies>
+    <SamplePackages>
+      <SamplePackage LastUpdated="12/19/2012" DownloadLink="http://code.msdn.microsoft.com/CSNamedPipeCommunication-33b2485c/file/61590/5/Named-pipe%20communication%20for%20IPC%20(CSNamedPipeCommunication).zip" ProgrammingLanguage="C#" EntryFile="H:\src\allin1\Visual Studio 2010\CSNamedPipeCommunication-33b2485c\C#\CSNamedPipeCommunication.sln" />
+    </SamplePackages>
+  </CodeSample>
+  <CodeSample Name="CSNamedPipeClient-a36e1bbc" Title="Named-pipe communication for IPC (CSNamedPipeCommunication)" Supports="Visual Studio 2008" LastUpdated="11/28/2012" GallertURL="http://code.msdn.microsoft.com/CSNamedPipeClient-a36e1bbc" Rating="0" Raters="0" Downloads="7536" Affiliation="">
+    <Author DisplayName="All-In-One Code Framework" Link="http://code.msdn.microsoft.com/site/profile?userName=All-In-One%20Code%20Framework" />
+    <License Title="MSLPL" Link="http://code.msdn.microsoft.com/site/CSNamedPipeClient-a36e1bbc/eula?licenseType=MSLPL" />
+    <ProgrammingLanguages>
+      <ProgrammingLanguage>C#</ProgrammingLanguage>
+    </ProgrammingLanguages>
+    <Platforms>
+      <Platform>Desktop</Platform>
+    </Platforms>
+    <Summary>Named pipe is a mechanism for one-way or duplex inter-process communication between the pipe server and one or more pipe clients in the local machine or across the computers in the intranet</Summary>
+    <Technologies>
+      <Technology>Windows SDK</Technology>
+    </Technologies>
+    <SamplePackages>
+      <SamplePackage LastUpdated="12/19/2012" DownloadLink="http://code.msdn.microsoft.com/CSNamedPipeClient-a36e1bbc/file/21683/13/Named-pipe%20communication%20for%20IPC%20(CSNamedPipeCommunication).zip" ProgrammingLanguage="C#" EntryFile="H:\src\allin1\Visual Studio 2008\CSNamedPipeClient-a36e1bbc\C#\CSNamedPipeCommunication.sln" />
+    </SamplePackages>
+  </CodeSample>
+  <CodeSample Name="CSNamedPipeServer-4c760c2c" Title="C# named-pipe server for IPC (CSNamedPipeServer)" Supports="Visual Studio 2008" LastUpdated="5/5/2011" GallertURL="http://code.msdn.microsoft.com/CSNamedPipeServer-4c760c2c" Rating="0" Raters="0" Downloads="7570" Affiliation="">
+    <Author DisplayName="All-In-One Code Framework" Link="http://code.msdn.microsoft.com/site/profile?userName=All-In-One%20Code%20Framework" />
+    <License Title="Apache" Link="http://code.msdn.microsoft.com/site/CSNamedPipeServer-4c760c2c/eula?licenseType=Apache" />
+    <ProgrammingLanguages>
+      <ProgrammingLanguage>C#</ProgrammingLanguage>
+    </ProgrammingLanguages>
+    <Platforms>
+      <Platform>Desktop</Platform>
+    </Platforms>
+    <Summary>The VC# code sample demonstrates creating a basic named pipe server for inter-process communication</Summary>
+    <Technologies>
+      <Technology>Windows General</Technology>
+    </Technologies>
+    <SamplePackages>
+      <SamplePackage LastUpdated="12/19/2012" DownloadLink="http://code.msdn.microsoft.com/CSNamedPipeServer-4c760c2c/file/21684/9/C%23%20named-pipe%20server%20for%20IPC%20(CSNamedPipeServer).zip" ProgrammingLanguage="C#" EntryFile="H:\src\allin1\Visual Studio 2008\CSNamedPipeServer-4c760c2c\C#\CSNamedPipeServer.sln" />
+    </SamplePackages>
+  </CodeSample>
+  <CodeSample Name="CppNamedPipeCommunication-7447a0bf" Title="Named-pipe communication for IPC (CppNamedPipeCommunication)" Supports="Visual Studio 2010" LastUpdated="7/23/2012" GallertURL="http://code.msdn.microsoft.com/CppNamedPipeCommunication-7447a0bf" Rating="0" Raters="0" Downloads="1232" Affiliation="">
+    <Author DisplayName="All-In-One Code Framework" Link="http://code.msdn.microsoft.com/site/profile?userName=All-In-One%20Code%20Framework" />
+    <License Title="MSLPL" Link="http://code.msdn.microsoft.com/site/CppNamedPipeCommunication-7447a0bf/eula?licenseType=MSLPL" />
+    <ProgrammingLanguages>
+      <ProgrammingLanguage>C++</ProgrammingLanguage>
+    </ProgrammingLanguages>
+    <Platforms>
+      <Platform>Desktop</Platform>
+    </Platforms>
+    <Summary>Named pipe is a mechanism for one-way or duplex inter-process communication between the pipe server and one or more pipe clients in the local machine or across the computers in the intranet</Summary>
+    <Technologies>
+      <Technology>Windows SDK</Technology>
+    </Technologies>
+    <SamplePackages>
+      <SamplePackage LastUpdated="12/19/2012" DownloadLink="http://code.msdn.microsoft.com/CppNamedPipeCommunication-7447a0bf/file/61572/5/Named-pipe%20communication%20for%20IPC%20(CppNamedPipeCommunication).zip" ProgrammingLanguage="C++" EntryFile="H:\src\allin1\Visual Studio 2010\CppNamedPipeCommunication-7447a0bf\C++\CppNamedPipeCommunication.sln" />
+    </SamplePackages>
+  </CodeSample>
+  <CodeSample Name="CSSendWMCOPYDATA-97e6644e" Title="C# Windows app uses WM_COPYDATA for IPC (CSSendWM_COPYDATA)" Supports="Visual Studio 2008" LastUpdated="5/5/2011" GallertURL="http://code.msdn.microsoft.com/CSSendWMCOPYDATA-97e6644e" Rating="0" Raters="0" Downloads="5768" Affiliation="">
+    <Author DisplayName="All-In-One Code Framework" Link="http://code.msdn.microsoft.com/site/profile?userName=All-In-One%20Code%20Framework" />
+    <License Title="Apache" Link="http://code.msdn.microsoft.com/site/CSSendWMCOPYDATA-97e6644e/eula?licenseType=Apache" />
+    <ProgrammingLanguages>
+      <ProgrammingLanguage>C#</ProgrammingLanguage>
+    </ProgrammingLanguages>
+    <Platforms>
+      <Platform>Desktop</Platform>
+    </Platforms>
+    <Summary>CSReceiveWM_COPYDATA and CSSendWM_COPYDATA demonstrate inter-process communication via the WM_COPYDATA windows message in VC#.  CSSendWM_COPYDATA sends the data, and CSReceiveWM_COPYDATA receives the data.</Summary>
+    <Technologies>
+      <Technology>Windows General</Technology>
+    </Technologies>
+    <SamplePackages>
+      <SamplePackage LastUpdated="12/19/2012" DownloadLink="http://code.msdn.microsoft.com/CSSendWMCOPYDATA-97e6644e/file/21698/9/C%23%20Windows%20app%20uses%20WM_COPYDATA%20for%20IPC%20(CSSendWM_COPYDATA).zip" ProgrammingLanguage="C#" EntryFile="H:\src\allin1\Visual Studio 2008\CSSendWMCOPYDATA-97e6644e\C#\CSSendWM_COPYDATA.sln" />
+    </SamplePackages>
+  </CodeSample>
+  <CodeSample Name="CSMailslotClient-db570a6f" Title="Mailslot Communication for IPC (CSMailslotCommunication)" Supports="Visual Studio 2008" LastUpdated="11/28/2012" GallertURL="http://code.msdn.microsoft.com/CSMailslotClient-db570a6f" Rating="0" Raters="0" Downloads="5971" Affiliation="">
+    <Author DisplayName="All-In-One Code Framework" Link="http://code.msdn.microsoft.com/site/profile?userName=All-In-One%20Code%20Framework" />
+    <License Title="MSLPL" Link="http://code.msdn.microsoft.com/site/CSMailslotClient-db570a6f/eula?licenseType=MSLPL" />
+    <ProgrammingLanguages>
+      <ProgrammingLanguage>C#</ProgrammingLanguage>
+    </ProgrammingLanguages>
+    <Platforms>
+      <Platform>Desktop</Platform>
+    </Platforms>
+    <Summary>Mailslot is a mechanism for one-way inter-process communication in the local machine or across the computers in the intranet.</Summary>
+    <Technologies>
+      <Technology>Windows SDK</Technology>
+    </Technologies>
+    <SamplePackages>
+      <SamplePackage LastUpdated="12/19/2012" DownloadLink="http://code.msdn.microsoft.com/CSMailslotClient-db570a6f/file/21680/13/Mailslot%20Communication%20for%20IPC%20(CSMailslotCommunication).zip" ProgrammingLanguage="C#" EntryFile="H:\src\allin1\Visual Studio 2008\CSMailslotClient-db570a6f\C#\CSMailslotcommunication.sln" />
+    </SamplePackages>
+  </CodeSample>
+  <CodeSample Name="CppMailslotServer-43b701b6" Title="C++ mailslot server for IPC (CppMailslotServer)" Supports="Visual Studio 2008" LastUpdated="5/5/2011" GallertURL="http://code.msdn.microsoft.com/CppMailslotServer-43b701b6" Rating="0" Raters="0" Downloads="4656" Affiliation="">
+    <Author DisplayName="All-In-One Code Framework" Link="http://code.msdn.microsoft.com/site/profile?userName=All-In-One%20Code%20Framework" />
+    <License Title="Apache" Link="http://code.msdn.microsoft.com/site/CppMailslotServer-43b701b6/eula?licenseType=Apache" />
+    <ProgrammingLanguages>
+      <ProgrammingLanguage>C++</ProgrammingLanguage>
+    </ProgrammingLanguages>
+    <Platforms>
+      <Platform>Desktop</Platform>
+    </Platforms>
+    <Summary>The VC++ code sample demonstrates creating a mailslot and reading messages sent to it by the client applications. CppMailslotClient and CppMailslotServer together show inter-process communication via mailslot</Summary>
+    <Technologies>
+      <Technology>Windows General</Technology>
+    </Technologies>
+    <SamplePackages>
+      <SamplePackage LastUpdated="12/19/2012" DownloadLink="http://code.msdn.microsoft.com/CppMailslotServer-43b701b6/file/21570/9/C%20mailslot%20server%20for%20IPC%20(CppMailslotServer).zip" ProgrammingLanguage="C++" EntryFile="H:\src\allin1\Visual Studio 2008\CppMailslotServer-43b701b6\C++\CppMailslotServer.sln" />
+    </SamplePackages>
+  </CodeSample>
+  <CodeSample Name="CSMailslotServer-1ca18b47" Title="C# mailslot server for IPC (CSMailslotServer)" Supports="Visual Studio 2008" LastUpdated="5/5/2011" GallertURL="http://code.msdn.microsoft.com/CSMailslotServer-1ca18b47" Rating="0" Raters="0" Downloads="5540" Affiliation="">
+    <Author DisplayName="All-In-One Code Framework" Link="http://code.msdn.microsoft.com/site/profile?userName=All-In-One%20Code%20Framework" />
+    <License Title="Apache" Link="http://code.msdn.microsoft.com/site/CSMailslotServer-1ca18b47/eula?licenseType=Apache" />
+    <ProgrammingLanguages>
+      <ProgrammingLanguage>C#</ProgrammingLanguage>
+    </ProgrammingLanguages>
+    <Platforms>
+      <Platform>Desktop</Platform>
+    </Platforms>
+    <Summary>The VC# code sample demonstrates creating a mailslot and reading messages sent to it by the client applications. CSMailslotClient and CSMailslotServer together show inter-process communication via mailslot</Summary>
+    <Technologies>
+      <Technology>Windows General</Technology>
+    </Technologies>
+    <SamplePackages>
+      <SamplePackage LastUpdated="12/19/2012" DownloadLink="http://code.msdn.microsoft.com/CSMailslotServer-1ca18b47/file/21681/9/C%23%20mailslot%20server%20for%20IPC%20(CSMailslotServer).zip" ProgrammingLanguage="C#" EntryFile="H:\src\allin1\Visual Studio 2008\CSMailslotServer-1ca18b47\C#\CSMailslotServer.sln" />
+    </SamplePackages>
+  </CodeSample>
+  <CodeSample Name="CppReceiveWMCOPYDATA-89f1c620" Title="C++ Windows app uses WM_COPYDATA for IPC (CppReceiveWM_COPYDATA)" Supports="Visual Studio 2008" LastUpdated="5/5/2011" GallertURL="http://code.msdn.microsoft.com/CppReceiveWMCOPYDATA-89f1c620" Rating="0" Raters="0" Downloads="4599" Affiliation="">
+    <Author DisplayName="All-In-One Code Framework" Link="http://code.msdn.microsoft.com/site/profile?userName=All-In-One%20Code%20Framework" />
+    <License Title="Apache" Link="http://code.msdn.microsoft.com/site/CppReceiveWMCOPYDATA-89f1c620/eula?licenseType=Apache" />
+    <ProgrammingLanguages>
+      <ProgrammingLanguage>C++</ProgrammingLanguage>
+    </ProgrammingLanguages>
+    <Platforms>
+      <Platform>Desktop</Platform>
+    </Platforms>
+    <Summary>CppReceiveWM_COPYDATA and CppSendWM_COPYDATA demonstrate inter-process communication via the WM_COPYDATA windows message in VC++.  CppSendWM_COPYDATA sends the data, and CppReceiveWM_COPYDATA receives the data.</Summary>
+    <Technologies>
+      <Technology>Windows General</Technology>
+    </Technologies>
+    <SamplePackages>
+      <SamplePackage LastUpdated="12/19/2012" DownloadLink="http://code.msdn.microsoft.com/CppReceiveWMCOPYDATA-89f1c620/file/21574/9/C%20Windows%20app%20uses%20WM_COPYDATA%20for%20IPC%20(CppReceiveWM_COPYDATA).zip" ProgrammingLanguage="C++" EntryFile="H:\src\allin1\Visual Studio 2008\CppReceiveWMCOPYDATA-89f1c620\C++\CppReceiveWM_COPYDATA.sln" />
+    </SamplePackages>
+  </CodeSample>
+  <CodeSample Name="CppSendWMCOPYDATA-f75bc681" Title="C++ Windows app uses WM_COPYDATA for IPC (CppSendWM_COPYDATA)" Supports="Visual Studio 2008" LastUpdated="5/5/2011" GallertURL="http://code.msdn.microsoft.com/CppSendWMCOPYDATA-f75bc681" Rating="5" Raters="1" Downloads="4880" Affiliation="">
+    <Author DisplayName="All-In-One Code Framework" Link="http://code.msdn.microsoft.com/site/profile?userName=All-In-One%20Code%20Framework" />
+    <License Title="Apache" Link="http://code.msdn.microsoft.com/site/CppSendWMCOPYDATA-f75bc681/eula?licenseType=Apache" />
+    <ProgrammingLanguages>
+      <ProgrammingLanguage>C++</ProgrammingLanguage>
+    </ProgrammingLanguages>
+    <Platforms>
+      <Platform>Desktop</Platform>
+    </Platforms>
+    <Summary>CppReceiveWM_COPYDATA and CppSendWM_COPYDATA demonstrate inter-process communication via the WM_COPYDATA windows message in VC++.  CppSendWM_COPYDATA sends the data, and CppReceiveWM_COPYDATA receives the data.</Summary>
+    <Technologies>
+      <Technology>Windows General</Technology>
+    </Technologies>
+    <SamplePackages>
+      <SamplePackage LastUpdated="12/19/2012" DownloadLink="http://code.msdn.microsoft.com/CppSendWMCOPYDATA-f75bc681/file/21580/9/C%20Windows%20app%20uses%20WM_COPYDATA%20for%20IPC%20(CppSendWM_COPYDATA).zip" ProgrammingLanguage="C++" EntryFile="H:\src\allin1\Visual Studio 2008\CppSendWMCOPYDATA-f75bc681\C++\CppSendWM_COPYDATA.sln" />
+    </SamplePackages>
+  </CodeSample>
+  <CodeSample Name="CSFileMappingServer-1ec32972" Title="Use shared memory for IPC in C# (CSFileMappingServer)" Supports="Visual Studio 2008" LastUpdated="5/5/2011" GallertURL="http://code.msdn.microsoft.com/CSFileMappingServer-1ec32972" Rating="0" Raters="0" Downloads="5896" Affiliation="">
+    <Author DisplayName="All-In-One Code Framework" Link="http://code.msdn.microsoft.com/site/profile?userName=All-In-One%20Code%20Framework" />
+    <License Title="Apache" Link="http://code.msdn.microsoft.com/site/CSFileMappingServer-1ec32972/eula?licenseType=Apache" />
+    <ProgrammingLanguages>
+      <ProgrammingLanguage>C#</ProgrammingLanguage>
+    </ProgrammingLanguages>
+    <Platforms>
+      <Platform>Desktop</Platform>
+    </Platforms>
+    <Summary>The VC# code sample demonstrates creating a shared memory.  CSFileMappingClient and CSFileMappingServer together show inter-process communication via shared memory</Summary>
+    <Technologies>
+      <Technology>Windows General</Technology>
+    </Technologies>
+    <SamplePackages>
+      <SamplePackage LastUpdated="12/19/2012" DownloadLink="http://code.msdn.microsoft.com/CSFileMappingServer-1ec32972/file/21667/9/Use%20shared%20memory%20for%20IPC%20in%20C%23%20(CSFileMappingServer).zip" ProgrammingLanguage="C#" EntryFile="H:\src\allin1\Visual Studio 2008\CSFileMappingServer-1ec32972\C#\CSFileMappingServer.sln" />
+    </SamplePackages>
+  </CodeSample>
+  <CodeSample Name="CppFileMappingServer-621d89a0" Title="Use shared memory for IPC in C++ (CppFileMappingServer)" Supports="Visual Studio 2008" LastUpdated="5/5/2011" GallertURL="http://code.msdn.microsoft.com/CppFileMappingServer-621d89a0" Rating="0" Raters="0" Downloads="4797" Affiliation="">
+    <Author DisplayName="All-In-One Code Framework" Link="http://code.msdn.microsoft.com/site/profile?userName=All-In-One%20Code%20Framework" />
+    <License Title="Apache" Link="http://code.msdn.microsoft.com/site/CppFileMappingServer-621d89a0/eula?licenseType=Apache" />
+    <ProgrammingLanguages>
+      <ProgrammingLanguage>C++</ProgrammingLanguage>
+    </ProgrammingLanguages>
+    <Platforms>
+      <Platform>Desktop</Platform>
+    </Platforms>
+    <Summary>The VC++ code sample demonstrates creating a shared memory.  CppFileMappingClient and CppFileMappingServer together show inter-process communication via shared memory</Summary>
+    <Technologies>
+      <Technology>Windows General</Technology>
+    </Technologies>
+    <SamplePackages>
+      <SamplePackage LastUpdated="12/19/2012" DownloadLink="http://code.msdn.microsoft.com/CppFileMappingServer-621d89a0/file/21562/9/Use%20shared%20memory%20for%20IPC%20in%20C%20(CppFileMappingServer).zip" ProgrammingLanguage="C++" EntryFile="H:\src\allin1\Visual Studio 2008\CppFileMappingServer-621d89a0\C++\CppFileMappingServer.sln" />
+    </SamplePackages>
+  </CodeSample>
+  <CodeSample Name="CppNamedPipeClient-a88eb958" Title="Named-pipe communication for IPC (CppNamedPipeCommunication)" Supports="Visual Studio 2008" LastUpdated="7/23/2012" GallertURL="http://code.msdn.microsoft.com/CppNamedPipeClient-a88eb958" Rating="4" Raters="1" Downloads="5347" Affiliation="">
+    <Author DisplayName="All-In-One Code Framework" Link="http://code.msdn.microsoft.com/site/profile?userName=All-In-One%20Code%20Framework" />
+    <License Title="MSLPL" Link="http://code.msdn.microsoft.com/site/CppNamedPipeClient-a88eb958/eula?licenseType=MSLPL" />
+    <ProgrammingLanguages>
+      <ProgrammingLanguage>C++</ProgrammingLanguage>
+    </ProgrammingLanguages>
+    <Platforms>
+      <Platform>Desktop</Platform>
+    </Platforms>
+    <Summary>Named pipe is a mechanism for one-way or duplex inter-process communication between the pipe server and one or more pipe clients in the local machine or across the computers in the intranet</Summary>
+    <Technologies>
+      <Technology>Windows SDK</Technology>
+    </Technologies>
+    <SamplePackages>
+      <SamplePackage LastUpdated="12/19/2012" DownloadLink="http://code.msdn.microsoft.com/CppNamedPipeClient-a88eb958/file/21571/11/Named-pipe%20communication%20for%20IPC%20(CppNamedPipeCommunication).zip" ProgrammingLanguage="C++" EntryFile="H:\src\allin1\Visual Studio 2008\CppNamedPipeClient-a88eb958\C++\CppNamedPipeCommunication.sln" />
+    </SamplePackages>
+  </CodeSample>
+  <CodeSample Name="CSFileMappingClient-50e7ebc1" Title="Use shared memory for IPC in C# (CSFileMappingClient)" Supports="Visual Studio 2008" LastUpdated="5/5/2011" GallertURL="http://code.msdn.microsoft.com/CSFileMappingClient-50e7ebc1" Rating="0" Raters="0" Downloads="5762" Affiliation="">
+    <Author DisplayName="All-In-One Code Framework" Link="http://code.msdn.microsoft.com/site/profile?userName=All-In-One%20Code%20Framework" />
+    <License Title="Apache" Link="http://code.msdn.microsoft.com/site/CSFileMappingClient-50e7ebc1/eula?licenseType=Apache" />
+    <ProgrammingLanguages>
+      <ProgrammingLanguage>C#</ProgrammingLanguage>
+    </ProgrammingLanguages>
+    <Platforms>
+      <Platform>Desktop</Platform>
+    </Platforms>
+    <Summary>The VC# code sample demonstrates accessing a shared memory. CSFileMappingClient and CSFileMappingServer together show inter-process communication via shared memory</Summary>
+    <Technologies>
+      <Technology>Windows General</Technology>
+    </Technologies>
+    <SamplePackages>
+      <SamplePackage LastUpdated="12/19/2012" DownloadLink="http://code.msdn.microsoft.com/CSFileMappingClient-50e7ebc1/file/21666/9/Use%20shared%20memory%20for%20IPC%20in%20C%23%20(CSFileMappingClient).zip" ProgrammingLanguage="C#" EntryFile="H:\src\allin1\Visual Studio 2008\CSFileMappingClient-50e7ebc1\C#\CSFileMappingClient.sln" />
+    </SamplePackages>
+  </CodeSample>
+  <CodeSample Name="CSReceiveWMCOPYDATA-dbbc7ed7" Title="C# Windows app uses WM_COPYDATA for IPC (CSReceiveWM_COPYDATA)" Supports="Visual Studio 2008" LastUpdated="5/5/2011" GallertURL="http://code.msdn.microsoft.com/CSReceiveWMCOPYDATA-dbbc7ed7" Rating="0" Raters="0" Downloads="5738" Affiliation="">
+    <Author DisplayName="All-In-One Code Framework" Link="http://code.msdn.microsoft.com/site/profile?userName=All-In-One%20Code%20Framework" />
+    <License Title="Apache" Link="http://code.msdn.microsoft.com/site/CSReceiveWMCOPYDATA-dbbc7ed7/eula?licenseType=Apache" />
+    <ProgrammingLanguages>
+      <ProgrammingLanguage>C#</ProgrammingLanguage>
+    </ProgrammingLanguages>
+    <Platforms>
+      <Platform>Desktop</Platform>
+    </Platforms>
+    <Summary>CSReceiveWM_COPYDATA and CSSendWM_COPYDATA demonstrate inter-process communication via the WM_COPYDATA windows message in VC#.  CSSendWM_COPYDATA sends the data, and CSReceiveWM_COPYDATA receives the data.</Summary>
+    <Technologies>
+      <Technology>Windows General</Technology>
+    </Technologies>
+    <SamplePackages>
+      <SamplePackage LastUpdated="12/19/2012" DownloadLink="http://code.msdn.microsoft.com/CSReceiveWMCOPYDATA-dbbc7ed7/file/21692/9/C%23%20Windows%20app%20uses%20WM_COPYDATA%20for%20IPC%20(CSReceiveWM_COPYDATA).zip" ProgrammingLanguage="C#" EntryFile="H:\src\allin1\Visual Studio 2008\CSReceiveWMCOPYDATA-dbbc7ed7\C#\CSReceiveWM_COPYDATA.sln" />
+    </SamplePackages>
+  </CodeSample>
+  <CodeSample Name="CppFileMappingClient-2e26b94c" Title="Use shared memory for IPC in C++ (CppFileMappingClient)" Supports="Visual Studio 2008" LastUpdated="5/5/2011" GallertURL="http://code.msdn.microsoft.com/CppFileMappingClient-2e26b94c" Rating="0" Raters="0" Downloads="4832" Affiliation="">
+    <Author DisplayName="All-In-One Code Framework" Link="http://code.msdn.microsoft.com/site/profile?userName=All-In-One%20Code%20Framework" />
+    <License Title="Apache" Link="http://code.msdn.microsoft.com/site/CppFileMappingClient-2e26b94c/eula?licenseType=Apache" />
+    <ProgrammingLanguages>
+      <ProgrammingLanguage>C++</ProgrammingLanguage>
+    </ProgrammingLanguages>
+    <Platforms>
+      <Platform>Desktop</Platform>
+    </Platforms>
+    <Summary>The VC++ code sample demonstrates accessing a shared memory. CppFileMappingClient and CppFileMappingServer together show inter-process communication via shared memory</Summary>
+    <Technologies>
+      <Technology>Windows General</Technology>
+    </Technologies>
+    <SamplePackages>
+      <SamplePackage LastUpdated="12/19/2012" DownloadLink="http://code.msdn.microsoft.com/CppFileMappingClient-2e26b94c/file/21561/9/Use%20shared%20memory%20for%20IPC%20in%20C%20(CppFileMappingClient).zip" ProgrammingLanguage="C++" EntryFile="H:\src\allin1\Visual Studio 2008\CppFileMappingClient-2e26b94c\C++\CppFileMappingClient.sln" />
+    </SamplePackages>
+  </CodeSample>
+  <CodeSample Name="CppMailslotClient-dc7c429a" Title="C++ mailslot client for IPC (CppMailslotClient)" Supports="Visual Studio 2008" LastUpdated="5/5/2011" GallertURL="http://code.msdn.microsoft.com/CppMailslotClient-dc7c429a" Rating="0" Raters="0" Downloads="4633" Affiliation="">
+    <Author DisplayName="All-In-One Code Framework" Link="http://code.msdn.microsoft.com/site/profile?userName=All-In-One%20Code%20Framework" />
+    <License Title="Apache" Link="http://code.msdn.microsoft.com/site/CppMailslotClient-dc7c429a/eula?licenseType=Apache" />
+    <ProgrammingLanguages>
+      <ProgrammingLanguage>C++</ProgrammingLanguage>
+    </ProgrammingLanguages>
+    <Platforms>
+      <Platform>Desktop</Platform>
+    </Platforms>
+    <Summary>The VC++ code sample demonstrates sending messages to a mailslot. CppMailslotClient and CppMailslotServer together show inter-process communication via mailslot</Summary>
+    <Technologies>
+      <Technology>Windows General</Technology>
+    </Technologies>
+    <SamplePackages>
+      <SamplePackage LastUpdated="12/19/2012" DownloadLink="http://code.msdn.microsoft.com/CppMailslotClient-dc7c429a/file/21569/9/C%20mailslot%20client%20for%20IPC%20(CppMailslotClient).zip" ProgrammingLanguage="C++" EntryFile="H:\src\allin1\Visual Studio 2008\CppMailslotClient-dc7c429a\C++\CppMailslotClient.sln" />
+    </SamplePackages>
+  </CodeSample>
+  <CodeSample Name="CSMailslotCommunication-ec2a9639" Title="Mailslot Communication for IPC (CSMailslotCommunication)" Supports="Visual Studio 2010" LastUpdated="7/23/2012" GallertURL="http://code.msdn.microsoft.com/CSMailslotCommunication-ec2a9639" Rating="0" Raters="0" Downloads="1172" Affiliation="">
+    <Author DisplayName="All-In-One Code Framework" Link="http://code.msdn.microsoft.com/site/profile?userName=All-In-One%20Code%20Framework" />
+    <License Title="MSLPL" Link="http://code.msdn.microsoft.com/site/CSMailslotCommunication-ec2a9639/eula?licenseType=MSLPL" />
+    <ProgrammingLanguages>
+      <ProgrammingLanguage>C#</ProgrammingLanguage>
+    </ProgrammingLanguages>
+    <Platforms>
+      <Platform>Desktop</Platform>
+    </Platforms>
+    <Summary>Mailslot is a mechanism for one-way inter-process communication in the local machine or across the computers in the intranet.</Summary>
+    <Technologies>
+      <Technology>Windows SDK</Technology>
+    </Technologies>
+    <SamplePackages>
+      <SamplePackage LastUpdated="12/19/2012" DownloadLink="http://code.msdn.microsoft.com/CSMailslotCommunication-ec2a9639/file/61391/5/Mailslot%20Communication%20for%20IPC%20(CSMailslotCommunication).zip" ProgrammingLanguage="C#" EntryFile="H:\src\allin1\Visual Studio 2010\CSMailslotCommunication-ec2a9639\C#\CSMailslotcommunication.sln" />
+    </SamplePackages>
+  </CodeSample>
+  <CodeSample Name="ATLExeCOMServer-db24ab80" Title="Out-of-process ATL COM server (ATLExeCOMServer)" Supports="Visual Studio 2008" LastUpdated="5/5/2011" GallertURL="http://code.msdn.microsoft.com/ATLExeCOMServer-db24ab80" Rating="0" Raters="0" Downloads="4958" Affiliation="">
+    <Author DisplayName="All-In-One Code Framework" Link="http://code.msdn.microsoft.com/site/profile?userName=All-In-One%20Code%20Framework" />
+    <License Title="Apache" Link="http://code.msdn.microsoft.com/site/ATLExeCOMServer-db24ab80/eula?licenseType=Apache" />
+    <ProgrammingLanguages>
+      <ProgrammingLanguage>C++</ProgrammingLanguage>
+    </ProgrammingLanguages>
+    <Platforms>
+      <Platform>Desktop</Platform>
+    </Platforms>
+    <Summary>The code sample demonstrates how to use Acitve Template Library (ATL) wizards in Visual Studio 2008 to create an out-of-process COM server. </Summary>
+    <Technologies>
+      <Technology>COM</Technology>
+      <Technology>ATL</Technology>
+    </Technologies>
+    <SamplePackages>
+      <SamplePackage LastUpdated="12/19/2012" DownloadLink="http://code.msdn.microsoft.com/ATLExeCOMServer-db24ab80/file/21534/9/Out-of-process%20ATL%20COM%20server%20(ATLExeCOMServer).zip" ProgrammingLanguage="C++" EntryFile="H:\src\allin1\Visual Studio 2008\ATLExeCOMServer-db24ab80\C++\ATLExeCOMServer.sln" />
+    </SamplePackages>
+  </CodeSample>
+  <CodeSample Name="ATLCOMService-8e3d2dd0" Title="Out-of-process ATL COM service (ATLCOMService)" Supports="Visual Studio 2010" LastUpdated="3/5/2012" GallertURL="http://code.msdn.microsoft.com/ATLCOMService-8e3d2dd0" Rating="0" Raters="0" Downloads="2586" Affiliation="">
+    <Author DisplayName="All-In-One Code Framework" Link="http://code.msdn.microsoft.com/site/profile?userName=All-In-One%20Code%20Framework" />
+    <License Title="MSLPL" Link="http://code.msdn.microsoft.com/site/ATLCOMService-8e3d2dd0/eula?licenseType=MSLPL" />
+    <ProgrammingLanguages>
+      <ProgrammingLanguage>C++</ProgrammingLanguage>
+    </ProgrammingLanguages>
+    <Platforms>
+      <Platform>Desktop</Platform>
+    </Platforms>
+    <Summary>The sample demonstrates how to use Acitve Template Library (ATL) wizards in Visual Studio 2008 to create an out-of-process COM service.</Summary>
+    <Technologies>
+      <Technology>COM</Technology>
+      <Technology>Windows SDK</Technology>
+    </Technologies>
+    <SamplePackages>
+      <SamplePackage LastUpdated="12/19/2012" DownloadLink="http://code.msdn.microsoft.com/ATLCOMService-8e3d2dd0/file/53502/9/Out-of-process%20ATL%20COM%20service%20(ATLCOMService).zip" ProgrammingLanguage="C++" EntryFile="H:\src\allin1\Visual Studio 2010\ATLCOMService-8e3d2dd0\C++\ATLCOMService.sln" />
+    </SamplePackages>
+  </CodeSample>
+  <CodeSample Name="ATLCOMService-113c3c12" Title="Out-of-process ATL COM service (ATLCOMService)" Supports="Visual Studio 2008" LastUpdated="3/5/2012" GallertURL="http://code.msdn.microsoft.com/ATLCOMService-113c3c12" Rating="0" Raters="0" Downloads="5583" Affiliation="">
+    <Author DisplayName="All-In-One Code Framework" Link="http://code.msdn.microsoft.com/site/profile?userName=All-In-One%20Code%20Framework" />
+    <License Title="MSLPL" Link="http://code.msdn.microsoft.com/site/ATLCOMService-113c3c12/eula?licenseType=MSLPL" />
+    <ProgrammingLanguages>
+      <ProgrammingLanguage>C++</ProgrammingLanguage>
+    </ProgrammingLanguages>
+    <Platforms>
+      <Platform>Desktop</Platform>
+    </Platforms>
+    <Summary>The sample demonstrates how to use Acitve Template Library (ATL) wizards in Visual Studio 2008 to create an out-of-process COM service.</Summary>
+    <Technologies>
+      <Technology>COM</Technology>
+      <Technology>Windows SDK</Technology>
+    </Technologies>
+    <SamplePackages>
+      <SamplePackage LastUpdated="12/19/2012" DownloadLink="http://code.msdn.microsoft.com/ATLCOMService-113c3c12/file/21532/11/Out-of-process%20ATL%20COM%20service%20(ATLCOMService).zip" ProgrammingLanguage="C++" EntryFile="H:\src\allin1\Visual Studio 2008\ATLCOMService-113c3c12\C++\ATLCOMService.sln" />
+    </SamplePackages>
+  </CodeSample>
+  <CodeSample Name="CSCOMService-fb8eaad7" Title="Out-of-process C# COM service (CSCOMService)" Supports="Visual Studio 2008" LastUpdated="5/5/2011" GallertURL="http://code.msdn.microsoft.com/CSCOMService-fb8eaad7" Rating="4" Raters="1" Downloads="6540" Affiliation="">
+    <Author DisplayName="All-In-One Code Framework" Link="http://code.msdn.microsoft.com/site/profile?userName=All-In-One%20Code%20Framework" />
+    <License Title="Apache" Link="http://code.msdn.microsoft.com/site/CSCOMService-fb8eaad7/eula?licenseType=Apache" />
+    <ProgrammingLanguages>
+      <ProgrammingLanguage>C#</ProgrammingLanguage>
+    </ProgrammingLanguages>
+    <Platforms>
+      <Platform>Desktop</Platform>
+    </Platforms>
+    <Summary>The sample demonstrates an out-of-process COM/DCOM service in the form of  Windows Service (EXE), which is implemented entirely in Visual C#. </Summary>
+    <Technologies>
+      <Technology>COM</Technology>
+      <Technology>Windows Service</Technology>
+    </Technologies>
+    <SamplePackages>
+      <SamplePackage LastUpdated="12/19/2012" DownloadLink="http://code.msdn.microsoft.com/CSCOMService-fb8eaad7/file/21656/9/Out-of-process%20C%23%20COM%20service%20(CSCOMService).zip" ProgrammingLanguage="C#" EntryFile="H:\src\allin1\Visual Studio 2008\CSCOMService-fb8eaad7\C#\CSCOMService.sln" />
+    </SamplePackages>
+  </CodeSample>
+  <CodeSample Name="CppCOMClient-8eb832b1" Title="C++ app invokes COM server (CppCOMClient)" Supports="Visual Studio 2010" LastUpdated="3/2/2012" GallertURL="http://code.msdn.microsoft.com/CppCOMClient-8eb832b1" Rating="0" Raters="0" Downloads="5517" Affiliation="">
+    <Author DisplayName="All-In-One Code Framework" Link="http://code.msdn.microsoft.com/site/profile?userName=All-In-One%20Code%20Framework" />
+    <License Title="MSLPL" Link="http://code.msdn.microsoft.com/site/CppCOMClient-8eb832b1/eula?licenseType=MSLPL" />
+    <ProgrammingLanguages>
+      <ProgrammingLanguage>C#</ProgrammingLanguage>
+      <ProgrammingLanguage>C++</ProgrammingLanguage>
+    </ProgrammingLanguages>
+    <Platforms>
+      <Platform>Desktop</Platform>
+    </Platforms>
+    <Summary>The code sample demonstrates the different ways to invoke COM objects from native VC++</Summary>
+    <Technologies>
+      <Technology>COM</Technology>
+      <Technology>Windows SDK</Technology>
+    </Technologies>
+    <SamplePackages>
+      <SamplePackage LastUpdated="1/10/2013" DownloadLink="http://code.msdn.microsoft.com/CppCOMClient-8eb832b1/file/52780/9/C%20app%20invokes%20COM%20server%20(CppCOMClient).zip" ProgrammingLanguage="C#,C++" EntryFile="C:\ipc\3rdParties\allin1\Visual Studio 2010\CppCOMClient-8eb832b1\C#,C++\CppCOMClient.sln" />
+    </SamplePackages>
+  </CodeSample>
+  <CodeSample Name="CppOfficeManagedCOMAddInShi-39f7be85" Title="Office managed COM addIn shim (CppOfficeManagedCOMAddInShim)" Supports="Visual Studio 2008" LastUpdated="5/5/2011" GallertURL="http://code.msdn.microsoft.com/CppOfficeManagedCOMAddInShi-39f7be85" Rating="0" Raters="0" Downloads="8644" Affiliation="">
+    <Author DisplayName="All-In-One Code Framework" Link="http://code.msdn.microsoft.com/site/profile?userName=All-In-One%20Code%20Framework" />
+    <License Title="Apache" Link="http://code.msdn.microsoft.com/site/CppOfficeManagedCOMAddInShi-39f7be85/eula?licenseType=Apache" />
+    <ProgrammingLanguages>
+      <ProgrammingLanguage>C#</ProgrammingLanguage>
+      <ProgrammingLanguage>C++</ProgrammingLanguage>
+    </ProgrammingLanguages>
+    <Platforms>
+      <Platform>Desktop</Platform>
+    </Platforms>
+    <Summary>The code sample demonstrates a VC++ shim for Office managed COM add-in</Summary>
+    <Technologies>
+      <Technology>Office</Technology>
+    </Technologies>
+    <SamplePackages>
+      <SamplePackage LastUpdated="1/10/2013" DownloadLink="http://code.msdn.microsoft.com/CppOfficeManagedCOMAddInShi-39f7be85/file/21573/9/Office%20managed%20COM%20addIn%20shim%20(CppOfficeManagedCOMAddInShim).zip" ProgrammingLanguage="C#,C++" EntryFile="C:\ipc\3rdParties\allin1\Visual Studio 2008\CppOfficeManagedCOMAddInShi-39f7be85\C#,C++\CppOfficeManagedCOMAddInShim.sln" />
+    </SamplePackages>
+  </CodeSample>
+  <CodeSample Name="CppCOMClient-fbb4c5f4" Title="C++ app invokes COM server (CppCOMClient)" Supports="Visual Studio 2008" LastUpdated="3/2/2012" GallertURL="http://code.msdn.microsoft.com/CppCOMClient-fbb4c5f4" Rating="5" Raters="2" Downloads="9922" Affiliation="">
+    <Author DisplayName="All-In-One Code Framework" Link="http://code.msdn.microsoft.com/site/profile?userName=All-In-One%20Code%20Framework" />
+    <License Title="MSLPL" Link="http://code.msdn.microsoft.com/site/CppCOMClient-fbb4c5f4/eula?licenseType=MSLPL" />
+    <ProgrammingLanguages>
+      <ProgrammingLanguage>C#</ProgrammingLanguage>
+      <ProgrammingLanguage>C++</ProgrammingLanguage>
+    </ProgrammingLanguages>
+    <Platforms>
+      <Platform>Desktop</Platform>
+    </Platforms>
+    <Summary>The code sample demonstrates the different ways to invoke COM objects from native VC++</Summary>
+    <Technologies>
+      <Technology>COM</Technology>
+      <Technology>Windows SDK</Technology>
+    </Technologies>
+    <SamplePackages>
+      <SamplePackage LastUpdated="1/10/2013" DownloadLink="http://code.msdn.microsoft.com/CppCOMClient-fbb4c5f4/file/21555/11/C%20app%20invokes%20COM%20server%20(CppCOMClient).zip" ProgrammingLanguage="C#,C++" EntryFile="C:\ipc\3rdParties\allin1\Visual Studio 2008\CppCOMClient-fbb4c5f4\C#,C++\CppCOMClient.sln" />
+    </SamplePackages>
+  </CodeSample>
+  <CodeSample Name="ATLCOMClient-aa6bb0d7" Title="ATL app invokes COM server (ATLCOMClient)" Supports="Visual Studio 2010" LastUpdated="3/5/2012" GallertURL="http://code.msdn.microsoft.com/ATLCOMClient-aa6bb0d7" Rating="0" Raters="0" Downloads="3280" Affiliation="">
+    <Author DisplayName="All-In-One Code Framework" Link="http://code.msdn.microsoft.com/site/profile?userName=All-In-One%20Code%20Framework" />
+    <License Title="MSLPL" Link="http://code.msdn.microsoft.com/site/ATLCOMClient-aa6bb0d7/eula?licenseType=MSLPL" />
+    <ProgrammingLanguages>
+      <ProgrammingLanguage>C++</ProgrammingLanguage>
+    </ProgrammingLanguages>
+    <Platforms>
+      <Platform>Desktop</Platform>
+    </Platforms>
+    <Summary>The sample demonstrates invoking COM objects in an application that enables ATL</Summary>
+    <Technologies>
+      <Technology>Windows SDK</Technology>
+    </Technologies>
+    <SamplePackages>
+      <SamplePackage LastUpdated="1/10/2013" DownloadLink="http://code.msdn.microsoft.com/ATLCOMClient-aa6bb0d7/file/53612/9/ATL%20app%20invokes%20COM%20server%20(ATLCOMClient).zip" ProgrammingLanguage="C++" EntryFile="C:\ipc\3rdParties\allin1\Visual Studio 2010\ATLCOMClient-aa6bb0d7\C++\ATLCOMClient.sln" />
+    </SamplePackages>
+  </CodeSample>
+  <CodeSample Name="ATLDllCOMServer-b52a7d5d" Title="In-process ATL COM server (ATLDllCOMServer)" Supports="Visual Studio 2008" LastUpdated="3/12/2012" GallertURL="http://code.msdn.microsoft.com/ATLDllCOMServer-b52a7d5d" Rating="0" Raters="0" Downloads="5710" Affiliation="">
+    <Author DisplayName="All-In-One Code Framework" Link="http://code.msdn.microsoft.com/site/profile?userName=All-In-One%20Code%20Framework" />
+    <License Title="MSLPL" Link="http://code.msdn.microsoft.com/site/ATLDllCOMServer-b52a7d5d/eula?licenseType=MSLPL" />
+    <ProgrammingLanguages>
+      <ProgrammingLanguage>C++</ProgrammingLanguage>
+    </ProgrammingLanguages>
+    <Platforms>
+      <Platform>Desktop</Platform>
+    </Platforms>
+    <Summary>The code sample demonstrates how to use Acitve Template Library (ATL) wizards in Visual Studio 2008 to create an in-process COM server.</Summary>
+    <Technologies>
+      <Technology>COM</Technology>
+      <Technology>Windows SDK</Technology>
+    </Technologies>
+    <SamplePackages>
+      <SamplePackage LastUpdated="1/10/2013" DownloadLink="http://code.msdn.microsoft.com/ATLDllCOMServer-b52a7d5d/file/21533/13/In-process%20ATL%20COM%20server%20(ATLDllCOMServer).zip" ProgrammingLanguage="C++" EntryFile="C:\ipc\3rdParties\allin1\Visual Studio 2008\ATLDllCOMServer-b52a7d5d\C++\ATLDllCOMServer.sln" />
+    </SamplePackages>
+  </CodeSample>
+  <CodeSample Name="ATLCOMClient-2a29c499" Title="ATL app invokes COM server (ATLCOMClient)" Supports="Visual Studio 2008" LastUpdated="3/5/2012" GallertURL="http://code.msdn.microsoft.com/ATLCOMClient-2a29c499" Rating="0" Raters="0" Downloads="5973" Affiliation="">
+    <Author DisplayName="All-In-One Code Framework" Link="http://code.msdn.microsoft.com/site/profile?userName=All-In-One%20Code%20Framework" />
+    <License Title="MSLPL" Link="http://code.msdn.microsoft.com/site/ATLCOMClient-2a29c499/eula?licenseType=MSLPL" />
+    <ProgrammingLanguages>
+      <ProgrammingLanguage>C++</ProgrammingLanguage>
+    </ProgrammingLanguages>
+    <Platforms>
+      <Platform>Desktop</Platform>
+    </Platforms>
+    <Summary>The sample demonstrates invoking COM objects in an application that enables ATL</Summary>
+    <Technologies>
+      <Technology>Windows SDK</Technology>
+    </Technologies>
+    <SamplePackages>
+      <SamplePackage LastUpdated="1/10/2013" DownloadLink="http://code.msdn.microsoft.com/ATLCOMClient-2a29c499/file/21531/11/ATL%20app%20invokes%20COM%20server%20(ATLCOMClient).zip" ProgrammingLanguage="C++" EntryFile="C:\ipc\3rdParties\allin1\Visual Studio 2008\ATLCOMClient-2a29c499\C++\ATLCOMClient.sln" />
+    </SamplePackages>
+  </CodeSample>
+  <CodeSample Name="CSCOMClient-f776f7b8" Title="C# app invokes COM server and ActiveX control (CSCOMClient)" Supports="Visual Studio 2008" LastUpdated="5/5/2011" GallertURL="http://code.msdn.microsoft.com/CSCOMClient-f776f7b8" Rating="0" Raters="0" Downloads="8259" Affiliation="">
+    <Author DisplayName="All-In-One Code Framework" Link="http://code.msdn.microsoft.com/site/profile?userName=All-In-One%20Code%20Framework" />
+    <License Title="Apache" Link="http://code.msdn.microsoft.com/site/CSCOMClient-f776f7b8/eula?licenseType=Apache" />
+    <ProgrammingLanguages>
+      <ProgrammingLanguage>C#</ProgrammingLanguage>
+      <ProgrammingLanguage>C++</ProgrammingLanguage>
+    </ProgrammingLanguages>
+    <Platforms>
+      <Platform>Desktop</Platform>
+    </Platforms>
+    <Summary>The sample demonstrates the different ways to invoke COM objects from VC#</Summary>
+    <Technologies>
+      <Technology>COM</Technology>
+    </Technologies>
+    <SamplePackages>
+      <SamplePackage LastUpdated="1/10/2013" DownloadLink="http://code.msdn.microsoft.com/CSCOMClient-f776f7b8/file/21655/9/C%23%20app%20invokes%20COM%20server%20and%20ActiveX%20control%20(CSCOMClient).zip" ProgrammingLanguage="C#,C++" EntryFile="C:\ipc\3rdParties\allin1\Visual Studio 2008\CSCOMClient-f776f7b8\C#,C++\CSCOMClient.sln" />
+    </SamplePackages>
+  </CodeSample>
+  <CodeSample Name="CSRegFreeCOMServer-d138c3c4" Title="Reg-free C# COM server (CSRegFreeCOMServer)" Supports="Visual Studio 2008" LastUpdated="5/5/2011" GallertURL="http://code.msdn.microsoft.com/CSRegFreeCOMServer-d138c3c4" Rating="0" Raters="0" Downloads="5929" Affiliation="">
+    <Author DisplayName="All-In-One Code Framework" Link="http://code.msdn.microsoft.com/site/profile?userName=All-In-One%20Code%20Framework" />
+    <License Title="Apache" Link="http://code.msdn.microsoft.com/site/CSRegFreeCOMServer-d138c3c4/eula?licenseType=Apache" />
+    <ProgrammingLanguages>
+      <ProgrammingLanguage>C#</ProgrammingLanguage>
+    </ProgrammingLanguages>
+    <Platforms>
+      <Platform>Desktop</Platform>
+    </Platforms>
+    <Summary>The sample demonstrates a .NET Framework-based component which is ready for registration-free activation. </Summary>
+    <Technologies>
+      <Technology>COM</Technology>
+    </Technologies>
+    <SamplePackages>
+      <SamplePackage LastUpdated="1/10/2013" DownloadLink="http://code.msdn.microsoft.com/CSRegFreeCOMServer-d138c3c4/file/21695/9/Reg-free%20C%23%20COM%20server%20(CSRegFreeCOMServer).zip" ProgrammingLanguage="C#" EntryFile="C:\ipc\3rdParties\allin1\Visual Studio 2008\CSRegFreeCOMServer-d138c3c4\C#\CSRegFreeCOMServer.sln" />
+    </SamplePackages>
+  </CodeSample>
+  <CodeSample Name="CSDllCOMServer-1d5f97a4" Title="In-process C# COM server (CSDllCOMServer)" Supports="Visual Studio 2008" LastUpdated="5/5/2011" GallertURL="http://code.msdn.microsoft.com/CSDllCOMServer-1d5f97a4" Rating="0" Raters="0" Downloads="5951" Affiliation="">
+    <Author DisplayName="All-In-One Code Framework" Link="http://code.msdn.microsoft.com/site/profile?userName=All-In-One%20Code%20Framework" />
+    <License Title="Apache" Link="http://code.msdn.microsoft.com/site/CSDllCOMServer-1d5f97a4/eula?licenseType=Apache" />
+    <ProgrammingLanguages>
+      <ProgrammingLanguage>C#</ProgrammingLanguage>
+    </ProgrammingLanguages>
+    <Platforms>
+      <Platform>Desktop</Platform>
+    </Platforms>
+    <Summary>This VC# code sample focuses on exposing .NET Framework components to COM,  which allows us to write a .NET type and consuming that type from unmanaged  code with distinct activities for COM developers</Summary>
+    <Technologies>
+      <Technology>COM</Technology>
+    </Technologies>
+    <SamplePackages>
+      <SamplePackage LastUpdated="1/10/2013" DownloadLink="http://code.msdn.microsoft.com/CSDllCOMServer-1d5f97a4/file/21660/9/In-process%20C%23%20COM%20server%20(CSDllCOMServer).zip" ProgrammingLanguage="C#" EntryFile="C:\ipc\3rdParties\allin1\Visual Studio 2008\CSDllCOMServer-1d5f97a4\C#\CSDllCOMServer.sln" />
+    </SamplePackages>
+  </CodeSample>
+  <CodeSample Name="CSRegFreeCOMClient-1b9bcfe5" Title="Reg-free C# COM client (CSRegFreeCOMClient)" Supports="Visual Studio 2008" LastUpdated="5/5/2011" GallertURL="http://code.msdn.microsoft.com/CSRegFreeCOMClient-1b9bcfe5" Rating="0" Raters="0" Downloads="5858" Affiliation="">
+    <Author DisplayName="All-In-One Code Framework" Link="http://code.msdn.microsoft.com/site/profile?userName=All-In-One%20Code%20Framework" />
+    <License Title="Apache" Link="http://code.msdn.microsoft.com/site/CSRegFreeCOMClient-1b9bcfe5/eula?licenseType=Apache" />
+    <ProgrammingLanguages>
+      <ProgrammingLanguage>C#</ProgrammingLanguage>
+    </ProgrammingLanguages>
+    <Platforms>
+      <Platform>Desktop</Platform>
+    </Platforms>
+    <Summary>This sample demonstrates how to create a registration-free COM from the aspect of .NET Framework based client, so that the client can consume existing COM server as if the COM server is Registration-free</Summary>
+    <Technologies>
+      <Technology>COM</Technology>
+    </Technologies>
+    <SamplePackages>
+      <SamplePackage LastUpdated="1/10/2013" DownloadLink="http://code.msdn.microsoft.com/CSRegFreeCOMClient-1b9bcfe5/file/21694/9/Reg-free%20C%23%20COM%20client%20(CSRegFreeCOMClient).zip" ProgrammingLanguage="C#" EntryFile="C:\ipc\3rdParties\allin1\Visual Studio 2008\CSRegFreeCOMClient-1b9bcfe5\C#\CSRegFreeCOMClient.sln" />
+    </SamplePackages>
+  </CodeSample>
+  <CodeSample Name="CppRegFreeCOMClient-553897dc" Title="Reg-free C++ COM client (CppRegFreeCOMClient)" Supports="Visual Studio 2008" LastUpdated="4/5/2011" GallertURL="http://code.msdn.microsoft.com/CppRegFreeCOMClient-553897dc" Rating="4" Raters="1" Downloads="6511" Affiliation="">
+    <Author DisplayName="All-In-One Code Framework" Link="http://code.msdn.microsoft.com/site/profile?userName=All-In-One%20Code%20Framework" />
+    <License Title="Apache" Link="http://code.msdn.microsoft.com/site/CppRegFreeCOMClient-553897dc/eula?licenseType=Apache" />
+    <ProgrammingLanguages>
+      <ProgrammingLanguage>C#</ProgrammingLanguage>
+      <ProgrammingLanguage>C++</ProgrammingLanguage>
+    </ProgrammingLanguages>
+    <Platforms>
+      <Platform>Desktop</Platform>
+    </Platforms>
+    <Summary>This sample demonstrates how to create a registration-free COM from the native VC++ based client, so that the client can consume existing COM server as if the COM server is Registration-free</Summary>
+    <Technologies>
+      <Technology>COM</Technology>
+      <Technology>Interop</Technology>
+    </Technologies>
+    <SamplePackages>
+      <SamplePackage LastUpdated="1/10/2013" DownloadLink="http://code.msdn.microsoft.com/CppRegFreeCOMClient-553897dc/file/20446/9/Reg-free%20C%20COM%20client%20(CppRegFreeCOMClient).zip" ProgrammingLanguage="C#,C++" EntryFile="C:\ipc\3rdParties\allin1\Visual Studio 2008\CppRegFreeCOMClient-553897dc\C#,C++\CppRegFreeCOMClient.sln" />
+    </SamplePackages>
+  </CodeSample>
+  <CodeSample Name="CSActiveX-b86194f8" Title="C# ActiveX control (CSActiveX)" Supports="Visual Studio 2010" LastUpdated="3/2/2012" GallertURL="http://code.msdn.microsoft.com/CSActiveX-b86194f8" Rating="1" Raters="1" Downloads="5698" Affiliation="">
+    <Author DisplayName="All-In-One Code Framework" Link="http://code.msdn.microsoft.com/site/profile?userName=All-In-One%20Code%20Framework" />
+    <License Title="MSLPL" Link="http://code.msdn.microsoft.com/site/CSActiveX-b86194f8/eula?licenseType=MSLPL" />
+    <ProgrammingLanguages>
+      <ProgrammingLanguage>C#</ProgrammingLanguage>
+      <ProgrammingLanguage>XML</ProgrammingLanguage>
+    </ProgrammingLanguages>
+    <Platforms>
+      <Platform>Desktop</Platform>
+    </Platforms>
+    <Summary>The code sample demonstrates creating an ActiveX control in VC#</Summary>
+    <Technologies>
+      <Technology>COM</Technology>
+      <Technology>Windows SDK</Technology>
+    </Technologies>
+    <SamplePackages>
+      <SamplePackage LastUpdated="1/10/2013" DownloadLink="http://code.msdn.microsoft.com/CSActiveX-b86194f8/file/52605/9/C%23%20ActiveX%20control%20(CSActiveX).zip" ProgrammingLanguage="C#" EntryFile="C:\ipc\3rdParties\allin1\Visual Studio 2010\CSActiveX-b86194f8\C#\CSActiveX.sln" />
+    </SamplePackages>
+  </CodeSample>
+  <CodeSample Name="CSActiveX-c3f43e7d" Title="C# ActiveX control (CSActiveX)" Supports="Visual Studio 2008" LastUpdated="3/2/2012" GallertURL="http://code.msdn.microsoft.com/CSActiveX-c3f43e7d" Rating="5" Raters="1" Downloads="10219" Affiliation="">
+    <Author DisplayName="All-In-One Code Framework" Link="http://code.msdn.microsoft.com/site/profile?userName=All-In-One%20Code%20Framework" />
+    <License Title="MSLPL" Link="http://code.msdn.microsoft.com/site/CSActiveX-c3f43e7d/eula?licenseType=MSLPL" />
+    <ProgrammingLanguages>
+      <ProgrammingLanguage>C#</ProgrammingLanguage>
+      <ProgrammingLanguage>XML</ProgrammingLanguage>
+    </ProgrammingLanguages>
+    <Platforms>
+      <Platform>Desktop</Platform>
+    </Platforms>
+    <Summary>The code sample demonstrates creating an ActiveX control in VC#</Summary>
+    <Technologies>
+      <Technology>COM</Technology>
+      <Technology>Windows SDK</Technology>
+    </Technologies>
+    <SamplePackages>
+      <SamplePackage LastUpdated="1/10/2013" DownloadLink="http://code.msdn.microsoft.com/CSActiveX-c3f43e7d/file/21607/11/C%23%20ActiveX%20control%20(CSActiveX).zip" ProgrammingLanguage="C#" EntryFile="C:\ipc\3rdParties\allin1\Visual Studio 2008\CSActiveX-c3f43e7d\C#\CSActiveX.sln" />
+    </SamplePackages>
+  </CodeSample>
+  <CodeSample Name="CSExcelAutomationAddIn-c46f6956" Title="C# Excel Automation addin (CSExcelAutomationAddIn)" Supports="Visual Studio 2010" LastUpdated="3/2/2012" GallertURL="http://code.msdn.microsoft.com/CSExcelAutomationAddIn-c46f6956" Rating="5" Raters="1" Downloads="4033" Affiliation="">
+    <Author DisplayName="All-In-One Code Framework" Link="http://code.msdn.microsoft.com/site/profile?userName=All-In-One%20Code%20Framework" />
+    <License Title="MSLPL" Link="http://code.msdn.microsoft.com/site/CSExcelAutomationAddIn-c46f6956/eula?licenseType=MSLPL" />
+    <ProgrammingLanguages>
+      <ProgrammingLanguage>C#</ProgrammingLanguage>
+    </ProgrammingLanguages>
+    <Platforms>
+      <Platform>Desktop</Platform>
+    </Platforms>
+    <Summary>This project illustrates how to write a managed COM component which can be used as an Automation AddIn in Excel.</Summary>
+    <Technologies>
+      <Technology>Office</Technology>
+    </Technologies>
+    <SamplePackages>
+      <SamplePackage LastUpdated="1/10/2013" DownloadLink="http://code.msdn.microsoft.com/CSExcelAutomationAddIn-c46f6956/file/52672/9/C%23%20Excel%20Automation%20addin%20(CSExcelAutomationAddIn).zip" ProgrammingLanguage="C#" EntryFile="C:\ipc\3rdParties\allin1\Visual Studio 2010\CSExcelAutomationAddIn-c46f6956\C#\CSExcelAutomationAddIn.sln" />
+    </SamplePackages>
+  </CodeSample>
+  <CodeSample Name="CSOneNoteRibbonAddIn-c3547362" Title="C# OneNote Ribbon addin (CSOneNoteRibbonAddIn)" Supports="Visual Studio 2010" LastUpdated="5/5/2011" GallertURL="http://code.msdn.microsoft.com/CSOneNoteRibbonAddIn-c3547362" Rating="0" Raters="0" Downloads="9253" Affiliation="">
+    <Author DisplayName="All-In-One Code Framework" Link="http://code.msdn.microsoft.com/site/profile?userName=All-In-One%20Code%20Framework" />
+    <License Title="Apache" Link="http://code.msdn.microsoft.com/site/CSOneNoteRibbonAddIn-c3547362/eula?licenseType=Apache" />
+    <ProgrammingLanguages>
+      <ProgrammingLanguage>C#</ProgrammingLanguage>
+    </ProgrammingLanguages>
+    <Platforms>
+      <Platform>Desktop</Platform>
+    </Platforms>
+    <Summary>The example demonstrates how to create a VSTO add-in to customize the ribbon of Microsoft OneCode 2010</Summary>
+    <Technologies>
+      <Technology>Office</Technology>
+    </Technologies>
+    <SamplePackages>
+      <SamplePackage LastUpdated="1/10/2013" DownloadLink="http://code.msdn.microsoft.com/CSOneNoteRibbonAddIn-c3547362/file/22032/9/C%23%20OneNote%20Ribbon%20addin%20(CSOneNoteRibbonAddIn).zip" ProgrammingLanguage="C#" EntryFile="C:\ipc\3rdParties\allin1\Visual Studio 2010\CSOneNoteRibbonAddIn-c3547362\C#\CSOneNoteRibbonAddIn.sln" />
+    </SamplePackages>
+  </CodeSample>
+  <CodeSample Name="CSExcelAutomationAddIn-d0281eca" Title="C# Excel Automation addin (CSExcelAutomationAddIn)" Supports="Visual Studio 2008" LastUpdated="3/2/2012" GallertURL="http://code.msdn.microsoft.com/CSExcelAutomationAddIn-d0281eca" Rating="0" Raters="0" Downloads="6384" Affiliation="">
+    <Author DisplayName="All-In-One Code Framework" Link="http://code.msdn.microsoft.com/site/profile?userName=All-In-One%20Code%20Framework" />
+    <License Title="MSLPL" Link="http://code.msdn.microsoft.com/site/CSExcelAutomationAddIn-d0281eca/eula?licenseType=MSLPL" />
+    <ProgrammingLanguages>
+      <ProgrammingLanguage>C#</ProgrammingLanguage>
+    </ProgrammingLanguages>
+    <Platforms>
+      <Platform>Desktop</Platform>
+    </Platforms>
+    <Summary>This project illustrates how to write a managed COM component which can be used as an Automation AddIn in Excel.</Summary>
+    <Technologies>
+      <Technology>Office</Technology>
+    </Technologies>
+    <SamplePackages>
+      <SamplePackage LastUpdated="1/10/2013" DownloadLink="http://code.msdn.microsoft.com/CSExcelAutomationAddIn-d0281eca/file/21664/11/C%23%20Excel%20Automation%20addin%20(CSExcelAutomationAddIn).zip" ProgrammingLanguage="C#" EntryFile="C:\ipc\3rdParties\allin1\Visual Studio 2008\CSExcelAutomationAddIn-d0281eca\C#\CSExcelAutomationAddIn.sln" />
+    </SamplePackages>
+  </CodeSample>
+  <CodeSample Name="CppAutomateExcel-be36992e" Title="C++ app automates Excel (CppAutomateExcel)" Supports="Visual Studio 2010" LastUpdated="3/2/2012" GallertURL="http://code.msdn.microsoft.com/CppAutomateExcel-be36992e" Rating="5" Raters="1" Downloads="8282" Affiliation="">
+    <Author DisplayName="All-In-One Code Framework" Link="http://code.msdn.microsoft.com/site/profile?userName=All-In-One%20Code%20Framework" />
+    <License Title="MSLPL" Link="http://code.msdn.microsoft.com/site/CppAutomateExcel-be36992e/eula?licenseType=MSLPL" />
+    <ProgrammingLanguages>
+      <ProgrammingLanguage>C#</ProgrammingLanguage>
+      <ProgrammingLanguage>C++</ProgrammingLanguage>
+    </ProgrammingLanguages>
+    <Platforms>
+      <Platform>Desktop</Platform>
+    </Platforms>
+    <Summary>The CppAutomateExcel example demonstrates how to write VC++ codes to create and automate a Microsoft Excel instance</Summary>
+    <Technologies>
+      <Technology>Office</Technology>
+    </Technologies>
+    <SamplePackages>
+      <SamplePackage LastUpdated="1/10/2013" DownloadLink="http://code.msdn.microsoft.com/CppAutomateExcel-be36992e/file/52564/9/C%20app%20automates%20Excel%20(CppAutomateExcel).zip" ProgrammingLanguage="C++" EntryFile="C:\ipc\3rdParties\allin1\Visual Studio 2010\CppAutomateExcel-be36992e\C++\CppAutomateExcel.sln" />
+    </SamplePackages>
+  </CodeSample>
+  <CodeSample Name="CppAutomateExcel-44214081" Title="C++ app automates Excel (CppAutomateExcel)" Supports="Visual Studio 2008" LastUpdated="3/2/2012" GallertURL="http://code.msdn.microsoft.com/CppAutomateExcel-44214081" Rating="5" Raters="1" Downloads="8227" Affiliation="">
+    <Author DisplayName="All-In-One Code Framework" Link="http://code.msdn.microsoft.com/site/profile?userName=All-In-One%20Code%20Framework" />
+    <License Title="MSLPL" Link="http://code.msdn.microsoft.com/site/CppAutomateExcel-44214081/eula?licenseType=MSLPL" />
+    <ProgrammingLanguages>
+      <ProgrammingLanguage>C#</ProgrammingLanguage>
+      <ProgrammingLanguage>C++</ProgrammingLanguage>
+    </ProgrammingLanguages>
+    <Platforms>
+      <Platform>Desktop</Platform>
+    </Platforms>
+    <Summary>The CppAutomateExcel example demonstrates how to write VC++ codes to create and automate a Microsoft Excel instance</Summary>
+    <Technologies>
+      <Technology>Office</Technology>
+    </Technologies>
+    <SamplePackages>
+      <SamplePackage LastUpdated="1/10/2013" DownloadLink="http://code.msdn.microsoft.com/CppAutomateExcel-44214081/file/21544/11/C%20app%20automates%20Excel%20(CppAutomateExcel).zip" ProgrammingLanguage="C++" EntryFile="C:\ipc\3rdParties\allin1\Visual Studio 2008\CppAutomateExcel-44214081\C++\CppAutomateExcel.sln" />
+    </SamplePackages>
+  </CodeSample>
+  <CodeSample Name="CSExcelNewEventForShapes-5d1a5046" Title="Create new events for shape in Excel (CSExcelNewEventForShapes)" Supports="Visual Studio 2012" LastUpdated="12/21/2012" GallertURL="http://code.msdn.microsoft.com/CSExcelNewEventForShapes-5d1a5046" Rating="0" Raters="0" Downloads="284" Affiliation="">
+    <Author DisplayName="All-In-One Code Framework" Link="http://code.msdn.microsoft.com/site/profile?userName=All-In-One%20Code%20Framework" />
+    <License Title="MSLPL" Link="http://code.msdn.microsoft.com/site/CSExcelNewEventForShapes-5d1a5046/eula?licenseType=MSLPL" />
+    <ProgrammingLanguages>
+      <ProgrammingLanguage>C#</ProgrammingLanguage>
+    </ProgrammingLanguages>
+    <Platforms>
+      <Platform>Desktop</Platform>
+    </Platforms>
+    <Summary>This sample demonstrates how to create new events​ for shape in Excel by VSTO</Summary>
+    <Technologies>
+      <Technology>Office</Technology>
+    </Technologies>
+    <SamplePackages>
+      <SamplePackage LastUpdated="1/10/2013" DownloadLink="http://code.msdn.microsoft.com/CSExcelNewEventForShapes-5d1a5046/file/73162/5/Create%20new%20events%20for%20shape%20in%20Excel%20(CSExcelNewEventForShapes).zip" ProgrammingLanguage="C#" EntryFile="C:\ipc\3rdParties\allin1\Visual Studio 2012\CSExcelNewEventForShapes-5d1a5046\C#\CSExcelNewEventForShapes.sln" />
+    </SamplePackages>
+  </CodeSample>
+  <CodeSample Name="CSExcelNewEventForShapes-0e26b1f2" Title="Create new events for shape in Excel (CSExcelNewEventForShapes)" Supports="Visual Studio 2010" LastUpdated="12/21/2012" GallertURL="http://code.msdn.microsoft.com/CSExcelNewEventForShapes-0e26b1f2" Rating="0" Raters="0" Downloads="322" Affiliation="">
+    <Author DisplayName="All-In-One Code Framework" Link="http://code.msdn.microsoft.com/site/profile?userName=All-In-One%20Code%20Framework" />
+    <License Title="MSLPL" Link="http://code.msdn.microsoft.com/site/CSExcelNewEventForShapes-0e26b1f2/eula?licenseType=MSLPL" />
+    <ProgrammingLanguages>
+      <ProgrammingLanguage>C#</ProgrammingLanguage>
+    </ProgrammingLanguages>
+    <Platforms>
+      <Platform>Desktop</Platform>
+    </Platforms>
+    <Summary>This sample demonstrates how to create new events​ for shape in Excel by VSTO</Summary>
+    <Technologies>
+      <Technology>Office</Technology>
+    </Technologies>
+    <SamplePackages>
+      <SamplePackage LastUpdated="1/10/2013" DownloadLink="http://code.msdn.microsoft.com/CSExcelNewEventForShapes-0e26b1f2/file/73122/5/Create%20new%20events%20for%20shape%20in%20Excel%20(CSExcelNewEventForShapes).zip" ProgrammingLanguage="C#" EntryFile="C:\ipc\3rdParties\allin1\Visual Studio 2010\CSExcelNewEventForShapes-0e26b1f2\C#\CSExcelNewEventForShapes.sln" />
+    </SamplePackages>
+  </CodeSample>
+  <CodeSample Name="CSVstoGetWrapperObject-f7ee870d" Title="Get VSTO wrapper object (CSVstoGetWrapperObject)" Supports="Visual Studio 2008" LastUpdated="4/5/2011" GallertURL="http://code.msdn.microsoft.com/CSVstoGetWrapperObject-f7ee870d" Rating="0" Raters="0" Downloads="6783" Affiliation="">
+    <Author DisplayName="All-In-One Code Framework" Link="http://code.msdn.microsoft.com/site/profile?userName=All-In-One%20Code%20Framework" />
+    <License Title="Apache" Link="http://code.msdn.microsoft.com/site/CSVstoGetWrapperObject-f7ee870d/eula?licenseType=Apache" />
+    <ProgrammingLanguages>
+      <ProgrammingLanguage>C#</ProgrammingLanguage>
+    </ProgrammingLanguages>
+    <Platforms>
+      <Platform>Desktop</Platform>
+    </Platforms>
+    <Summary>The CSVstoGetWrapperObject project demonstrates how to get a VSTO wrapper object from an existing Office COM object</Summary>
+    <Technologies>
+      <Technology>Office</Technology>
+    </Technologies>
+    <SamplePackages>
+      <SamplePackage LastUpdated="1/10/2013" DownloadLink="http://code.msdn.microsoft.com/CSVstoGetWrapperObject-f7ee870d/file/20619/9/Get%20VSTO%20wrapper%20object%20(CSVstoGetWrapperObject).zip" ProgrammingLanguage="C#" EntryFile="C:\ipc\3rdParties\allin1\Visual Studio 2008\CSVstoGetWrapperObject-f7ee870d\C#\CSVstoGetWrapperObject.sln" />
+    </SamplePackages>
+  </CodeSample>
+  <CodeSample Name="CSVstoGetWrapperObject-abda93a5" Title="Get VSTO wrapper object (CSVstoGetWrapperObject)" Supports="Visual Studio 2012" LastUpdated="12/7/2012" GallertURL="http://code.msdn.microsoft.com/CSVstoGetWrapperObject-abda93a5" Rating="5" Raters="1" Downloads="425" Affiliation="">
+    <Author DisplayName="All-In-One Code Framework" Link="http://code.msdn.microsoft.com/site/profile?userName=All-In-One%20Code%20Framework" />
+    <License Title="MSLPL" Link="http://code.msdn.microsoft.com/site/CSVstoGetWrapperObject-abda93a5/eula?licenseType=MSLPL" />
+    <ProgrammingLanguages>
+      <ProgrammingLanguage>C#</ProgrammingLanguage>
+    </ProgrammingLanguages>
+    <Platforms>
+      <Platform>Desktop</Platform>
+    </Platforms>
+    <Summary>The CSVstoGetWrapperObject project demonstrates how to get a VSTO wrapper object from an existing Office COM object.</Summary>
+    <Technologies>
+      <Technology>Office</Technology>
+    </Technologies>
+    <SamplePackages>
+      <SamplePackage LastUpdated="1/10/2013" DownloadLink="http://code.msdn.microsoft.com/CSVstoGetWrapperObject-abda93a5/file/72134/4/Get%20VSTO%20wrapper%20object%20(CSVstoGetWrapperObject).zip" ProgrammingLanguage="C#" EntryFile="C:\ipc\3rdParties\allin1\Visual Studio 2012\CSVstoGetWrapperObject-abda93a5\C#\CSVstoGetWrapperObject.sln" />
+    </SamplePackages>
+  </CodeSample>
+  <CodeSample Name="CSVstoGetWrapperObject-0a223bf5" Title="Get VSTO wrapper object (CSVstoGetWrapperObject)" Supports="Visual Studio 2010" LastUpdated="12/7/2012" GallertURL="http://code.msdn.microsoft.com/CSVstoGetWrapperObject-0a223bf5" Rating="0" Raters="0" Downloads="369" Affiliation="">
+    <Author DisplayName="All-In-One Code Framework" Link="http://code.msdn.microsoft.com/site/profile?userName=All-In-One%20Code%20Framework" />
+    <License Title="MSLPL" Link="http://code.msdn.microsoft.com/site/CSVstoGetWrapperObject-0a223bf5/eula?licenseType=MSLPL" />
+    <ProgrammingLanguages>
+      <ProgrammingLanguage>C#</ProgrammingLanguage>
+    </ProgrammingLanguages>
+    <Platforms>
+      <Platform>Desktop</Platform>
+    </Platforms>
+    <Summary>The CSVstoGetWrapperObject project demonstrates how to get a VSTO wrapper object from an existing Office COM object.</Summary>
+    <Technologies>
+      <Technology>Office</Technology>
+    </Technologies>
+    <SamplePackages>
+      <SamplePackage LastUpdated="1/10/2013" DownloadLink="http://code.msdn.microsoft.com/CSVstoGetWrapperObject-0a223bf5/file/72128/4/Get%20VSTO%20wrapper%20object%20(CSVstoGetWrapperObject).zip" ProgrammingLanguage="C#" EntryFile="C:\ipc\3rdParties\allin1\Visual Studio 2010\CSVstoGetWrapperObject-0a223bf5\C#\CSVstoGetWrapperObject.sln" />
+    </SamplePackages>
+  </CodeSample>
+  <CodeSample Name="VBVstoGetWrapperObject-d17e2086" Title="Get VSTO wrapper object (VBVstoGetWrapperObject)" Supports="Visual Studio 2010" LastUpdated="12/7/2012" GallertURL="http://code.msdn.microsoft.com/VBVstoGetWrapperObject-d17e2086" Rating="0" Raters="0" Downloads="339" Affiliation="">
+    <Author DisplayName="All-In-One Code Framework" Link="http://code.msdn.microsoft.com/site/profile?userName=All-In-One%20Code%20Framework" />
+    <License Title="MSLPL" Link="http://code.msdn.microsoft.com/site/VBVstoGetWrapperObject-d17e2086/eula?licenseType=MSLPL" />
+    <ProgrammingLanguages>
+      <ProgrammingLanguage>VB.NET</ProgrammingLanguage>
+    </ProgrammingLanguages>
+    <Platforms>
+      <Platform>Desktop</Platform>
+    </Platforms>
+    <Summary>The VBVstoGetWrapperObject project demonstrates how to get a VSTO wrapper object from an existing Office COM object.</Summary>
+    <Technologies>
+      <Technology>Office</Technology>
+    </Technologies>
+    <SamplePackages>
+      <SamplePackage LastUpdated="1/10/2013" DownloadLink="http://code.msdn.microsoft.com/VBVstoGetWrapperObject-d17e2086/file/72131/4/Get%20VSTO%20wrapper%20object%20(VBVstoGetWrapperObject).zip" ProgrammingLanguage="VB" EntryFile="C:\ipc\3rdParties\allin1\Visual Studio 2010\VBVstoGetWrapperObject-d17e2086\VB\VBVstoGetWrapperObject.sln" />
+    </SamplePackages>
+  </CodeSample>
+  <CodeSample Name="CSExeCOMServer-3b1c1054" Title="Out-of-process C# COM server (CSExeCOMServer)" Supports="Visual Studio 2008" LastUpdated="3/5/2012" GallertURL="http://code.msdn.microsoft.com/CSExeCOMServer-3b1c1054" Rating="0" Raters="0" Downloads="2862" Affiliation="">
+    <Author DisplayName="All-In-One Code Framework" Link="http://code.msdn.microsoft.com/site/profile?userName=All-In-One%20Code%20Framework" />
+    <License Title="MSLPL" Link="http://code.msdn.microsoft.com/site/CSExeCOMServer-3b1c1054/eula?licenseType=MSLPL" />
+    <ProgrammingLanguages>
+      <ProgrammingLanguage>C#</ProgrammingLanguage>
+    </ProgrammingLanguages>
+    <Platforms>
+      <Platform>Desktop</Platform>
+    </Platforms>
+    <Summary>The sample demonstrates an out-of-process COM server in the form of local server (EXE), which is implemented entirely in Visual C#.</Summary>
+    <Technologies>
+      <Technology>COM</Technology>
+      <Technology>Windows SDK</Technology>
+    </Technologies>
+    <SamplePackages>
+      <SamplePackage LastUpdated="2/10/2013" DownloadLink="http://code.msdn.microsoft.com/CSExeCOMServer-3b1c1054/file/53558/9/Out-of-process%20C%23%20COM%20server%20(CSExeCOMServer).zip" ProgrammingLanguage="C#" EntryFile="H:\src\ipc\3rdParties\allin1\Visual Studio 2008\CSExeCOMServer-3b1c1054\C#\CSExeCOMServer.sln" />
+    </SamplePackages>
+  </CodeSample>
+</CodeSamples>

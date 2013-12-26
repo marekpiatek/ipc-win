@@ -13,16 +13,17 @@
 #include <stopwatch.h>
 #include <objects.h>
 
-
+using namespace reqresp;
 TEST(add_hoc_deandserialization,ad_hoc_deserialize_signle_item){
-}
-//custom_response r;
+	//custom_response r;
 //r.m_data.insert(r.m_data.end()," ");
 //auto tsize = r.getSize();
 //unsigned char* tb = (unsigned char*)malloc(tsize);
 //r.toArray(tb,tsize);
 //int size1 = 0;
 //r.fromArray(tb,&size1);
+}
+
 
 void run(){
 		//data
@@ -32,23 +33,23 @@ void run(){
 	char* val = "123456789 123456789";
 	Stopwatch t;
 	t.set_mode(REAL_TIME);
+	t.lang = StopwatchReportLang::MARKDOWN;
 
+	auto batching = "Batching 2000 requests ~0.1kb and ~1kb responses";
 
-	auto batching = "Batching 2000 small objects ~0.1kb and ~1kb response";
+	auto obj_data_creation = "Custom response object creation";
+	auto obj_data_serialization = "Custom response object serialization";
+	auto obj_data_deserialization = "Custom response object deserialization";
+	auto msg_data_creation = "Protobuf response message creation";
+	auto msg_data_serialization = "Protobuf response message serialization";
+	auto msg_data_deserialization = "Protobuf response message deserialization";
 
-	auto obj_data_creation = "Custom data object creation";
-	auto obj_data_serialization = "Custom data object serialization";
-	auto obj_data_deserialization = "Custom data object deserialization";
-	auto msg_data_creation = "Protobuf data object creation";
-	auto msg_data_serialization = "Protobuf data object serialization";
-	auto msg_data_deserialization = "Protobuf data object deserialization";
-
-	auto obj_creation = "Cusom object creation";
-	auto obj_serialization = "Custom object to byte array serialization";
-	auto obj_deserializaion = "Cusom object instatiation from byte array";
-	auto message_creation = "Protobuf message creation";
-	auto message_serialization = "Protobug message serialization";
-	auto message_deserialization = "Protobug message deserialization";
+	auto obj_creation = "Custom request creation";
+	auto obj_serialization = "Custom request to byte array serialization";
+	auto obj_deserializaion = "Custom request instatiation from byte array";
+	auto message_creation = "Protobuf request message creation";
+	auto message_serialization = "Protobuf request message serialization";
+	auto message_deserialization = "Protobuf request message deserialization";
 
 	list<request> requests;
 	list<response> responses;
@@ -71,8 +72,8 @@ void run(){
 		responses.insert(responses.end(),d);
 	}
 
-
-	for (auto epoch =0;epoch<10;epoch++){
+	int indexes = 10;
+	for (auto index =0;index<indexes;index++){
 
 		t.start(batching);
 		batch_request breq;
@@ -87,6 +88,7 @@ void run(){
 		}
 		t.stop(batching);
 
+		// requests
 		t.start(obj_data_creation);
 		custom_response br;
 		for (auto i= 0;i<5000*10;i++){
@@ -126,11 +128,7 @@ void run(){
 		respmde.ParseFromArray(respmb,respms);
 		t.stop(msg_data_deserialization);
 
-
-
-
-		////steps
-
+		// responses
 		t.start(obj_creation);
 		custom_request sc;
 		sc.m_name = std::string(name);
@@ -187,6 +185,7 @@ void run(){
 
 	t.report(batching);
 
+	cout << "## ~100kb request" << endl << endl;
 	t.report(obj_data_creation);
 	t.report(obj_data_serialization);
 	t.report(obj_data_deserialization);
@@ -194,6 +193,7 @@ void run(){
 	t.report(msg_data_serialization);
 	t.report(msg_data_deserialization);
 
+	cout << "## ~1 megabyte response" << endl << endl;
 	t.report(obj_creation);
 	t.report(obj_serialization);
 	t.report(obj_deserializaion);

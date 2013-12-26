@@ -14,6 +14,8 @@
 #include <google/protobuf/wire_format.h>
 // @@protoc_insertion_point(includes)
 
+namespace reqresp {
+
 namespace {
 
 const ::google::protobuf::Descriptor* request_descriptor_ = NULL;
@@ -142,11 +144,13 @@ void protobuf_AddDesc_Messages_2eproto() {
   GOOGLE_PROTOBUF_VERIFY_VERSION;
 
   ::google::protobuf::DescriptorPool::InternalAddGeneratedFile(
-    "\n\016Messages.proto\"3\n\007request\022\014\n\004name\030\001 \002("
-    "\t\022\013\n\003ids\030\002 \003(\t\022\r\n\005types\030\003 \003(\t\"\030\n\010respons"
-    "e\022\014\n\004data\030\001 \003(\t\"(\n\rbatch_request\022\027\n\005batc"
-    "h\030\001 \003(\0132\010.request\"*\n\016batch_response\022\030\n\005b"
-    "atch\030\001 \003(\0132\t.response", 181);
+    "\n\016Messages.proto\022\007reqresp\"3\n\007request\022\014\n\004"
+    "name\030\001 \002(\t\022\013\n\003ids\030\002 \003(\t\022\r\n\005types\030\003 \003(\t\"\030"
+    "\n\010response\022\014\n\004data\030\001 \003(\t\"0\n\rbatch_reques"
+    "t\022\037\n\005batch\030\001 \003(\0132\020.reqresp.request\"2\n\016ba"
+    "tch_response\022 \n\005batch\030\001 \003(\0132\021.reqresp.re"
+    "sponse25\n\006Server\022+\n\004Send\022\020.reqresp.reque"
+    "st\032\021.reqresp.responseB\002H\001", 265);
   ::google::protobuf::MessageFactory::InternalRegisterGeneratedFile(
     "Messages.proto", &protobuf_RegisterTypes);
   request::default_instance_ = new request();
@@ -762,7 +766,7 @@ bool batch_request::MergePartialFromCodedStream(
   ::google::protobuf::uint32 tag;
   while ((tag = input->ReadTag()) != 0) {
     switch (::google::protobuf::internal::WireFormatLite::GetTagFieldNumber(tag)) {
-      // repeated .request batch = 1;
+      // repeated .reqresp.request batch = 1;
       case 1: {
         if (::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
             ::google::protobuf::internal::WireFormatLite::WIRETYPE_LENGTH_DELIMITED) {
@@ -795,7 +799,7 @@ bool batch_request::MergePartialFromCodedStream(
 
 void batch_request::SerializeWithCachedSizes(
     ::google::protobuf::io::CodedOutputStream* output) const {
-  // repeated .request batch = 1;
+  // repeated .reqresp.request batch = 1;
   for (int i = 0; i < this->batch_size(); i++) {
     ::google::protobuf::internal::WireFormatLite::WriteMessageMaybeToArray(
       1, this->batch(i), output);
@@ -809,7 +813,7 @@ void batch_request::SerializeWithCachedSizes(
 
 ::google::protobuf::uint8* batch_request::SerializeWithCachedSizesToArray(
     ::google::protobuf::uint8* target) const {
-  // repeated .request batch = 1;
+  // repeated .reqresp.request batch = 1;
   for (int i = 0; i < this->batch_size(); i++) {
     target = ::google::protobuf::internal::WireFormatLite::
       WriteMessageNoVirtualToArray(
@@ -826,7 +830,7 @@ void batch_request::SerializeWithCachedSizes(
 int batch_request::ByteSize() const {
   int total_size = 0;
   
-  // repeated .request batch = 1;
+  // repeated .reqresp.request batch = 1;
   total_size += 1 * this->batch_size();
   for (int i = 0; i < this->batch_size(); i++) {
     total_size +=
@@ -967,7 +971,7 @@ bool batch_response::MergePartialFromCodedStream(
   ::google::protobuf::uint32 tag;
   while ((tag = input->ReadTag()) != 0) {
     switch (::google::protobuf::internal::WireFormatLite::GetTagFieldNumber(tag)) {
-      // repeated .response batch = 1;
+      // repeated .reqresp.response batch = 1;
       case 1: {
         if (::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
             ::google::protobuf::internal::WireFormatLite::WIRETYPE_LENGTH_DELIMITED) {
@@ -1000,7 +1004,7 @@ bool batch_response::MergePartialFromCodedStream(
 
 void batch_response::SerializeWithCachedSizes(
     ::google::protobuf::io::CodedOutputStream* output) const {
-  // repeated .response batch = 1;
+  // repeated .reqresp.response batch = 1;
   for (int i = 0; i < this->batch_size(); i++) {
     ::google::protobuf::internal::WireFormatLite::WriteMessageMaybeToArray(
       1, this->batch(i), output);
@@ -1014,7 +1018,7 @@ void batch_response::SerializeWithCachedSizes(
 
 ::google::protobuf::uint8* batch_response::SerializeWithCachedSizesToArray(
     ::google::protobuf::uint8* target) const {
-  // repeated .response batch = 1;
+  // repeated .reqresp.response batch = 1;
   for (int i = 0; i < this->batch_size(); i++) {
     target = ::google::protobuf::internal::WireFormatLite::
       WriteMessageNoVirtualToArray(
@@ -1031,7 +1035,7 @@ void batch_response::SerializeWithCachedSizes(
 int batch_response::ByteSize() const {
   int total_size = 0;
   
-  // repeated .response batch = 1;
+  // repeated .reqresp.response batch = 1;
   total_size += 1 * this->batch_size();
   for (int i = 0; i < this->batch_size(); i++) {
     total_size +=
@@ -1104,5 +1108,7 @@ void batch_response::Swap(batch_response* other) {
 
 
 // @@protoc_insertion_point(namespace_scope)
+
+}  // namespace reqresp
 
 // @@protoc_insertion_point(global_scope)

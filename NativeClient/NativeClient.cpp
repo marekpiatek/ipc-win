@@ -5,15 +5,18 @@
 #include <windows.h>
 #include <stdio.h>
 #include <assert.h>
-#include <assert.h>
 #include <string>
 #include "Stopwatch.h"
 #include <objects.h>
 #include <Messages.pb.h>
 #include <windows.h>
 #include <windowsx.h>
+#include <Rpc.h>
+#include "..\Example1Explicit\Example1Explicit.h"
+
 
 using namespace std;
+using namespace reqresp;
 VOID RegisterDispatcherWindow();
 typedef void (*req_builder)(unsigned int size,unsigned char** dataP,unsigned int* sizeP);
 
@@ -22,6 +25,7 @@ typedef void (*resp_builder)(unsigned int size,unsigned char* resp_data);
 typedef void (*makeRequest)(unsigned int req_size,req_builder b, resp_builder br,void** result,int* resultSize);
 void makeSharedMemoryRequest(unsigned int req_size,req_builder b,resp_builder br,void** result,int* resultSize);
 void makePipeRequest(unsigned int req_size,req_builder b,resp_builder br,void** result,int* resultSize);
+void makeRpc(unsigned int req_size,req_builder b,resp_builder br,void** result,int* resultSize);
 void makeWindowsMessageRequest(unsigned int req_size,req_builder b,resp_builder br,void** result,int* resultSize);
 
 char* name = "cool data";
@@ -48,6 +52,48 @@ void init_reqs(int req_size,int ids,int types){
 	}
 
 	req.insert(make_pair(req_size,sc));
+}
+
+
+
+handle_t rpcTransport = NULL;
+
+void init_rpc(){
+	RPC_STATUS status;
+	unsigned char* szStringBinding = NULL;
+
+	// Creates a string binding handle.
+	// This function is nothing more than a printf.
+	// Connection is not done here.
+
+	status = RpcStringBindingComposeA(
+		NULL, // UUID to bind to.
+		reinterpret_cast<unsigned char*>("ncalrpc"),                                                      
+		NULL,                                                     
+		reinterpret_cast<unsigned char*>("FastDataServer"), 
+		
+		//reinterpret_cast<unsigned char*>("ncacn_np"),                                                      
+		//NULL,                                                     
+		//reinterpret_cast<unsigned char*>("\\pipe\\FastDataServer"),         
+
+		//NOTE: TCP is slower then Named Pipes
+		//reinterpret_cast<unsigned char*>("ncacn_ip_tcp"), // Use TCP/IP protocol.
+		//   reinterpret_cast<unsigned char*>("localhost"), // TCP/IP network address to use.
+		//   reinterpret_cast<unsigned char*>("4747"), // TCP/IP port to use.
+
+		NULL, // Protocol dependent network options to use.
+		&szStringBinding); // String binding output.
+
+	assert (status == S_OK);
+	// Validates the format of the string binding handle and converts
+	// it to a binding handle.
+	// Connection is not done here either.
+	status = RpcBindingFromStringBindingA(
+		szStringBinding, // The string binding to validate.
+		&rpcTransport); // Put the result in the explicit
+	// binding handle.
+	assert (status == S_OK);
+	assert (rpcTransport != NULL);
 }
 
 void req_obj(unsigned int size,unsigned char** rdataP,unsigned int* rmessageSizeP)
@@ -121,10 +167,13 @@ void init_mem_open();
 bool oneway = false;
 bool reuse = false;
 
+const wchar_t* pipe_name = TEXT("\\\\.\\pipe\\FastDataServer");
+
+
 //TODO: dispose resource on client disconnect
 int _tmain(int argc, _TCHAR* argv[])
 {
-	//TODO: use some lib (e.g. like in git)
+	//TODO: use some lib for command line
 	req_builder builder = req_msg;
 	resp_builder br = resp_msg;
 	makeRequest call = makeSharedMemoryRequest;
@@ -133,7 +182,21 @@ int _tmain(int argc, _TCHAR* argv[])
 		if (s == TEXT("-m")) 
 		{
 			std::wstring  s = argv[i+1];
-			call = s == TEXT("pipes") ? makePipeRequest : (s == TEXT("messaging") ? makeWindowsMessageRequest : makeSharedMemoryRequest);
+			if (s == TEXT("pipes"))
+			{
+				call = makePipeRequest;
+			}
+			else if (s == TEXT("messaging"))
+			{
+				call = makeWindowsMessageRequest;
+			}
+			else if(s == TEXT("rpc")){
+				call = makeRpc;
+			}
+			else{
+				call = makeSharedMemoryRequest;
+			}
+
 		}
 		if (s == TEXT("-d")) 
 		{
@@ -152,33 +215,47 @@ int _tmain(int argc, _TCHAR* argv[])
 	}
 
 	if (reuse) {
-		init_mem(3000*kb);
-		init_mem_open();
-		RegisterDispatcherWindow();
+		if (call == makeSharedMemoryRequest){
+			init_mem(3000*kb);
+			init_mem_open();
+		}
+		if (call== makeWindowsMessageRequest) 
+			RegisterDispatcherWindow();
+		if (call == makePipeRequest)
+			while ( !WaitNamedPipe(pipe_name, 1)); 
+		if (call == makeRpc)
+			init_rpc(); 
 	}
 
 
-	if (!oneway){
-		init_reqs(req_size100,5000,10);
-		init_reqs(req_size50,2500,10);
-		init_reqs(req_size10,500,10);
-		init_reqs(req_size1,50,10);
-		init_reqs(req_size0_1,5,10);
+
+	if (builder != req_bytes)
+	{
+		if (!oneway){
+			init_reqs(req_size100,5000,10);
+			init_reqs(req_size50,2500,10);
+			init_reqs(req_size10,500,10);
+			init_reqs(req_size1,50,10);
+			init_reqs(req_size0_1,5,10);
+		}
+		else{
+			init_reqs(req_size100,50000,10);
+			init_reqs(req_size50,25000,10);
+			init_reqs(req_size10,5000,10);
+			init_reqs(req_size1,500,10);
+			init_reqs(req_size0_1,50,10);
+		}
 	}
-	else{
-	    init_reqs(req_size100,50000,10);
-		init_reqs(req_size50,25000,10);
-		init_reqs(req_size10,5000,10);
-		init_reqs(req_size1,500,10);
-		init_reqs(req_size0_1,50,10);
-		 req_size100 = req_size100*10;;
- req_size50 = req_size50*10;
- req_size10 = req_size10*10;
- req_size1 = req_size1*10;
- req_size0_1 = req_size0_1*10;
+	if (oneway){
+		req_size100 = req_size100*10;;
+		req_size50 = req_size50*10;
+		req_size10 = req_size10*10;
+		req_size1 = req_size1*10;
+		req_size0_1 = req_size0_1*10;
 	}
 	Stopwatch sw;
 	sw.set_mode(REAL_TIME);
+	sw.lang = StopwatchReportLang::MARKDOWN;
 
 	//TODO: clear response after each request
 	void* response = NULL;
@@ -195,17 +272,17 @@ int _tmain(int argc, _TCHAR* argv[])
 	char* msr0_1 = "Client process requests ~0.1kb and gets ~1kb response  of server process";
 	if (oneway)
 	{
-	 msr100 = "Client process requests ~1000kb";
-	 msr50 = "Client process requests ~500kb";
-	 msr10 = "Client process requests ~100kb";
-	 msr1 = "Client process requests ~10kb";
-	 msr0_1 = "Client process requests ~1kb";
+		msr100 = "Client process requests ~1000kb";
+		msr50 = "Client process requests ~500kb";
+		msr10 = "Client process requests ~100kb";
+		msr1 = "Client process requests ~10kb";
+		msr0_1 = "Client process requests ~1kb";
 	}
-	
+
 
 	builder(req_size100,&req,&real_size);
 	cout << "Request size :" << real_size/kb << " kb" << endl;
-	for (int i=0;i<10;i++){
+	for (int i=0;i<5;i++){
 
 		sw.start(msr100);
 		call(req_size100,builder,br,&response,&resp_size);
@@ -216,7 +293,7 @@ int _tmain(int argc, _TCHAR* argv[])
 
 	builder(req_size50,&req,&real_size);
 	cout << "Request size :" << real_size/kb << " kb" << endl;
-	for (int i=0;i<20;i++){
+	for (int i=0;i<10;i++){
 
 		sw.start(msr50);
 		call(req_size50,builder,br,&response,&resp_size);
@@ -226,7 +303,7 @@ int _tmain(int argc, _TCHAR* argv[])
 
 	builder(req_size10,&req,&real_size);
 	cout << "Message size :" << real_size/kb << " kb" << endl;
-	for (int i=0;i<100;i++){
+	for (int i=0;i<50;i++){
 
 		sw.start(msr10);
 		call(req_size10,builder,br,&response,&resp_size);
@@ -236,7 +313,7 @@ int _tmain(int argc, _TCHAR* argv[])
 
 	builder(req_size1,&req,&real_size);
 	cout << "Message size :" << real_size << " bytes" << endl;
-	for (int i=0;i<1000;i++){
+	for (int i=0;i<500;i++){
 		//Sleep(1);
 		//BUG: sometimes hangs here when pipes used....
 		sw.start(msr1);
@@ -248,7 +325,7 @@ int _tmain(int argc, _TCHAR* argv[])
 
 	builder(req_size0_1,&req,&real_size);
 	cout << "Message size :" << real_size << " bytes" << endl;
-	for (int i=0;i<2000;i++){//BUG: server of shared memory crashes if make number of 10000
+	for (int i=0;i<1000;i++){//BUG: server of shared memory crashes if make number of 10000
 		//Sleep(1);
 		//BUG: sometimes hangs here when pipes used....
 		sw.start(msr0_1);
@@ -256,6 +333,63 @@ int _tmain(int argc, _TCHAR* argv[])
 		sw.stop(msr0_1);
 	}
 	cout << "Response size was :" << resp_size << " bytes" <<endl;
+
+
+	builder(req_size100,&req,&real_size);
+	cout << "Request size :" << real_size/kb << " kb" << endl;
+	for (int i=0;i<5;i++){
+
+		sw.start(msr100);
+		call(req_size100,builder,br,&response,&resp_size);
+		sw.stop(msr100);
+	}	
+	cout << "Response size was :" << resp_size/kb << " kb" <<endl;
+
+
+	builder(req_size50,&req,&real_size);
+	cout << "Request size :" << real_size/kb << " kb" << endl;
+	for (int i=0;i<10;i++){
+
+		sw.start(msr50);
+		call(req_size50,builder,br,&response,&resp_size);
+		sw.stop(msr50);
+	}	
+	cout << "Response size was :" << resp_size/kb << " kb" <<endl;
+
+	builder(req_size10,&req,&real_size);
+	cout << "Message size :" << real_size/kb << " kb" << endl;
+	for (int i=0;i<50;i++){
+
+		sw.start(msr10);
+		call(req_size10,builder,br,&response,&resp_size);
+		sw.stop(msr10);
+	}
+	cout << "Response size was :" << resp_size/kb << " kb" <<endl;
+
+	builder(req_size1,&req,&real_size);
+	cout << "Message size :" << real_size << " bytes" << endl;
+	for (int i=0;i<500;i++){
+		//Sleep(1);
+		//BUG: sometimes hangs here when pipes used....
+		sw.start(msr1);
+		call(req_size1,builder,br,&response,&resp_size);
+		sw.stop(msr1);
+	}
+	cout << "Response size was :" << resp_size/kb << " kb" <<endl;
+
+
+	builder(req_size0_1,&req,&real_size);
+	cout << "Message size :" << real_size << " bytes" << endl;
+	for (int i=0;i<1000;i++){//BUG: server of shared memory crashes if make number of 10000
+		//Sleep(1);
+		//BUG: sometimes hangs here when pipes used....
+		sw.start(msr0_1);
+		call(req_size0_1,builder,br,&response,&resp_size);
+		sw.stop(msr0_1);
+	}
+	cout << "Response size was :" << resp_size << " bytes" <<endl;
+
+
 	//TODO: make assertion of response
 
 	sw.report(msr100);
@@ -269,7 +403,7 @@ int _tmain(int argc, _TCHAR* argv[])
 	return 0;
 }
 
-		HWND hTargetWnd ;
+HWND hTargetWnd ;
 #define IDD_MAINDIALOG                  129
 #define IDC_SENDMSG_BUTTON              1001
 #define IDC_NUMBER_EDIT                 1002
@@ -316,7 +450,7 @@ VOID RegisterDispatcherWindow()
 	// Register the window class.
 	DWORD wt = 0;
 	m_thread = CreateThread(NULL,NULL,WinThreadProc,NULL,0,&wt);
-    hTargetWnd = FindWindow(NULL, L"CppReceiveWM_COPYDATA");
+	hTargetWnd = FindWindow(NULL, L"CppReceiveWM_COPYDATA");
 
 }
 void OnCommand(HWND hWnd, int id, HWND hwndCtl, UINT codeNotify);
@@ -420,51 +554,80 @@ void makeWindowsMessageRequest(unsigned int req_size,req_builder b,resp_builder 
 	current_req_size =  req_size;
 	message_send = false;
 	SendMessage(m_messageDispatcherWindow,WM_COMMAND,IDC_SENDMSG_BUTTON,req_size);
-			// Find the target window handle.
-		//if (!reuse || hTargetWnd == NULL) hTargetWnd = FindWindow(NULL, L"CppReceiveWM_COPYDATA");
-		//if (hTargetWnd == NULL)
-		//{
-		//	cout << "Unable to find the \"CppReceiveWM_COPYDATA\" window Error" <<endl;
-		//}
+	// Find the target window handle.
+	//if (!reuse || hTargetWnd == NULL) hTargetWnd = FindWindow(NULL, L"CppReceiveWM_COPYDATA");
+	//if (hTargetWnd == NULL)
+	//{
+	//	cout << "Unable to find the \"CppReceiveWM_COPYDATA\" window Error" <<endl;
+	//}
 
-		//COPYDATASTRUCT cds;
-		//cds.cbData = current_req_size;
-		//cds.lpData = malloc(current_req_size*10);
+	//COPYDATASTRUCT cds;
+	//cds.cbData = current_req_size;
+	//cds.lpData = malloc(current_req_size*10);
 
-		//// Send the COPYDATASTRUCT struct through the WM_COPYDATA message to 
-		//// the receiving window. (The application must use SendMessage, 
-		//// instead of PostMessage to send WM_COPYDATA because the receiving 
-		//// application must accept while it is guaranteed to be valid.)
+	//// Send the COPYDATASTRUCT struct through the WM_COPYDATA message to 
+	//// the receiving window. (The application must use SendMessage, 
+	//// instead of PostMessage to send WM_COPYDATA because the receiving 
+	//// application must accept while it is guaranteed to be valid.)
 
-		//SendMessage(hTargetWnd, WM_COPYDATA, reinterpret_cast<WPARAM>(m_messageDispatcherWindow), reinterpret_cast<LPARAM>(&cds));
-		////SendMessage(hTargetWnd, WM_COPYDATA, reinterpret_cast<WPARAM>(hWnd), reinterpret_cast<LPARAM>(&cds));
-		////SendMessage(hTargetWnd, WM_COPYDATA, reinterpret_cast<WPARAM>(hWnd), reinterpret_cast<LPARAM>(&cds));
-		////SendMessage(hTargetWnd, WM_COPYDATA, reinterpret_cast<WPARAM>(hWnd), reinterpret_cast<LPARAM>(&cds));
-		////SendMessage(hTargetWnd, WM_COPYDATA, reinterpret_cast<WPARAM>(hWnd), reinterpret_cast<LPARAM>(&cds));
-		//message_send = true;
-		//free(cds.lpData);
-		//DWORD dwError = GetLastError();
-		//if (dwError != NO_ERROR)
-		//{
-		//	cout << "SendMessage(WM_COPYDATA)" << dwError << endl;
-		//}
+	//SendMessage(hTargetWnd, WM_COPYDATA, reinterpret_cast<WPARAM>(m_messageDispatcherWindow), reinterpret_cast<LPARAM>(&cds));
+	////SendMessage(hTargetWnd, WM_COPYDATA, reinterpret_cast<WPARAM>(hWnd), reinterpret_cast<LPARAM>(&cds));
+	////SendMessage(hTargetWnd, WM_COPYDATA, reinterpret_cast<WPARAM>(hWnd), reinterpret_cast<LPARAM>(&cds));
+	////SendMessage(hTargetWnd, WM_COPYDATA, reinterpret_cast<WPARAM>(hWnd), reinterpret_cast<LPARAM>(&cds));
+	////SendMessage(hTargetWnd, WM_COPYDATA, reinterpret_cast<WPARAM>(hWnd), reinterpret_cast<LPARAM>(&cds));
+	//message_send = true;
+	//free(cds.lpData);
+	//DWORD dwError = GetLastError();
+	//if (dwError != NO_ERROR)
+	//{
+	//	cout << "SendMessage(WM_COPYDATA)" << dwError << endl;
+	//}
 	//PostMessage(m_messageDispatcherWindow,WM_COMMAND,IDC_SENDMSG_BUTTON,req_size);
 	//PostThreadMessage(GetThreadId(m_thread),IDC_SENDMSG_BUTTON,0,0);
 	//while (!message_send){};//TODO: compare to wait handle
 }
 
+// Memory allocation function for RPC.
+// The runtime uses these two functions for allocating/deallocating
+// enough memory to pass the string to the server.
+void* __RPC_USER midl_user_allocate(size_t size)
+{
+	return malloc(size);
+}
+
+// Memory deallocation function for RPC.
+void __RPC_USER midl_user_free(void* p)
+{
+	free(p);
+}
+
+void makeRpc(unsigned int req_size,req_builder b,resp_builder br,void** result,int* resultSize){
+
+	unsigned char* request_data = NULL;
+	unsigned int rmessageSize = 0;
+	b(req_size,&request_data,&rmessageSize);
+
+	unsigned char* response = NULL;
+	long responseSize = 0;
+	Output(rpcTransport,rmessageSize,request_data,&responseSize,&response);
+
+	br(responseSize,response);
+	*result = response;
+	*resultSize = responseSize;
+	free(response);
+}
+
 HANDLE	hPipe = INVALID_HANDLE_VALUE;
 void makePipeRequest(unsigned int req_size,req_builder b,resp_builder br,void** result,int* resultSize){
 	if (!reuse)
-		hPipe = INVALID_HANDLE_VALUE;
-	auto name = TEXT("\\\\.\\pipe\\FastDataServer");
+		hPipe = INVALID_HANDLE_VALUE;	
 	if (hPipe == INVALID_HANDLE_VALUE)
-		while ( !WaitNamedPipe(name, 1)); 
+		while ( !WaitNamedPipe(pipe_name, 1)); 
 	while (hPipe == INVALID_HANDLE_VALUE) 
 	{ 
 
 		hPipe = CreateFile( 
-			name,   
+			pipe_name,   
 			GENERIC_READ | 
 			GENERIC_WRITE, 
 			0,              
@@ -496,7 +659,7 @@ void makePipeRequest(unsigned int req_size,req_builder b,resp_builder br,void** 
 
 		unsigned long	cbRead = 0;
 		bool size_was_read = ReadFile(hPipe,&responseSize,sizeof(long),&cbRead,NULL);
-		unsigned char* response = (unsigned char*) malloc(responseSize);
+		response = (unsigned char*) malloc(responseSize);
 		//if (!rSizeRead) cout << cbRead << endl;
 		//cout << cbRead << endl;
 		//if (GetLastError() == ERROR_MORE_DATA) cout << "MORE DATA" << endl;
@@ -513,7 +676,7 @@ void makePipeRequest(unsigned int req_size,req_builder b,resp_builder br,void** 
 		bool got_data = false;
 		bool was_read = ReadFile(hPipe,&got_data,sizeof(bool),&cbRead,NULL);
 	}
-	if (!reuse && !oneway)
+	if (!reuse)
 		CloseHandle(hPipe);
 	if (!oneway){
 		br(responseSize,response);

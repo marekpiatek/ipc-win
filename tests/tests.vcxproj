@@ -39,7 +39,7 @@
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <LinkIncremental>true</LinkIncremental>
-    <IncludePath>$(SolutionDir)3rdParties\gtest\include\;$(SolutionDir)3rdParties\protobuf-2.4.1\src\;$(SolutionDir)3rdParties\Stopwatch;$(SolutionDir)Entities;$(IncludePath)</IncludePath>
+    <IncludePath>$(SolutionDir)lib\gtest\include\;$(SolutionDir)lib\protobuf-2.4.1\src\;$(SolutionDir)lib\Stopwatch;$(SolutionDir)Entities;$(IncludePath)</IncludePath>
     <ExecutablePath>$(SolutionDir)Tools;$(ExecutablePath)</ExecutablePath>
     <ReferencePath>$(SolutionDir)$(Configuration);$(Configuration);$(ReferencePath)</ReferencePath>
     <LibraryPath>$(SolutionDir)$(Configuration);$(Configuration);$(LibraryPath)</LibraryPath>
@@ -47,9 +47,9 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <LinkIncremental>false</LinkIncremental>
     <ExecutablePath>$(SolutionDir)Tools;$(ExecutablePath)</ExecutablePath>
-    <IncludePath>$(SolutionDir)3rdParties\gtest\include\;$(SolutionDir)3rdParties\;$(SolutionDir)3rdParties\Stopwatch;$(SolutionDir)3rdParties\protobuf-2.4.1\src\;$(SolutionDir)Entities;$(IncludePath)</IncludePath>
+    <IncludePath>$(SolutionDir)lib\gtest\include\;$(SolutionDir)lib\;$(SolutionDir)lib\Stopwatch;$(SolutionDir)lib\protobuf-2.4.1\src\;$(SolutionDir)Entities;$(IncludePath)</IncludePath>
     <ReferencePath>$(SolutionDir)$(Configuration);$(Configuration);$(ReferencePath)</ReferencePath>
-    <LibraryPath>$(SolutionDir)$(Configuration);$(Configuration);$(SolutionDir)3rdParties\lib;$(SolutionDir)build\$(Configuration);$(SolutionDir)Entities\$(Configuration);$(SolutionDir)Entities;$(LibraryPath)</LibraryPath>
+    <LibraryPath>$(SolutionDir)$(Configuration);$(Configuration);$(SolutionDir)lib\lib;$(SolutionDir)build\$(Configuration);$(SolutionDir)Entities\$(Configuration);$(SolutionDir)Entities;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
@@ -62,7 +62,7 @@
     <Link>
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalLibraryDirectories>$(SolutionDir)3rdParties\gtest\msvc\gtest\Debug\;$(SolutionDir)3rdParties\protobuf-2.4.1\vsprojects\Debug\;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>$(SolutionDir)lib\gtest\msvc\gtest\Debug\;$(SolutionDir)lib\protobuf-2.4.1\vsprojects\Debug\;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <AdditionalDependencies>gtestd.lib;libprotobuf.lib;Stopwatch.lib;entities.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
