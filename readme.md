@@ -149,12 +149,10 @@ BY DEFAULT ALL COMMUNICATION GOES EVENTUALLY THROUGHT *NAMED PIPES* EXCEPT WHERE
 - Shuffle tests and shuffle data, investigate CPU cache influence
 - Make tests of managed Protobuf
 - Increase managed tests coverage (server for pipes and protobuf)
-- 
-    //TODO: add WCF steaming
-    //TODO: add WCF protobuf
-    //TODO: add WCF via ALPC
-    //TODO: add NDceRpc (Mono WCF, Protobuf, MS-RPC via ALPC)
-
+- Add WCF steaming
+- Add WCF protobuf
+- Add WCF via ALPC
+- Add NDceRpc.ServiceModel (custom/Mono like hich level WCF, Protobuf, MS-RPC via ALPC)
 - Wrap Chromium IPC in C#
 - Default and optimized WCF tests
 - Write and test named pipe transport for open sources which lack it, make tests.
@@ -175,7 +173,7 @@ BY DEFAULT ALL COMMUNICATION GOES EVENTUALLY THROUGHT *NAMED PIPES* EXCEPT WHERE
  [6]: http://stackoverflow.com/questions/8748396/ipc-port-ranges
  [7]: http://msdn.microsoft.com/en-us/library/windows/desktop/aa365574.aspx#base.using_dde_for_ipc
  [8]: http://en.wikipedia.org/wiki/Local_Procedure_Call
- [9]: http://csharptest.net/projects/rpclibrary/
+ [9]: https://github.com/asd-and-Rizzo/NDceRpc
  [10]: http://www.grimes.nildram.co.uk/dotnet/man_unman.htm
  [11]: http://msdn.microsoft.com/en-us/library/windows/desktop/aa365576.aspx
  [12]: http://en.wikipedia.org/wiki/Computer_multitasking
