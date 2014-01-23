@@ -148,6 +148,7 @@ BY DEFAULT ALL COMMUNICATION GOES EVENTUALLY THROUGHT *NAMED PIPES* EXCEPT WHERE
 
 
 # To be done
+- WebServices.dll over Named Pipes
 - Try to load to fix early binding with ROT COM by loading server stub assembly into process manually.
 - Review C++ for performance issues related to serialization because C# custom serialization is faster
 - Try to use wait or spin for confirming data read instead of writing byte during streaming.
