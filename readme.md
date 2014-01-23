@@ -1,6 +1,10 @@
 # Background
 Need of integration for Desktop applications, MS Office add-ins, IE add-ins, written managed and native code, heavily dependant on Web services.
 
+# Fast
+
+See chart in *measurments.png*.
+
 ## Run
 
 Script files in *distribution* folder. Run server bat and corresponding client bat next (e.g. *managedpipesbytesclient.bat* and *pipesbytessrv.bat*).
@@ -87,7 +91,7 @@ Having multitasking operating system [12] with memory protection by virtual memo
 Highlights
 ----------
 
-See chart in *measurements.xlsx* for visualization of decision making items.
+See chart in *measurements.xlsx* for visualization of decision making items. 
 
 BY DEFAULT ALL COMMUNICATION GOES EVENTUALLY THROUGHT *NAMED PIPES* EXCEPT WHERE *ALPC* DOCUMENTED DIRECTLY
 
@@ -119,7 +123,7 @@ BY DEFAULT ALL COMMUNICATION GOES EVENTUALLY THROUGHT *NAMED PIPES* EXCEPT WHERE
 
 * WCF 20 requests ~50kb and gets ~500kb response of server process takes 0.1217944 sec
 * WCF 1000 requests ~1kb and gets ~10kb response of server process takes 0.3074838 sec
-* WCF 10000 requests ~0.1kb and gets ~1kb response  of server process takes 0.2788995 sec
+* WCF 10000 requests ~0.1kb and gets ~1kb response  of server process takes 1.3944975 sec
 
 
 * Sending custom objects translated into Protobuf messages 10 requests ~100kb and getting ~1000kb response takes 0.569171 sec.
