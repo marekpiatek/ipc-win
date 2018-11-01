@@ -1,0 +1,22 @@
+Bad	DLL Surrogate	Out of Proc COM EXE	System.AddIn	TopShelf	Syste.ServiceProcess(Windows Service)	ServicedComponent(COM+ Service)	Chromium	IE	Good
+No C++ host inegration	9	9	0		9	9	9	9	C++ host integration
+No C# host integration		6	10	10			0		C# host integration
+Needs Registration		2(Need put info into ROT, or startup reg)	10		2	3			Reg Free
+One threading build in		2 (Windows Message Pump)	9						IPC Threading Models
+Bad support for Multiprocessing	9		7 (has, but new processes are to big because to much .NET)				9		Multi Process
+Not hosts C++ UI		7 (Ole,ActiveX)	5 (WPF has good integratio with native UI)				7		C++ UI
+Not hists C# UI		3	9				0		C# UI
+Need much resources			2				9		Lightweight
+Slow IPC		7	2	0	0				Fast IPC
+Cannot do C++ IPC		8	0	0	0		9		C++ IPC
+Cannot do C# IPC		6	9	0	0		0		C# IPC
+Slow to load and start 			3						Fast start
+No code isolation			10				9		Isolation
+Only one way			6						Versatility for many scenarios
+Cannot modify to needs				9 (Open Source)			7(is opensource)		Maleability
+Cannot run multiple instances or heavy dependant o OS version.								5(Consider hard to have several IE engines)	Coexistence with others
+									
+									
+									
+0 - not build in									
+10 - is designed for									

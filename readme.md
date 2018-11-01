@@ -169,7 +169,10 @@ BY DEFAULT ALL COMMUNICATION GOES EVENTUALLY THROUGHT *NAMED PIPES* EXCEPT WHERE
 - 400kb and 2000kb, 1kb and 1kb requests/responses
 - Make multithreaded tests (consider single channel memory issues)
 - Tuning synchronization to optimize chatty (many small requests) conversations by spin vs. lock
-
+- Clean up of non relevant stuff
+- Added ASYNC RPC samples
+- Add ORLEANS RPC
+- Run on VS Code.
  
  [Machine 1]: http://valid.canardpc.com/2639433
  [1]: http://msdn.microsoft.com/en-us/library/windows/desktop/aa365574.aspx
